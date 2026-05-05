@@ -1,0 +1,97 @@
+<div class="header">
+  <div class="logo">
+    <img [src]="logo()" alt="Logo Los Olivos Tolima" [routerLink]="['/home']" />
+  </div>
+
+  <div class="sectionNavar">
+
+    <!-- Barra superior: contacto WhatsApp y teléfono (solo desktop) -->
+    <div class="navbarDesktop">
+      <div class="contact" [ngStyle]="{ background: color() }">
+        <p>
+          <a href="https://api.whatsapp.com/send/?phone=573104171085">
+            <strong>Escríbenos</strong>
+          </a>
+          <br />
+          para asesorarte
+        </p>
+        <i class="fa-brands fa-whatsapp"></i>
+        <div class="separador"></div>
+        <img src="/icons/iphone.svg" alt="" />
+        <a id="phone" href="tel:+573009132223">300 913 2223</a>
+      </div>
+
+      <!-- Barra inferior: acciones y menú de secciones -->
+      <div class="navbar">
+        <button id="bill" [routerLink]="['/pagos']">
+          Pagar factura
+        </button>
+
+        <div class="dropdown">
+          <button class="dropdown-button">
+            Los Olivos Tolima
+            <i class="fa-solid fa-caret-down"></i>
+          </button>
+          <div class="dropdown-content">
+            <a [routerLink]="['/nosotros']" [routerLinkActive]="['active']">Nosotros</a>
+            <a [routerLink]="['/prevision']" [routerLinkActive]="['active']">Previsión Exequial</a>
+            <a [routerLink]="['/servicio-funerario']" [routerLinkActive]="['active']">Homenajes</a>
+            <a [routerLink]="['/apoyo-al-duelo']" [routerLinkActive]="['active']">Apoyo al Duelo</a>
+            <a [routerLink]="['/sedes']" [routerLinkActive]="['active']">Sedes</a>
+            <a [routerLink]="['/obituarios']" [routerLinkActive]="['active']">Obituarios</a>
+            <a [routerLink]="['/pagos']" [routerLinkActive]="['active']">Medios de Pago</a>
+          </div>
+        </div>
+
+        <i class="fa-solid fa-magnifying-glass" id="search" (click)="openSearch()"></i>
+
+        <button id="login" (click)="openLogin()">
+          <i class="fa-solid fa-user"></i>
+          Iniciar Sesión
+        </button>
+      </div>
+    </div>
+
+    <!-- Menú hamburguesa (solo mobile) -->
+    <div class="navbarMobile">
+      <div class="icons">
+        <i class="fa-solid fa-magnifying-glass"></i>
+        <i class="fa-solid fa-bars" (click)="openNavbar()"></i>
+      </div>
+
+      @if (openNavbarMobile) {
+        <div class="content-navbar">
+          <div class="icon">
+            <i class="fa-solid fa-xmark" (click)="openNavbar()"></i>
+          </div>
+
+          <div class="dropdown-content">
+            <a [routerLink]="['/nosotros']" routerLinkActive="active">Nosotros</a>
+            <a [routerLink]="['/prevision']" routerLinkActive="active">Previsión Exequial</a>
+            <a [routerLink]="['/servicio-funerario']" routerLinkActive="active">Homenajes</a>
+            <a [routerLink]="['/apoyo-al-duelo']" routerLinkActive="active">Apoyo al Duelo</a>
+            <a [routerLink]="['/sedes']" routerLinkActive="active">Sedes</a>
+            <a [routerLink]="['/obituarios']" routerLinkActive="active">Obituarios</a>
+            <a [routerLink]="['/pagos']" routerLinkActive="active">Medios de Pago</a>
+          </div>
+
+          <div class="buttons">
+            <button [routerLink]="['/pagos']">Pagar factura</button>
+            <button (click)="openLogin()">
+              <i class="fa-solid fa-user"></i>
+              Iniciar Sesión
+            </button>
+          </div>
+        </div>
+      }
+    </div>
+
+  </div>
+</div>
+
+<!-- Botón flotante de WhatsApp (visible en todas las páginas) -->
+<div class="button-contact">
+  <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="Contactar por WhatsApp">
+    <i class="fa-brands fa-whatsapp"></i>
+  </a>
+</div>

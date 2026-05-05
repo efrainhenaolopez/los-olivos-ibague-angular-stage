@@ -1,0 +1,131 @@
+<app-header
+  logo="/logos/logo-olivos.svg"
+  color="#908e8e61"
+></app-header>
+
+<main>
+
+  <!-- Vista desktop -->
+  <div class="noIsMobile">
+    <div class="space-page"></div>
+
+    <div class="container-information">
+      <div class="container-rigth">
+
+        <section>
+          <div class="container-img container-navbar-top" [routerLink]="['/bienestar-integral']">
+            <img src="/logos/bienestar-integral.svg" alt="Bienestar Integral" />
+          </div>
+          <div class="container-content">
+            <h2>Bienestar integral</h2>
+            <p>
+              ¡Conoce nuestros planes de previsión! <br />
+              Porque garantizar el bienestar de tu familia es el mejor regalo que puedes darle.
+            </p>
+          </div>
+        </section>
+
+        <hr />
+
+        <section>
+          <div class="container-img" [routerLink]="['/apoyo-inmediato']">
+            <img src="/logos/apoyo-inmediato.svg" alt="Apoyo Inmediato" />
+          </div>
+          <div class="container-content">
+            <h2>Apoyo Inmediato</h2>
+            <p>¿Ha ocurrido un fallecimiento o está cerca de suceder?</p>
+          </div>
+        </section>
+
+        <hr />
+
+        <section>
+          <div class="container-img container-navbar-buttom" [routerLink]="['/demuestra-tu-afecto']">
+            <img src="/logos/demuestra-afecto.svg" alt="Demuestra tu Afecto" />
+          </div>
+          <div class="container-content">
+            <h2>Demuestra tu afecto</h2>
+            <p>
+              Manifiesta tu solidaridad y empatía, compra un detalle y hazte
+              presente en este difícil momento.
+            </p>
+          </div>
+        </section>
+
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="footer-links">
+        <a [routerLink]="['/planes-empresariales']">Empresas</a> |
+        <a [routerLink]="['/prevision']">Previsión</a> |
+        <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a> |
+        <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a> |
+        <a [routerLink]="['/contacto']">PQRS</a> |
+        <a [routerLink]="['/contacto']">Contáctenos</a>
+      </div>
+      <div class="footer-social">
+        <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook Los Olivos Tolima">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram Los Olivos Tolima">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp Los Olivos Tolima">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vista mobile: slider automático cada 5s -->
+  <div class="isMobile">
+    <div class="space-page"></div>
+
+    <div class="container-information">
+      <div class="slider">
+        @for (plan of plans; track plan.id; let i = $index) {
+          <section class="slide"
+            [routerLink]="[plan.link]"
+            [class.active]="currentSlide === i">
+            <div class="container-img">
+              <img [src]="plan.img" [alt]="plan.title" />
+            </div>
+            <div class="container-content">
+              <h2>{{ plan.title }}</h2>
+              <p>{{ plan.description }}</p>
+            </div>
+          </section>
+        }
+      </div>
+    </div>
+
+    <div class="footer-bottom-mobile">
+      <a [routerLink]="['/planes-empresariales']">Empresas</a>
+      <a [routerLink]="['/prevision']">Previsión</a>
+      <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a>
+      <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a>
+      <a [routerLink]="['/contacto']">PQRS</a>
+      <a [routerLink]="['/contacto']">Contáctenos</a>
+      <div class="social">
+        <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+@if (modal) {
+  <popup-linea-etica
+    backgroundHeader="#f5821f"
+    (close)="closeModal()"
+  ></popup-linea-etica>
+}

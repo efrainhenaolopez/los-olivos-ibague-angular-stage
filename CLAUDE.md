@@ -165,6 +165,18 @@ if (typeof window !== 'undefined')
 - feature-name.service.ts
 - estructura por feature
 
+## Generación de Componentes
+
+Siempre generar componentes con:
+
+```
+ng g c componentes/nombre-componente --standalone --skip-tests
+```
+
+- Usar kebab-case para el nombre
+- Destino siempre dentro de `src/app/componentes/`
+- Nunca omitir `--standalone` ni `--skip-tests`
+
 ## Estructura de carpetas
 - src/app/componentes/nombre/  → componentes y páginas
 - src/app/servicios/           → servicios Angular

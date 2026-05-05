@@ -1,0 +1,78 @@
+<header class="header-menu">
+
+  <!-- Logo: abarca el alto de las 2 filas -->
+  <div class="logo">
+    <a [routerLink]="['/']">
+      <img [src]="logo()" alt="Logo Los Olivos Tolima" />
+    </a>
+  </div>
+
+  <!-- Contenedor de las 2 filas -->
+  <div class="header-content">
+
+    <!-- Top bar: ubicación + teléfono + búsqueda -->
+    <div class="top-bar">
+      <span class="location">
+        <i class="fa-solid fa-location-dot"></i>
+        Cra 4i N° 41-64 La Macarena, Ibagué
+      </span>
+      <span class="sep">|</span>
+      <a href="tel:+573009132223" class="top-link phone">
+        <i class="fa-solid fa-phone"></i>
+        300 913 2223
+      </a>
+      <span class="sep">|</span>
+      <a class="top-link search" aria-label="Buscar">
+        <i class="fa-solid fa-magnifying-glass"></i>
+      </a>
+    </div>
+
+    <!-- Main bar: nav horizontal + CTAs -->
+    <div class="main-bar">
+      <nav class="nav">
+        <a [routerLink]="['/nosotros']" routerLinkActive="active">Nosotros</a>
+        <a [routerLink]="['/prevision']" routerLinkActive="active">Previsión</a>
+        <a [routerLink]="['/servicio-funerario']" routerLinkActive="active">Homenajes</a>
+        <a [routerLink]="['/sedes']" routerLinkActive="active">Sedes</a>
+        <a [routerLink]="['/contacto']" routerLinkActive="active">Contáctenos</a>
+      </nav>
+
+      <div class="ctas">
+        <a [routerLink]="['/pagos']" class="cta cta--primary">
+          <i class="fa-solid fa-file-invoice"></i>
+          Pagar factura
+        </a>
+        <a (click)="openLogin()" class="cta cta--secondary">
+          <i class="fa-solid fa-user"></i>
+          Iniciar sesión
+        </a>
+      </div>
+    </div>
+
+  </div>
+
+  <button class="mobile-toggle" (click)="openNavbar()" aria-label="Abrir menú">
+    <i class="fa-solid fa-bars"></i>
+  </button>
+
+  <!-- Menú lateral mobile -->
+  @if (openNavbarMobile) {
+    <div class="mobile-menu">
+      <button class="mobile-close" (click)="openNavbar()" aria-label="Cerrar menú">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+      <nav class="mobile-nav">
+        <a [routerLink]="['/nosotros']" routerLinkActive="active" (click)="openNavbar()">Nosotros</a>
+        <a [routerLink]="['/prevision']" routerLinkActive="active" (click)="openNavbar()">Previsión</a>
+        <a [routerLink]="['/servicio-funerario']" routerLinkActive="active" (click)="openNavbar()">Homenajes</a>
+        <a [routerLink]="['/sedes']" routerLinkActive="active" (click)="openNavbar()">Sedes</a>
+        <a [routerLink]="['/contacto']" routerLinkActive="active" (click)="openNavbar()">Contáctenos</a>
+      </nav>
+      <div class="mobile-contact">
+        <a [routerLink]="['/pagos']" (click)="openNavbar()">Pagar factura</a>
+        <a (click)="openLogin(); openNavbar()">Iniciar sesión</a>
+      </div>
+    </div>
+  }
+
+</header>

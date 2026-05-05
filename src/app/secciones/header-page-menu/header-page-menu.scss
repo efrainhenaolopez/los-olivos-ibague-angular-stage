@@ -1,0 +1,57 @@
+.header-component {
+    max-width: 100%;
+    position: relative;
+    z-index: 1;
+    margin-bottom: -90px;
+
+    .background-header {
+        width: 100%;
+
+        img {
+            width: 100%;
+            object-fit: contain;
+        }
+    }
+
+    .button-ready {
+
+        position: absolute;
+        right: 78%;
+        top: 69%;
+        background: white;
+        padding: 15px;
+        border-radius: 50%;
+
+        a {
+            background: #CB1544;
+            border: none;
+            padding: 20px;
+            color: white;
+            border-radius: 50%;
+            height: 20px;
+            width: 20px;
+            font-size: 20px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+    }
+
+
+}
+
+@media (max-width: 768px) {
+    .header-component {
+        margin-bottom: 0;
+    }
+
+    .button-ready {
+        right: 62% !important;
+        top: 64% !important;
+
+        a {
+            height: 10px !important;
+            width: 10px !important;
+        }
+    }
+}

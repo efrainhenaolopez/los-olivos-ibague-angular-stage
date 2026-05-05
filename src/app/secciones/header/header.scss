@@ -1,0 +1,298 @@
+.header {
+    display: flex;
+    position: absolute;
+    z-index: 99;
+    width: 100%;
+    top: 0;
+
+    .logo {
+        width: 50%;
+        height: 150px;
+        padding: 1% 8%;
+        position: relative;
+        object-fit: contain;
+
+        img {
+            margin: 5%;
+            cursor: pointer;
+            width: 45%;
+            object-fit: contain;
+            height: 100%;
+        }
+    }
+
+    .sectionNavar {
+        width: 46%;
+        text-align: left;
+
+        .contact {
+            color: white;
+            display: flex;
+            padding: 2%;
+            border-bottom-left-radius: 60px;
+            align-items: center;
+            justify-content: flex-end;
+            text-align: right;
+            font-size: 15px;
+
+            a {
+                color: white;
+            }
+
+            i {
+                font-size: 30px;
+            }
+
+            img {
+                width: 7%;
+            }
+
+            .separador {
+                width: 2px;
+                background: white;
+                height: 30px;
+                margin: 0 48px;
+            }
+            
+            .fa-whatsapp {
+                color: #ffffff;
+            }
+
+            #phone {
+                font-size: 25px;
+                font-family: 'Comfortaa', sans-serif;
+                font-weight: 700;
+            }
+
+            * {
+                margin: 1%;
+            }
+        }
+
+        .navbar {
+            display: flex;
+            margin: auto;
+            margin-right: 2%;
+            align-items: center;
+            color: white;
+            justify-content: flex-end;
+
+            button {
+                margin: 10px 6px;
+                cursor: pointer;
+                color: white;
+                padding: 5px 10px;
+                border: none;
+                background: #908e8e61;
+                font-size: 15px;
+                font-family: var(--font-body);
+                transition: background-color 0.2s ease, color 0.2s ease;
+
+                &:hover {
+                    background-color: var(--color-dropdown-bg);
+                    color: rgba(255, 255, 255, 0.4392156863);
+                }
+            }
+
+            #login {
+                width: 24%;
+                border-bottom-right-radius: 10px;
+            }
+
+            #bill {
+                width: 20%;
+                border-bottom-left-radius: 10px;
+            }
+
+            #search {
+                cursor: pointer;
+                margin: 0 2%;
+            }
+
+            // Estilo del contenedor del select
+            .dropdown {
+                position: relative;
+                display: inline-block;
+
+                // Estilo del botón del select
+                .dropdown-button {
+                    background: #908e8e61;
+                    color: white;
+                    min-width: 190px;
+                    border: none;
+                    cursor: pointer;
+                    font-size: 15px;
+                    font-family: var(--font-body);
+                    transition: background-color 0.2s ease, color 0.2s ease;
+
+                    i {
+                        margin-right: 1%;
+                        float: right;
+                    }
+                }
+
+                &:hover .dropdown-button {
+                    background-color: var(--color-dropdown-bg);
+                    color: rgba(255, 255, 255, 0.4392156863);
+                }
+
+                // Estilo de la lista desplegable
+                .dropdown-content {
+                    display: none;
+                    position: absolute;
+                    background-color: var(--color-dropdown-bg);
+                    min-width: 190px;
+                    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+                    z-index: 1;
+                    margin: 0px 6px;
+
+                    // Estilo de los elementos de la lista
+                    a {
+                        color: #ffffff70;
+                        font-size: 15px;
+                        padding: 5px;
+                        text-decoration: none;
+                        display: block;
+
+                        // Cambiar color en hover
+                        &:hover {
+                            color: white; // Color más oscuro al pasar el mouse
+                        }
+                    }
+
+                    .active {
+                        color: white;
+                    }
+                }
+
+                // Mostrar la lista al hacer clic en el botón
+                &:hover .dropdown-content {
+                    display: block;
+                }
+            }
+
+        }
+    }
+}
+
+.navbarMobile{
+    display: none;
+}
+
+.navbarDesktop{
+    display: block;
+}
+
+.button-contact{
+    display: none;
+}
+
+@media (max-width: 768px) {
+
+    .navbarDesktop{
+        display: none;
+    }
+
+    .navbarMobile{
+        display: block;
+    }
+
+    .header {
+        align-items: center !important;
+    }
+
+    .logo {
+        width: 80% !important;
+        height: auto !important;
+        position: relative;
+        object-fit: contain;
+        padding-left: 15%;
+
+        img {
+            margin: 5%;
+            width: 35% !important;
+        }
+    }
+
+    .sectionNavar {
+        width: 20% !important;
+        display: flex;
+        justify-content: center !important;
+        align-items: center !important;
+        padding-right: 5%;
+
+        .navbarMobile {
+            .icons {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+
+                i {
+                    padding: 25%;
+                    color: white;
+                    filter: drop-shadow(2px 2px 3px black);
+                }
+            }
+
+            .content-navbar {
+                position: fixed;
+                background: var(--color-dropdown-bg);
+                z-index: 99;
+                top: 0;
+                right: 0;
+                
+                width: 60%;
+                height: 100vh;
+                padding: 5%;
+                text-align: right;
+
+                display: flex;
+                flex-direction: column;
+
+                .icon {
+                    i {
+                        color: white;
+                        font-size: 20px;
+                    }
+                }
+
+
+                .dropdown-content {
+                    text-align: left;
+                    height: 80vh;
+                    a {
+                        display: block;
+                        width: 100%;
+                        font-size: 16 !important;
+                        color: #ffffff70;
+                        text-decoration: none;
+                        margin: 5%;
+                    }
+
+                    .active {
+                        color: white;
+                    }
+                }
+
+                .buttons {
+                    button {
+                        width: 96%;
+                        text-align: center;
+                        cursor: pointer;
+                        margin: 10px 0;
+                        color: white;
+                        padding: 5px;
+                        border: none;
+                        background: var(--color-cta);
+                    }
+                }
+
+            }
+
+        }
+    }
+    
+    .button-contact{
+        padding: 4%;
+    }
+}

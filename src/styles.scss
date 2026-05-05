@@ -1,1 +1,146 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* ─── Sistema de Territorios — Manual de Marca Los Olivos ──────────────────── */
+
+/* Defaults globales (DUELO — territorio principal del portal) */
+:root {
+  --color-primary:      #234b50;
+  --color-secondary:    #477A7B;
+  --color-accent:       #A94D69;
+  --color-bg-from:      #234b50;
+  --color-bg-to:        #182e39;
+  --color-bg-light:     #EDF5F7;
+  --color-text:         #ffffff;
+  --color-text-alt:     #A7C9D2;
+  --color-cta:          #F0A33D; /* Naranja cálido — Pantone 2008 C (Previsión/Vida) */
+  --color-dropdown-bg:  rgba(35, 75, 80, 0.95);
+  --font-headline:      'Hind Vadodara', 'Comfortaa', sans-serif;
+  --font-body:          'Raleway', sans-serif;
+}
+
+/* ── DUELO ─────────────────────────────────────────────────────────────────── */
+[data-territory="duelo"] {
+  --color-primary:      #234b50;   /* Pantone 4168 C */
+  --color-secondary:    #477A7B;   /* Pantone 7475 C */
+  --color-accent:       #A94D69;   /* Pantone 2343 C */
+  --color-bg-from:      #234b50;
+  --color-bg-to:        #182e39;
+  --color-bg-light:     #EDF5F7;
+  --color-text:         #ffffff;
+  --color-text-alt:     #A7C9D2;   /* Pantone 551 C */
+  --color-cta:          #F0A33D;   /* Naranja cálido — Pantone 2008 C */
+  --color-dropdown-bg:  rgba(35, 75, 80, 0.95);
+  --font-headline:      'Hind Vadodara', 'Comfortaa', sans-serif;
+  --font-body:          'Raleway', sans-serif;
+}
+
+/* ── PREVISIÓN ─────────────────────────────────────────────────────────────── */
+[data-territory="prevision"] {
+  --color-primary:      #DC4C5A;   /* Pantone 709 C (oscuro) */
+  --color-secondary:    #8CE63C;   /* Pantone 2298 C */
+  --color-accent:       #59AB9B;   /* Pantone 7472 C */
+  --color-bg-from:      #EB6E82;   /* Pantone 709 C */
+  --color-bg-to:        #DC4C5A;
+  --color-bg-light:     #FFF2F4;
+  --color-text:         #ffffff;
+  --color-text-alt:     #F0A33D;   /* Pantone 2008 C */
+  --color-cta:          #F0A33D;   /* Naranja cálido — Pantone 2008 C */
+  --color-dropdown-bg:  rgba(35, 75, 80, 0.95);    /* Teal oscuro — Pantone 4168 C, complementario al naranja */
+  --font-headline:      'Comfortaa', sans-serif;
+  --font-body:          'Raleway', sans-serif;
+}
+
+/* ── VIDA ──────────────────────────────────────────────────────────────────── */
+[data-territory="vida"] {
+  --color-primary:      #CF4545;   /* Rosa/coral oscuro */
+  --color-secondary:    #EFC45B;   /* Pantone 2011 C */
+  --color-accent:       #6CD490;   /* Verde agua */
+  --color-bg-from:      #E97783;   /* Pantone 198 C */
+  --color-bg-to:        #CF4545;
+  --color-bg-light:     #FEF9EF;
+  --color-text:         #ffffff;
+  --color-text-alt:     #F8E5B0;   /* Pantone 134 C */
+  --color-cta:          #F0A33D;   /* Naranja cálido — Pantone 2008 C */
+  --color-dropdown-bg:  rgba(207, 69, 69, 0.95);
+  --font-headline:      'Comfortaa', sans-serif;
+  --font-body:          'Raleway', sans-serif;
+}
+
+/* reCAPTCHA v3: badge oculto — atribución incluida en el formulario (requerido por Google) */
+.grecaptcha-badge {
+  visibility: hidden !important;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    font-family: 'Raleway', sans-serif;
+}
+
+a {
+    text-decoration: none;
+}
+
+.space-page {
+    width: 100%;
+    height: 206px;
+}
+
+@media (max-width: 768px) {
+
+    .space-page {
+        width: 100%;
+        height: 100px !important;
+    }
+}
+
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+
+    .video-bg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover; 
+    }
+}
+
+.content-header h1 {
+    font-size: 36px;
+}
+
+.fullscreen {
+    height: 100vh;
+    transition: all 0.3s ease;
+}
+
+@media (max-width: 768px) {
+    .popup {
+        .border-pop-up{
+            width: 100% !important;
+
+            .popup-content{
+                .header{
+                    h1 {
+                        font-size: 35px !important;
+                    }
+                }
+                p {
+                    font-size: 18px !important;
+                }
+            }
+        }
+    }
+}

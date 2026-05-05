@@ -1,0 +1,126 @@
+<app-header
+  [logo]="logo"
+  color="#fdbf24"
+></app-header>
+
+<div class="background">
+  <div class="slider">
+    @for (slide of sliderSelect; track slide.src; let i = $index) {
+      <div class="slide" [class.active]="i === currentSlide">
+        <img [src]="slide.src" [alt]="slide.alt" />
+      </div>
+    }
+  </div>
+</div>
+
+<main>
+  <div class="noIsMobile">
+    <div class="space-page"></div>
+    <div class="container-information">
+      <div class="container-rigth">
+        <section>
+          <div
+            class="container-img container-navbar-top"
+            [routerLink]="['/bienestar-integral']"
+          >
+            <img src="/logos/bienestar-integral.svg" alt="" />
+          </div>
+          <div class="container-content">
+            <h2>Bienestar integral</h2>
+            <p>
+              ¡Conoce nuestros planes de previsión! Porque garantizar el
+              bienestar de tu familia es el mejor regalo que puedes darle.
+            </p>
+          </div>
+        </section>
+        <hr />
+        <section>
+          <div class="container-img" [routerLink]="['/apoyo-inmediato']">
+            <img src="/logos/apoyo-inmediato.svg" alt="" />
+          </div>
+          <div class="container-content">
+            <h2>Apoyo Inmediato</h2>
+            <p>¿Ha ocurrido un fallecimiento o está cerca de suceder?</p>
+          </div>
+        </section>
+        <hr />
+        <section>
+          <div
+            class="container-img container-navbar-buttom"
+            [routerLink]="['/demuestra-tu-afecto']"
+          >
+            <img src="/logos/demuestra-afecto.svg" alt="" />
+          </div>
+          <div class="container-content">
+            <h2>Demuestra tu afecto</h2>
+            <p>
+              Manifiesta tu solidaridad y empatía, compra un detalle y hazte
+              presente en este difícil momento.
+            </p>
+          </div>
+        </section>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <a [routerLink]="['/planes-empresariales']">Empresas</a> |
+      <a [routerLink]="['/prevision']">Previsión</a> |
+      <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a> |
+      <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a> |
+      <a [routerLink]="['/contacto']">PQRS</a> |
+      <a [routerLink]="['/contacto']">Contáctenos</a>
+      <a class="icon" href="https://www.facebook.com/losolivoscali" target="_blank" rel="noopener">
+        <i class="fa-brands fa-facebook-f"></i>
+      </a>
+      <a class="icon" href="https://www.instagram.com/losolivoscali" target="_blank" rel="noopener">
+        <i class="fa-brands fa-instagram"></i>
+      </a>
+      <a class="icon" href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener">
+        <i class="fa-brands fa-whatsapp"></i>
+      </a>
+    </div>
+  </div>
+
+  <div class="isMobile">
+    <div class="space-page"></div>
+    <div class="container-information">
+      <div class="slider-container">
+        <div class="slider">
+          @for (plan of plans; track plan.id; let i = $index) {
+            <section
+              class="slide"
+              [routerLink]="[plan.link]"
+              [class.active]="currentSlide === i"
+            >
+              <div class="container-img">
+                <img [src]="plan.img" alt="" />
+              </div>
+              <div class="container-content">
+                <h2>{{ plan.title }}</h2>
+                <p>{{ plan.description }}</p>
+              </div>
+            </section>
+          }
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom-mobile">
+      <div class="social">
+        <a class="icon" href="https://www.facebook.com/losolivoscali" target="_blank" rel="noopener">
+          <i class="fa-brands fa-facebook-f"></i>
+        </a>
+        <a class="icon" href="https://www.instagram.com/losolivoscali" target="_blank" rel="noopener">
+          <i class="fa-brands fa-instagram"></i>
+        </a>
+        <a class="icon" href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener">
+          <i class="fa-brands fa-whatsapp"></i>
+        </a>
+      </div>
+      <a [routerLink]="['/planes-empresariales']">Empresas</a>
+      <a [routerLink]="['/prevision']">Previsión</a>
+      <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a>
+      <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a>
+      <a [routerLink]="['/contacto']">PQRS</a>
+      <a [routerLink]="['/contacto']">Contáctenos</a>
+    </div>
+  </div>
+</main>

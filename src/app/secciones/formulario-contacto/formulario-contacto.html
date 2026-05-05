@@ -1,0 +1,49 @@
+<form [formGroup]="formulario" (ngSubmit)="onSubmit()">
+
+  <label for="name">Nombre*</label>
+  <input id="name" type="text" formControlName="name" autocomplete="given-name" />
+  @if (formulario.get('name')?.invalid && formulario.get('name')?.touched) {
+    <div><small>El nombre es obligatorio</small></div>
+  }
+
+  <label for="lastName">Apellido*</label>
+  <input id="lastName" type="text" formControlName="lastName" autocomplete="family-name" />
+  @if (formulario.get('lastName')?.invalid && formulario.get('lastName')?.touched) {
+    <div><small>El apellido es obligatorio</small></div>
+  }
+
+  <label for="phone">Teléfono en Colombia*</label>
+  <input id="phone" type="tel" formControlName="phone" autocomplete="tel" />
+  @if (formulario.get('phone')?.invalid && formulario.get('phone')?.touched) {
+    <div><small>Debe ser un número válido</small></div>
+  }
+
+  <label for="email">Correo electrónico*</label>
+  <input id="email" type="email" formControlName="email" autocomplete="email" />
+  @if (formulario.get('email')?.invalid && formulario.get('email')?.touched) {
+    <div><small>Debe ser un correo electrónico válido</small></div>
+  }
+
+  <label for="message">Mensaje*</label>
+  <textarea id="message" formControlName="message"></textarea>
+  @if (formulario.get('message')?.invalid && formulario.get('message')?.touched) {
+    <div><small>El mensaje es obligatorio</small></div>
+  }
+
+  <div class="button">
+    <button type="submit" [disabled]="enviando">
+      {{ enviando ? 'ENVIANDO...' : 'CONTACTAR AHORA' }}
+    </button>
+  </div>
+
+  <p>
+    Sus datos serán tratados conforme a la
+    <a [routerLink]="'/tratamiento-de-datos'" target="_blank">Política de Tratamiento de datos</a>.
+    Este sitio está protegido por reCAPTCHA y aplican la
+    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Política de privacidad</a>
+    y los
+    <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Términos de servicio</a>
+    de Google.
+  </p>
+
+</form>
