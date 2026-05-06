@@ -1,1 +1,16 @@
-<p>contacto works!</p>
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header" [ngStyle]="{ background: backgroundHeader() }">
+        <h1>Adquiérelo Ahora</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-information">
+        <app-formulario-contacto
+          tipoFormulario="Plan exequial"
+          [demoMode]="demoMode()"
+        ></app-formulario-contacto>
+      </div>
+    </div>
+  </div>
+</div>

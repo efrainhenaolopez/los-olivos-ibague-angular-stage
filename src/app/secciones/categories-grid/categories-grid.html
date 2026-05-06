@@ -1,0 +1,15 @@
+<div
+  class="categories-container"
+  [style.grid-template-columns]="'repeat(' + columns() + ', 1fr)'"
+>
+  @for (category of categories(); track category.img) {
+    <div class="category">
+      <div class="img" [style.border]="'3px solid ' + category.background">
+        <img [src]="category.img" alt="" />
+      </div>
+      <div class="container">
+        <p>{{ category.text }}</p>
+      </div>
+    </div>
+  }
+</div>

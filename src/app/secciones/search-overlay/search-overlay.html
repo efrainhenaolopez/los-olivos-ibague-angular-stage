@@ -1,0 +1,14 @@
+<div class="search-overlay">
+  <div class="input">
+    <form (submit)="search(); $event.preventDefault()">
+      <input
+        type="text"
+        placeholder="Buscar...."
+        [(ngModel)]="query"
+        [ngModelOptions]="{ standalone: true }"
+        (keyup.enter)="search()"
+      />
+      <i class="fa-solid fa-xmark" (click)="closeModal()" aria-label="Cerrar"></i>
+    </form>
+  </div>
+</div>

@@ -11,6 +11,7 @@ import { NgStyle } from '@angular/common';
 export class LineaEtica {
   public close = output<boolean>();
   public backgroundHeader = input.required<string>()
+  public demoMode = input<boolean>(false);
 
   closeModal(){
     this.close.emit(false);

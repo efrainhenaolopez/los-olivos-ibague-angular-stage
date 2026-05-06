@@ -1,0 +1,124 @@
+.contact-banner {
+  display: flex;
+  justify-content: space-between;
+  align-items: stretch;
+  position: relative;
+  padding: 0 10%;
+
+  &::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 30%;
+    height: 1px;
+    background-color: #ffa500;
+  }
+
+  .banner-content {
+    width: 60%;
+    padding: 3% 4%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    h1 {
+      font-family: var(--font-headline, serif);
+      font-size: 5rem;
+      color: #231f20;
+      margin: 0;
+    }
+
+    p {
+      font-size: 2rem;
+      margin: 30px 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: center;
+
+      a {
+        text-decoration: none;
+      }
+
+      button {
+        font-family: var(--font-headline, serif);
+        background: transparent;
+        font-size: 30px;
+        color: #231f20;
+        padding: 0 20px;
+        border: 2px solid #231f20;
+        cursor: pointer;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background: #231f20;
+          color: white;
+        }
+      }
+
+      i {
+        margin-left: 10px;
+        font-size: 20px;
+      }
+    }
+  }
+
+  .banner-image {
+    width: 40%;
+    margin-right: 1%;
+    display: flex;
+    align-items: end;
+
+    img {
+      width: 100%;
+      object-fit: contain;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .contact-banner {
+    flex-direction: column;
+    padding: 0 5%;
+
+    .banner-content {
+      width: 100%;
+
+      h1 {
+        font-size: 50px;
+      }
+
+      p {
+        font-size: 20px;
+        margin: 2% 0;
+      }
+
+      .buttons button {
+        color: white;
+        background: #f5821f;
+        border: none;
+        font-size: 25px;
+        padding: 5px 20px;
+
+        &.primary-button {
+          border-top-left-radius: 50px;
+          border-bottom-left-radius: 50px;
+          border-top-right-radius: 0;
+          border-bottom-right-radius: 0;
+        }
+      }
+    }
+
+    .banner-image {
+      width: 100%;
+      margin-right: 0;
+    }
+  }
+}

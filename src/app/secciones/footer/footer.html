@@ -31,7 +31,8 @@
     </a>
   </div>
 
-  <div class="footer-section" *ngIf="!isMobile">
+  @if (!isMobile) {
+  <div class="footer-section">
     <div class="footer-links">
       <div class="column" style="display: flex">
         <img src="/logos/logo_olivos_color.svg" alt="" />
@@ -142,8 +143,10 @@
       </a>
     </div>
   </div>
+  }
 
-  <div class="footer-bottom-mobile" *ngIf="isMobile">
+  @if (isMobile) {
+  <div class="footer-bottom-mobile">
     <div class="social">
       <a class="icon" href="https://www.facebook.com/losolivoscali">
         <i class="fa-brands fa-facebook-f"></i>
@@ -159,6 +162,7 @@
     <a (click)="openModal()">Linea Ética</a>
     <a href="https://www.losolivoscali.com/certificados/">Proveedores</a>
   </div>
+  }
 </div>
 <!--
 <app-pop-up-ethical-line-component

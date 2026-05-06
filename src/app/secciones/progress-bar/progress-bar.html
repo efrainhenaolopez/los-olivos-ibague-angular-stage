@@ -1,0 +1,7 @@
+<div class="progress-container">
+  <div class="progress-bar">
+    @for (isFilled of segments(); track $index) {
+      <div class="progress-segment" [class.filled]="isFilled"></div>
+    }
+  </div>
+</div>

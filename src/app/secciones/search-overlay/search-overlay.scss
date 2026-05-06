@@ -1,0 +1,50 @@
+.search-overlay {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .input {
+    width: 70%;
+    position: relative;
+
+    form {
+      position: relative;
+    }
+
+    input {
+      width: 100%;
+      padding: 16px 60px 16px 16px;
+      font-size: 50px;
+      background: transparent;
+      border: none;
+      color: white;
+      text-align: center;
+      outline: none;
+      border-bottom: 2px solid white;
+    }
+
+    i {
+      color: white;
+      position: absolute;
+      right: 10px;
+      top: 50%;
+      transform: translateY(-50%);
+      cursor: pointer;
+      font-size: 25px;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .search-overlay .input {
+    width: 90%;
+
+    input {
+      font-size: 28px;
+    }
+  }
+}

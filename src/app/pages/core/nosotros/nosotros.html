@@ -1,1 +1,73 @@
-<p>nosotros works!</p>
+<main>
+  <app-header-page-section
+    logo="/logos/bienestar-integral.svg"
+    color="#fdbf24"
+    background="/img/page-backgrounds/background-us.png"
+  ></app-header-page-section>
+
+  <div class="content-header">
+    <h1>
+      Todos merecemos <br />
+      <span>lo mejor...</span>
+    </h1>
+    <div class="container-columns">
+      <div class="container-text">
+        <p>
+          Somos una empresa con 49 años de existencia protegiendo a las familias
+          colombianas. Más de 7 millones de afiliados que con su confianza nos
+          motivan para seguir transformando historias y dando un nuevo
+          significado a la vida; lo que nos convierte en la red funeraria más
+          importante de Colombia, con la mayor cobertura geográfica a nivel
+          nacional.
+        </p>
+        <p>
+          Una empresa con responsabilidad social cada día trabajando por
+          reforzar nuestro compromiso con el medio ambiente, el crecimiento de
+          la comunidad, una prestación de servicios de calidad y el desarrollo
+          de nuestros socios y colaboradores.
+        </p>
+        <p>
+          De manera complementaria a la cobertura, Los Olivos ha fortalecido sus
+          planes de previsión exequial con microseguros, en alianza con
+          Aseguradora Solidaria, en busca del amparo de las familias tras su
+          pérdida.
+        </p>
+      </div>
+      <div class="cifras">
+        <img src="/img/cifras-nosotros.jpg" alt="Cifras de Los Olivos" />
+      </div>
+    </div>
+  </div>
+
+  <div class="separator-dotted"></div>
+
+  <div class="benefits">
+    <div class="benefits-header">
+      <h2>Nuestros Beneficios</h2>
+      <p>
+        Te brindamos una atención integral pensada para acompañar y apoyar este
+        momento de la vida en el que hemos aprendido que lo más importante es
+        honrar la memoria de nuestros seres queridos con el mejor de los
+        homenajes.
+      </p>
+    </div>
+    <div class="section-tributes">
+      <div class="title">
+        <h1>Nuestro homenaje</h1>
+      </div>
+      <app-tributes-grid [tributes]="tributes"></app-tributes-grid>
+    </div>
+  </div>
+
+  <app-death-abroad></app-death-abroad>
+
+  <app-section-information-contact></app-section-information-contact>
+</main>
+
+<app-contact-cta background="white" (phoneClick)="openLineas()"></app-contact-cta>
+
+<app-footer></app-footer>
+
+@if (showLineas()) {
+  <app-lineas backgroundHeader="#00966c" (close)="closeLineas()"></app-lineas>
+}

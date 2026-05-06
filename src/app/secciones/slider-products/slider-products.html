@@ -1,0 +1,37 @@
+<div class="slider-products">
+  <button type="button" class="nav prev" (click)="prev()" aria-label="Anterior">
+    <i class="fa-solid fa-chevron-left"></i>
+  </button>
+
+  <article class="slide">
+    <div class="slide-image">
+      <img [src]="current().img" [alt]="current().title" />
+    </div>
+    <div class="slide-content">
+      <h2>{{ current().title }}</h2>
+      @if (current().subtitle) {
+        <p class="subtitle">{{ current().subtitle }}</p>
+      }
+      <p class="description">{{ current().description }}</p>
+      @if (current().price) {
+        <p class="price">{{ current().price }}</p>
+      }
+    </div>
+  </article>
+
+  <button type="button" class="nav next" (click)="next()" aria-label="Siguiente">
+    <i class="fa-solid fa-chevron-right"></i>
+  </button>
+
+  <div class="dots">
+    @for (p of products(); track p.id; let i = $index) {
+      <button
+        type="button"
+        class="dot"
+        [class.is-active]="currentIndex() === i"
+        (click)="goTo(i)"
+        [attr.aria-label]="'Ir a slide ' + (i + 1)"
+      ></button>
+    }
+  </div>
+</div>

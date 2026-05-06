@@ -1,0 +1,22 @@
+<div class="tributes-container">
+  @for (tribute of tributes(); track tribute.img) {
+    <div class="tribute">
+      <div class="img">
+        <img [src]="tribute.img" alt="" />
+      </div>
+      <div class="container">
+        <p>
+          {{ tribute.text }}
+          @if (tribute.highlight) {
+            <br />
+            <span>{{ tribute.highlight }}</span>
+          }
+          @if (tribute.small) {
+            <br />
+            <small>{{ tribute.small }}</small>
+          }
+        </p>
+      </div>
+    </div>
+  }
+</div>

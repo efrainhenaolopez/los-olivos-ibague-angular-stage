@@ -18,6 +18,7 @@ interface Notificacion {
 })
 export class FormularioContacto {
   readonly tipoFormulario = input.required<string>();
+  readonly demoMode = input<boolean>(false);
 
   private readonly fb = inject(FormBuilder);
   private readonly formularioService = inject(FormularioService);
@@ -43,6 +44,16 @@ export class FormularioContacto {
     }
 
     this.enviando = true;
+
+    if (this.demoMode()) {
+      setTimeout(() => {
+        this.enviando = false;
+        this.formulario.reset();
+        this.mostrarExito();
+      }, 600);
+      return;
+    }
+
     const token = await this.recaptcha.execute('contacto');
     const { name, lastName, phone, email, message } = this.formulario.value;
 

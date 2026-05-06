@@ -1,1 +1,17 @@
-<p>principal works!</p>
+<div class="popup" (click)="closeModal()">
+  <div class="border-pop-up" (click)="$event.stopPropagation()">
+    <div class="popup-content">
+      <div class="header" [ngStyle]="{ background: backgroundHeader() }">
+        <h1>&nbsp;</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-welcome">
+        <div class="img">
+          <a href="https://portalwebolivos.com/#/login/cali" target="_blank" rel="noopener">
+            <img src="/img/popup/popup-portal.jpeg" alt="Portal" />
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

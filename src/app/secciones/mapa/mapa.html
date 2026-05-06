@@ -1,0 +1,31 @@
+<div class="mapa">
+  <div class="regions">
+    <h3>Cobertura nacional</h3>
+    <div class="regions-list">
+      @for (r of regiones; track r.region) {
+        <button
+          type="button"
+          class="region-btn"
+          [class.is-active]="currentRegion() === r.region"
+          (click)="selectRegion(r.region)"
+        >
+          {{ r.region }}
+        </button>
+      }
+    </div>
+
+    <ul class="cities-list">
+      @for (c of selectedCities(); track c.ciudad) {
+        <li>
+          <strong>{{ c.ciudad }}</strong>
+          <span>— {{ c.departamento }}</span>
+        </li>
+      }
+    </ul>
+  </div>
+
+  <div class="map-image">
+    <img src="/icons/Mapa-solo.svg" alt="Mapa de Colombia con cobertura" />
+    <p class="map-caption">{{ currentRegion() }}</p>
+  </div>
+</div>

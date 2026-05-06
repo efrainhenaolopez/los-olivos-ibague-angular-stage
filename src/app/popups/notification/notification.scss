@@ -1,0 +1,115 @@
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+
+  .border-pop-up {
+    width: 50%;
+    max-width: 600px;
+    background: #908e8e61;
+    border-radius: 20px;
+    padding: 1%;
+    box-shadow: 0 4px 10px rgba(92, 80, 80, 0.2);
+  }
+
+  .popup-content {
+    .header {
+      align-items: center;
+      padding: 1% 10%;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+
+      h1 {
+        font-weight: 100;
+        font-family: var(--font-headline, serif);
+        font-size: 32px;
+        margin: 0;
+      }
+
+      i {
+        border: 2px solid white;
+        cursor: pointer;
+        padding: 3px;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 18px;
+      }
+    }
+
+    .container-message {
+      padding: 3% 10%;
+      background: white;
+      display: flex;
+      align-items: center;
+
+      .contacts {
+        width: 60%;
+
+        p {
+          color: #828282;
+          font-size: 18px;
+          font-weight: 300;
+          line-height: 1.5;
+        }
+      }
+
+      .img {
+        width: 40%;
+
+        img {
+          width: 100%;
+          object-fit: contain;
+        }
+      }
+    }
+
+    .button {
+      width: 100%;
+      text-align: center;
+      background: white;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      padding: 3% 0;
+
+      button {
+        cursor: pointer;
+        padding: 8px 32px;
+        color: white;
+        background: #699392;
+        border: 1px solid #699392;
+        border-radius: 50px;
+        font-size: 16px;
+
+        &:hover {
+          color: #699392;
+          background: white;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .popup .border-pop-up {
+    width: 92%;
+  }
+
+  .popup .container-message {
+    flex-direction: column-reverse;
+
+    .contacts,
+    .img {
+      width: 100%;
+    }
+  }
+}

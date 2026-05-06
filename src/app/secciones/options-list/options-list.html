@@ -1,0 +1,17 @@
+<div
+  class="options-list"
+  [style.grid-template-columns]="'repeat(' + columns() + ', 1fr)'"
+>
+  @for (option of options(); track option.number) {
+    <a [routerLink]="[option.link]" [fragment]="option.fragment ?? ''">
+      <div class="option">
+        <div class="number" [style.background]="numberBg()">
+          {{ option.number }}
+        </div>
+        <p [style.background]="bodyBg()" [style.color]="bodyColor()">
+          {{ option.label }}
+        </p>
+      </div>
+    </a>
+  }
+</div>

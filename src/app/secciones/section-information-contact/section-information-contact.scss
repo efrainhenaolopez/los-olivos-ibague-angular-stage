@@ -1,0 +1,58 @@
+.section-information-contact {
+  text-align: center;
+  padding: 5% 10%;
+  background: #fef7fb;
+  max-width: 100%;
+  margin: -2px 0;
+
+  * {
+    margin: 2%;
+  }
+
+  h1 {
+    font-family: var(--font-headline, serif);
+    color: #699392;
+    font-size: 5rem;
+    font-weight: 300;
+  }
+
+  h2 {
+    font-family: var(--font-headline, serif);
+    font-size: 50px;
+    font-weight: 300;
+  }
+
+  h3 {
+    font-size: 27px;
+    font-weight: 400;
+    padding: 2% 15%;
+  }
+
+  p {
+    font-size: 22px;
+    line-height: 1.5;
+  }
+}
+
+@media (max-width: 768px) {
+  .section-information-contact {
+    padding: 8% 5%;
+
+    h1 {
+      font-size: 3rem;
+    }
+
+    h2 {
+      font-size: 32px;
+    }
+
+    h3 {
+      font-size: 23px;
+      padding: 2% 4%;
+    }
+
+    p {
+      font-size: 18px;
+    }
+  }
+}

@@ -1,0 +1,80 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header">
+        <h1>{{ response().title }}</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+
+      @if (response().option === 'optionOne') {
+        <div class="option option-one">
+          <h1>¡Bienvenido a la comunidad digital!</h1>
+          <p>
+            Nuestro propósito es ofrecer apoyo emocional y psicológico en
+            procesos de pérdida y duelo y brindar herramientas que permitan
+            transitar esta experiencia de manera sana.
+          </p>
+          <p>Este será un espacio donde se fomente la empatía, solidaridad y colaboración.</p>
+          <p>Nos gustaría que hicieras parte de nuestra comunidad.</p>
+          <p>Te invitamos a unirte a nuestros grupos de Facebook y WhatsApp:</p>
+          <div class="social">
+            <div class="grid">
+              <div class="icon">
+                <i class="fa-brands fa-whatsapp"></i>
+              </div>
+              <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener">
+                310 417 1085
+              </a>
+            </div>
+            <div class="grid">
+              <div class="icon">
+                <i class="fa-brands fa-facebook"></i>
+              </div>
+              <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener">
+                Grupo Los Olivos Tolima
+              </a>
+            </div>
+          </div>
+        </div>
+      }
+
+      @if (response().option === 'optionTwo') {
+        <div class="option option-two">
+          <embed
+            src="/pdfs/CAJA-DE-HERRAMIENTAS-PARA-EL-DUELO.pdf"
+            type="application/pdf"
+            width="100%"
+            height="600px"
+          />
+        </div>
+      }
+
+      @if (response().option === 'optionThree') {
+        <div class="option option-three">
+          <div class="img-books">
+            <img src="/img/libro-el-camino-de-las-lagrimas.jpg" alt="" />
+            <img src="/img/libro-el-dolor-no-es-para-siempre.jpg" alt="" />
+            <img src="/img/libro-rueda-de-la-vida.jpg" alt="" />
+          </div>
+          <div class="books">
+            <ul>
+              <li><span>El camino de las lágrimas:</span> Jorge Bucay</li>
+              <li><span>Las cinco pulgas del duelo:</span> Jose Carlos Bermejo, Marisa Magaña, Marta Villacieros</li>
+              <li><span>El camino de las lágrimas:</span> Elizabeth Kubler-Ross</li>
+              <li><span>Palabras para sanar:</span> Julieta Enríquez</li>
+              <li><span>El dolor no es para siempre:</span> Arnaldo Pangrazzi</li>
+              <li><span>Experiencias con el cielo:</span> Elsa Lucía Arango</li>
+              <li><span>Disculpe, estoy en duelo:</span> Jean Monbourquette, Isabelle d'Aspremont</li>
+              <li><span>La muerte nunca falla. Un doloroso descubrimiento:</span> Concepció Poch</li>
+              <li><span>Vivir la muerte. La muerte y el morir:</span> Vicente Madoz</li>
+              <li><span>Sobre la muerte y los moribundos:</span> Elizabeth Kubler-Ross</li>
+              <li><span>La rueda de la vida:</span> Elizabeth Kubler-Ross</li>
+              <li><span>Sobre el duelo y el dolor:</span> Elizabeth Kubler-Ross</li>
+              <li><span>Transformar el duelo:</span> Mario Guerra</li>
+            </ul>
+          </div>
+        </div>
+      }
+    </div>
+  </div>
+</div>

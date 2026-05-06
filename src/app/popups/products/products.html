@@ -1,0 +1,41 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header">
+        <h1>{{ product().title }}</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-description">
+        <p>{{ product().description }}</p>
+      </div>
+      <div class="container-details">
+        <div class="sections">
+          <section>
+            <h3>Titular</h3>
+            <p [innerHTML]="product().informationPopUP.holder"></p>
+          </section>
+          <section>
+            <h3>Afiliado Adicional</h3>
+            <p [innerHTML]="product().informationPopUP.affiliate"></p>
+          </section>
+          @if (product().informationPopUP.paymentMethods?.length) {
+            <section>
+              <h3>Precios</h3>
+              @for (price of product().informationPopUP.paymentMethods; track price.pay) {
+                <p><b>{{ price.pay }}</b> {{ price.price }}</p>
+              }
+            </section>
+          }
+          @if (product().informationPopUP.additional) {
+            <p>{{ product().informationPopUP.additional }}</p>
+          }
+          <strong>*Aplica C&amp;R</strong>
+          <button type="button">Comprar ahora</button>
+        </div>
+        <div class="img">
+          <img [src]="product().informationPopUP.img" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

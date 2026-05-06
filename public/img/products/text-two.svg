@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="100%" height="100%" viewBox="0 0 167 332" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linejoin:round;stroke-miterlimit:2;">
+    <rect x="-3.5" y="-4" width="174" height="340" style="fill:rgb(253,251,252);"/>
+    <path d="M51.75,333L44.75,333C36.9,322.92 30.68,312.07 28.15,299.35C25.23,284.6 25.71,270.28 34.15,257.28C38.48,250.62 45.15,247.28 53.15,247.05C58.76,246.86 64.15,247.41 69.09,250.58C72.4,252.703 74.708,256.084 75.48,259.94C77.55,268.75 74.79,276.57 68.1,280.77C62.41,284.34 50.7,284.77 45.85,278.46C44.8,277.09 44.17,277.63 43.5,278.8C41.794,282.09 40.858,285.725 40.76,289.43C40.196,298.361 41.211,307.322 43.76,315.9C45.54,322.05 49,327.37 51.75,333Z" style="fill:rgb(251,230,228);fill-rule:nonzero;"/>
+    <path d="M116.08,333L109.08,333C101.08,322.65 94.37,311.65 92.46,298.48C90.64,285.89 90.05,273.21 95.89,261.36C100.18,252.64 107.34,247.56 117.31,247.06C122.31,246.81 127.2,247.27 131.76,249.61C135.951,251.616 138.949,255.498 139.83,260.06C141.83,269 139.06,276.63 132.21,280.96C126.14,284.79 115.95,283.96 110.89,278.96C109.11,277.17 108.27,277.56 107.4,279.63C106.04,282.75 105.234,286.083 105.02,289.48C104.16,304.73 107.29,319.02 115.75,331.94C115.911,332.275 116.022,332.632 116.08,333Z" style="fill:rgb(251,230,228);fill-rule:nonzero;"/>
+    <g transform="matrix(1,0,0,1,12.33,132.96)">
+        <g transform="matrix(1,0,0,1,-1.40039,0)">
+            <g transform="matrix(12,0,0,12,30.996,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Baskervville-Italic', 'Baskervville';font-style:italic;font-size:12px;">Urnas</text>
+        </g>
+        <g transform="matrix(1,0,0,1,0,14.4)">
+            <g transform="matrix(12,0,0,12,85.632,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Baskervville-Italic', 'Baskervville';font-style:italic;font-size:12px;">Arreglos Florales</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-0.773438,28.8)">
+            <g transform="matrix(12,0,0,12,128.7,0)">
+            </g>
+            <text x="0px" y="0px" style="font-family:'Baskervville-Italic', 'Baskervville';font-style:italic;font-size:12px;">Detalles Comnemorativos</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-0.785156,43.2)">
+            <text x="0px" y="0px" style="font-family:'Baskervville-Italic', 'Baskervville';font-style:italic;font-size:12px;">Fotos Memoriales</text>
+        </g>
+        <g transform="matrix(1,0,0,1,-0.755859,57.6)">
+            <text x="0px" y="0px" style="font-family:'Baskervville-Italic', 'Baskervville';font-style:italic;font-size:12px;">Pedestal de Lápida</text>
+        </g>
+    </g>
+</svg>

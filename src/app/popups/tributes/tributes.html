@@ -1,0 +1,16 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header">
+        <h1>Protocolo</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-description">
+        <h1>{{ protocol().id }}</h1>
+        <h2>{{ protocol().title }}</h2>
+        <br />
+        <p>{{ protocol().content }}</p>
+      </div>
+    </div>
+  </div>
+</div>

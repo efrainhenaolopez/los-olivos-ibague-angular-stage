@@ -1,1 +1,28 @@
-<p>lineas works!</p>
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header" [ngStyle]="{ background: backgroundHeader() }">
+        <h1>Contáctanos</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-phones">
+        <div class="contacts">
+          <p>Línea de Atención Nacional <br /> 018000-180-150</p>
+          <p>Desde celular <br /> (57) 300 913 22 23</p>
+          <p>
+            Oficina Principal <br /> PBX (8) 2685656 <br />
+            Calle 25 N° 5-50 <br /> Ibagué - Colombia
+          </p>
+          <br />
+          <p>Tu voz nos importa (Felicitaciones, Peticiones, Quejas, Reclamos)</p>
+          <a href="/contacto">
+            <button type="button">Click aquí</button>
+          </a>
+        </div>
+        <div class="img">
+          <img src="/img/necesitas-ayuda-2.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

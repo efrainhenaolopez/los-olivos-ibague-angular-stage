@@ -1,0 +1,34 @@
+.buy-tribute-section {
+  max-width: 100%;
+  background: white;
+
+  .container-information {
+    background-image: url('/img/backgrounds-sections/buy-tributes.png');
+    background-repeat: no-repeat;
+    background-size: contain;
+    background-position: left;
+    color: #201e1e;
+    padding: 8% 4%;
+    text-align: right;
+    min-height: 200px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+
+    p {
+      font-size: 28px;
+      margin: 0;
+      line-height: 1.4;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .buy-tribute-section .container-information {
+    padding: 12% 4%;
+
+    p {
+      font-size: 20px;
+    }
+  }
+}

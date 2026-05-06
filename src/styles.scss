@@ -66,6 +66,389 @@
   --font-body:          'Raleway', sans-serif;
 }
 
+/* ─── Defaults de elementos (heredan de la paleta) ────────────────────────
+ * Cada token --el-* puede ser sobrescrito inline por el editor "Elementos"
+ * en /ux. Si no se sobrescribe, hereda automáticamente del valor --t-*.
+ */
+app-ux {
+  /* Botón primario */
+  --el-btn-primary-bg:     var(--t-cta);
+  --el-btn-primary-text:   var(--t-on-primary);
+  --el-btn-primary-border: var(--t-cta);
+  --el-btn-primary-radius: 8px;
+  /* Botón secundario */
+  --el-btn-secondary-border:     var(--t-primary);
+  --el-btn-secondary-text:       var(--t-primary);
+  --el-btn-secondary-hover-bg:   var(--t-primary);
+  --el-btn-secondary-hover-text: var(--t-on-primary);
+  --el-btn-secondary-radius:     8px;
+  /* Tipografía */
+  --el-h1-color:   var(--t-primary);
+  --el-h2-color:   var(--t-secondary);
+  --el-h3-color:   var(--t-accent);
+  --el-body-color: inherit;
+  /* Links */
+  --el-link-color:  var(--t-primary);
+  --el-link-hover:  var(--t-cta);
+  /* Estructura */
+  --el-header-bar-bg:     var(--t-gradient);
+  --el-header-bar-text:   var(--t-on-primary);
+  --el-hero-bg:           var(--t-gradient);
+  --el-hero-text:         var(--t-on-primary);
+  --el-footer-bg:         var(--t-gradient);
+  --el-footer-text:       var(--t-on-primary);
+  --el-popup-header-bg:   var(--t-gradient);
+  --el-popup-header-text: var(--t-on-primary);
+}
+
+/* ─── Overrides globales que aplican la paleta a los componentes hijos ───── */
+
+app-ux[data-territory] {
+  /* ── Botones primarios (CTA fuerte) ─────────────────────────────────────── */
+  .primary-button {
+    background: var(--el-btn-primary-bg) !important;
+    color: var(--el-btn-primary-text) !important;
+    border-color: var(--el-btn-primary-border) !important;
+    border-radius: var(--el-btn-primary-radius);
+  }
+  .primary-button:hover {
+    background: var(--t-cta-strong) !important;
+    border-color: var(--t-cta-strong) !important;
+  }
+  /* ── Botones secundarios (outlined sobre primary) ───────────────────────── */
+  .secondary-button {
+    border-color: var(--el-btn-secondary-border) !important;
+    color: var(--el-btn-secondary-text) !important;
+    background: transparent !important;
+    border-radius: var(--el-btn-secondary-radius);
+  }
+  .secondary-button:hover {
+    background: var(--el-btn-secondary-hover-bg) !important;
+    color: var(--el-btn-secondary-hover-text) !important;
+  }
+
+  /* ── Tipografía global del showcase ─────────────────────────────────────── */
+  h1 { color: var(--el-h1-color); }
+  h2 { color: var(--el-h2-color); }
+  h3 { color: var(--el-h3-color); }
+  app-ux,
+  main,
+  p { color: var(--el-body-color); }
+  a:not([class]) { color: var(--el-link-color); }
+  a:not([class]):hover { color: var(--el-link-hover); }
+
+  /* ── app-header (top bar usa primary, CTAs usan accent) ─────────────────── */
+  app-header .contact {
+    background: var(--el-header-bar-bg) !important;
+    color: var(--el-header-bar-text) !important;
+  }
+  app-header .navbar #bill,
+  app-header .navbar #login,
+  app-header .navbar button:not(.dropdown-button) {
+    background: var(--t-accent) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-header .navbar .dropdown-button {
+    color: var(--t-primary) !important;
+  }
+  app-header .navbar .dropdown-content {
+    background: var(--t-primary) !important;
+  }
+  app-header .navbar .dropdown-content a {
+    color: var(--t-on-primary) !important;
+  }
+  app-header .navbar .dropdown-content a:hover,
+  app-header .navbar .dropdown-content a.active {
+    background: var(--t-secondary) !important;
+  }
+  app-header .button-contact a {
+    background: var(--t-cta) !important;
+    color: var(--t-on-primary) !important;
+  }
+
+  /* ── app-header-page-section: play button con accent ─────────────────────── */
+  app-header-page-section .button-ready a {
+    background: var(--t-accent) !important;
+  }
+
+  /* ── app-contact-cta (banner "¿Necesitas ayuda?") ───────────────────────── */
+  app-contact-cta .contact-banner {
+    background: var(--t-bg-soft) !important;
+  }
+  app-contact-cta .contact-banner::before {
+    background: var(--t-gradient) !important;
+  }
+  app-contact-cta h1 {
+    color: var(--t-primary) !important;
+  }
+  app-contact-cta button {
+    color: var(--t-primary) !important;
+    border-color: var(--t-primary) !important;
+  }
+  app-contact-cta button:hover {
+    background: var(--t-primary) !important;
+    color: var(--t-on-primary) !important;
+  }
+
+  /* ── app-section-information-contact (bloque centrado fondo claro) ─────── */
+  app-section-information-contact > div,
+  app-section-information-contact .section-information-contact {
+    background: var(--t-bg-soft) !important;
+  }
+  app-section-information-contact h1 {
+    color: var(--t-primary) !important;
+  }
+  app-section-information-contact h2 {
+    color: var(--t-secondary) !important;
+  }
+  app-section-information-contact h3 {
+    color: var(--t-accent) !important;
+  }
+
+  /* ── app-tribute-section (banner con texto + 2 botones) ─────────────────── */
+  app-tribute-section .tribute-section,
+  app-tribute-section .container-information {
+    background: var(--el-hero-bg) !important;
+    color: var(--el-hero-text) !important;
+  }
+  app-tribute-section h1,
+  app-tribute-section p {
+    color: var(--el-hero-text) !important;
+  }
+  app-tribute-section .container-information button {
+    color: var(--t-on-primary) !important;
+    border-color: var(--t-on-primary) !important;
+    background: transparent !important;
+  }
+  app-tribute-section .container-information button:hover {
+    background: var(--t-on-primary) !important;
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-our-tributes-section (banner imagen) ───────────────────────────── */
+  app-our-tributes-section .container-information {
+    background: var(--el-hero-bg), var(--t-primary) !important;
+    background-blend-mode: multiply !important;
+    color: var(--el-hero-text) !important;
+  }
+  app-our-tributes-section button:hover {
+    background: var(--t-on-primary) !important;
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-show-your-affection ────────────────────────────────────────────── */
+  app-show-your-affection {
+    background: var(--t-bg-soft) !important;
+    display: block;
+  }
+  app-show-your-affection h1 {
+    color: var(--t-primary) !important;
+  }
+  app-show-your-affection .separator-text {
+    border-bottom-color: var(--t-accent) !important;
+  }
+  app-show-your-affection .circle {
+    border-color: var(--t-accent) !important;
+    background: var(--t-bg-soft) !important;
+  }
+
+  /* ── app-buy-tribute-section ────────────────────────────────────────────── */
+  app-buy-tribute-section {
+    background: var(--el-hero-bg) !important;
+    display: block;
+  }
+  app-buy-tribute-section h1,
+  app-buy-tribute-section h2,
+  app-buy-tribute-section .container-information {
+    color: var(--el-hero-text) !important;
+  }
+
+  /* ── app-death-abroad ───────────────────────────────────────────────────── */
+  app-death-abroad,
+  app-death-abroad .container-information,
+  app-death-abroad section {
+    background: var(--el-hero-bg) !important;
+  }
+  app-death-abroad h1,
+  app-death-abroad .container-information {
+    color: var(--el-hero-text) !important;
+  }
+
+  /* ── app-mapa ───────────────────────────────────────────────────────────── */
+  app-mapa h3,
+  app-mapa .map-caption {
+    color: var(--t-primary) !important;
+  }
+  app-mapa .region-btn {
+    border-color: var(--t-primary) !important;
+    color: var(--t-primary) !important;
+    background: transparent !important;
+  }
+  app-mapa .region-btn:hover {
+    border-color: var(--t-accent) !important;
+    color: var(--t-accent) !important;
+  }
+  app-mapa .region-btn.is-active {
+    background: var(--t-accent) !important;
+    border-color: var(--t-accent) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-mapa .cities-list li strong {
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-progress-bar ───────────────────────────────────────────────────── */
+  app-progress-bar .progress-segment.filled {
+    background: var(--t-accent) !important;
+  }
+
+  /* ── app-separator (círculo decorativo central) ─────────────────────────── */
+  app-separator .circle,
+  app-separator .separator-dot {
+    background: var(--t-accent) !important;
+  }
+
+  /* ── app-slider-products ────────────────────────────────────────────────── */
+  app-slider-products .nav,
+  app-slider-products .nav-prev,
+  app-slider-products .nav-next {
+    background: var(--t-cta) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-slider-products .nav:hover {
+    background: var(--t-cta-strong) !important;
+  }
+  app-slider-products .price {
+    color: var(--t-cta) !important;
+  }
+  app-slider-products h2 {
+    color: var(--t-primary) !important;
+  }
+  app-slider-products .dot.is-active {
+    background: var(--t-cta) !important;
+  }
+
+  /* ── app-plans-grid ─────────────────────────────────────────────────────── */
+  app-plans-grid hr {
+    border-top-color: var(--t-accent) !important;
+  }
+  app-plans-grid .price,
+  app-plans-grid h3 {
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-categories-grid ────────────────────────────────────────────────── */
+  app-categories-grid .category:hover .img {
+    box-shadow: 0 4px 16px var(--t-accent) !important;
+  }
+  app-categories-grid .category h3 {
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-tributes-grid ──────────────────────────────────────────────────── */
+  app-tributes-grid .tribute-card:hover .img,
+  app-tributes-grid .tribute:hover .img {
+    border-color: var(--t-accent) !important;
+  }
+  app-tributes-grid .tribute-card span,
+  app-tributes-grid .tribute span {
+    color: var(--t-primary) !important;
+  }
+
+  /* ── app-options-list ───────────────────────────────────────────────────── */
+  app-options-list .number {
+    background: var(--t-accent) !important;
+    color: var(--t-on-primary) !important;
+  }
+
+  /* ── app-formulario-contacto ────────────────────────────────────────────── */
+  app-formulario-contacto button[type='submit'] {
+    background: var(--t-cta) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-formulario-contacto button[type='submit']:hover {
+    background: var(--t-cta-strong) !important;
+  }
+  app-formulario-contacto a {
+    color: var(--t-primary) !important;
+  }
+  app-formulario-contacto a:hover {
+    color: var(--t-accent) !important;
+  }
+
+  /* ── app-footer ─────────────────────────────────────────────────────────── */
+  app-footer a:hover,
+  app-footer .active {
+    color: var(--el-link-hover) !important;
+  }
+  app-footer .footer-bottom {
+    background: var(--el-footer-bg) !important;
+    color: var(--el-footer-text) !important;
+  }
+  app-footer .icon {
+    background: var(--t-on-primary) !important;
+    color: var(--t-primary) !important;
+  }
+
+  /* ── Popups: header con gradient, botones con CTA ───────────────────────── */
+  app-lineas .header,
+  app-principal .header,
+  app-contacto .header,
+  app-tributes .header,
+  app-funeral-plans .header,
+  app-products .header,
+  app-relieves .header,
+  app-options-relieves .header,
+  app-headquarter .header,
+  popup-linea-etica .header {
+    background: var(--el-popup-header-bg) !important;
+    color: var(--el-popup-header-text) !important;
+  }
+  app-lineas button,
+  app-contacto button,
+  app-funeral-plans button,
+  app-products button {
+    background: var(--t-cta) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-lineas button:hover,
+  app-contacto button:hover,
+  app-funeral-plans button:hover,
+  app-products button:hover {
+    background: var(--t-cta-strong) !important;
+  }
+  app-tributes h1,
+  app-tributes h2,
+  app-relieves h1,
+  app-relieves h2,
+  app-options-relieves h1,
+  app-headquarter h2 {
+    color: var(--t-primary) !important;
+  }
+  app-options-relieves .icon,
+  app-headquarter .prev,
+  app-headquarter .next {
+    background: var(--t-accent) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-notification button {
+    background: var(--t-cta) !important;
+    color: var(--t-on-primary) !important;
+  }
+  app-notification button:hover {
+    background: var(--t-cta-strong) !important;
+  }
+
+  /* ── Showcase: subtítulos y nav del propio /ux ──────────────────────────── */
+  .ux-section h2 {
+    border-left: 4px solid var(--t-accent);
+    padding-left: 12px;
+  }
+  .ux-toc a:hover {
+    color: var(--t-accent);
+  }
+}
+
 /* reCAPTCHA v3: badge oculto — atribución incluida en el formulario (requerido por Google) */
 .grecaptcha-badge {
   visibility: hidden !important;

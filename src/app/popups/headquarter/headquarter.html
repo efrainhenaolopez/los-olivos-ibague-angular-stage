@@ -1,0 +1,47 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header">
+        <h1>{{ headquarter().name }}</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+
+      <div class="slider">
+        @for (image of images(); track image.url; let i = $index) {
+          <div class="slide" [class.active]="currentSlide() === i">
+            <img [src]="image.url" [alt]="image.alt" />
+          </div>
+        }
+        <button type="button" class="prev" (click)="prev()" aria-label="Anterior">
+          <i class="fa-solid fa-arrow-left"></i>
+        </button>
+        <button type="button" class="next" (click)="next()" aria-label="Siguiente">
+          <i class="fa-solid fa-arrow-right"></i>
+        </button>
+        <div class="dots">
+          @for (image of images(); track image.url; let i = $index) {
+            <span [class.active]="currentSlide() === i" (click)="setSlide(i)"></span>
+          }
+        </div>
+      </div>
+
+      <div class="services">
+        <div class="title">
+          <h2>Nuestros Servicios</h2>
+        </div>
+        <div class="list-services">
+          @for (service of services; track service.img) {
+            <div class="tribute">
+              <div class="img">
+                <img [src]="service.img" alt="" />
+              </div>
+              <div class="container">
+                <p [innerHTML]="service.text"></p>
+              </div>
+            </div>
+          }
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

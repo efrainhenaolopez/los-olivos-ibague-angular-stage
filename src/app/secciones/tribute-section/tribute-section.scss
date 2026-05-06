@@ -1,0 +1,79 @@
+.tribute-section {
+  max-width: 100%;
+  background: white;
+
+  .container-information {
+    background-image: url('/img/backgrounds-sections/ja.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    color: #201e1e;
+    padding: 13% 4%;
+    text-align: right;
+
+    h1 {
+      font-size: 32px;
+      font-family: var(--font-headline, serif);
+      margin: 0;
+    }
+
+    p {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    .buttons {
+      display: flex;
+      gap: 15px;
+      justify-content: end;
+      margin: 2% 5%;
+
+      a {
+        text-decoration: none;
+      }
+
+      button {
+        font-family: var(--font-headline, serif);
+        background: transparent;
+        font-size: 26px;
+        color: #231f20;
+        padding: 0 20px;
+        border: 2px solid #231f20;
+        cursor: pointer;
+        border-top-right-radius: 50px;
+        border-bottom-right-radius: 50px;
+        display: flex;
+        align-items: center;
+
+        &:hover {
+          background: #231f20;
+          color: white;
+        }
+
+        i {
+          margin-left: 10px;
+          font-size: 20px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .tribute-section .container-information {
+    background-position: center;
+    padding: 8% 4%;
+
+    h1 {
+      font-size: 26px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    .buttons button {
+      font-size: 18px;
+    }
+  }
+}

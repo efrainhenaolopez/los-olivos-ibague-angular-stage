@@ -1,0 +1,54 @@
+.death-abroad {
+  max-width: 100%;
+
+  .container-information {
+    background-image: url('/img/Manos-luto.png');
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: left;
+    color: white;
+    padding: 4%;
+    text-align: right;
+
+    h1 {
+      font-size: 55px;
+      font-family: var(--font-headline, sans-serif);
+      font-weight: 300;
+      line-height: 1;
+      margin: 0;
+    }
+
+    p {
+      font-size: 20px;
+      padding: 2% 0;
+      font-weight: 100;
+      margin: 0;
+    }
+
+    a {
+      display: inline-block;
+
+      img {
+        cursor: pointer;
+        width: 15%;
+        min-width: 80px;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .death-abroad .container-information {
+    h1 {
+      font-size: 30px;
+    }
+
+    p {
+      font-size: 18px;
+    }
+
+    a img {
+      width: 30%;
+    }
+  }
+}

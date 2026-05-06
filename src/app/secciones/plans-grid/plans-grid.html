@@ -1,0 +1,21 @@
+<div class="plans-grid">
+  @for (plan of plans(); track plan.id; let i = $index; let last = $last) {
+    <section>
+      <div
+        class="container-img"
+        [class.container-navbar-top]="i === 0"
+        [class.container-navbar-buttom]="last"
+        [routerLink]="[plan.link]"
+      >
+        <img [src]="plan.img" [alt]="plan.title" />
+      </div>
+      <div class="container-content">
+        <h2>{{ plan.title }}</h2>
+        <p>{{ plan.description }}</p>
+      </div>
+    </section>
+    @if (!last) {
+      <hr />
+    }
+  }
+</div>

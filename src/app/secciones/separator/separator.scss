@@ -1,0 +1,27 @@
+.separator {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 5%;
+  justify-content: center;
+  max-width: 100%;
+  margin: -2px 0;
+
+  &::before,
+  &::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    border-bottom: 1px dotted #a0a0a0;
+  }
+
+  .circle {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--color-cta, #f5821f);
+    margin: 0 12px;
+    flex-shrink: 0;
+  }
+}

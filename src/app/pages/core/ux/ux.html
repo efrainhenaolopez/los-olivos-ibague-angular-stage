@@ -1,1 +1,1503 @@
-<p>ux works!</p>
+<app-header logo="/logos/logo-olivos.svg" color="#908e8e61"></app-header>
+
+<main class="ux-showcase">
+  <header class="ux-hero">
+    <h1>UX Showcase</h1>
+    <p>
+      Catálogo visual e interactivo de los componentes, popups y servicios
+      reutilizables del proyecto. Cada tarjeta documenta el selector, los
+      inputs/outputs y un snippet de uso.
+    </p>
+  </header>
+
+  <nav class="ux-toc" aria-label="Tabla de contenidos">
+    <a href="#headers">Headers</a>
+    <a href="#footer">Footer</a>
+    <a href="#popups">Popups</a>
+    <a href="#formulario">Formulario</a>
+    <a href="#logos">Logos</a>
+    <a href="#iconos">Iconos</a>
+    <a href="#servicios">Servicios</a>
+    <a href="#bloques">Bloques</a>
+    <a href="#paginas">Páginas</a>
+  </nav>
+
+  <section id="headers" class="ux-section">
+    <h2>Headers</h2>
+    <p class="ux-section-desc">
+      Cuatro variantes de cabecera. La preview en vivo está en la parte superior
+      de esta misma página (<code>app-header</code>).
+    </p>
+    <div class="ux-grid">
+      @for (h of headersDoc; track h.selector) {
+        <article class="ux-card">
+          <header class="ux-card-head">
+            <h3>{{ h.titulo }}</h3>
+            <span class="ux-tag">{{ h.selector }}</span>
+          </header>
+          <p class="ux-desc">{{ h.desc }}</p>
+          <pre class="ux-snippet"><code>{{ h.snippet }}</code></pre>
+          <ul class="ux-meta">
+            <li><strong>Inputs:</strong> {{ h.inputs }}</li>
+          </ul>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section id="footer" class="ux-section">
+    <h2>Footer</h2>
+    <p class="ux-section-desc">
+      Pie de página global con links legales y redes sociales. La preview está
+      al final de esta página.
+    </p>
+    <div class="ux-grid">
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Footer principal</h3>
+          <span class="ux-tag">app-footer</span>
+        </header>
+        <p class="ux-desc">
+          Pie común a todas las páginas. Se inserta sin inputs y maneja sus
+          propios enlaces internamente.
+        </p>
+        <pre class="ux-snippet"><code>&lt;app-footer&gt;&lt;/app-footer&gt;</code></pre>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> — (sin inputs públicos)</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="popups" class="ux-section">
+    <h2>Popups</h2>
+    <p class="ux-section-desc">
+      Modales overlay. Cada popup emite <code>(close)</code> al cerrarse. Solo
+      <code>linea-etica</code> está implementado por ahora.
+    </p>
+    <div class="ux-grid">
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Línea Ética</h3>
+          <span class="ux-tag">popup-linea-etica</span>
+        </header>
+        <p class="ux-desc">
+          Modal con formulario para reportes éticos. Color de cabecera
+          personalizable.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('linea-etica')">
+            Abrir popup
+          </button>
+        </div>
+        <pre class="ux-snippet"><code>&lt;popup-linea-etica
+  backgroundHeader="#f5821f"
+  [demoMode]="false"
+  (close)="closeModal()"
+&gt;&lt;/popup-linea-etica&gt;</code></pre>
+        <ul class="ux-meta">
+          <li>
+            <strong>Inputs:</strong> backgroundHeader (string, required),
+            demoMode (boolean, default false)
+          </li>
+          <li><strong>Outputs:</strong> close: boolean</li>
+          <li><strong>Usa:</strong> app-formulario-contacto</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Principal (welcome)</h3>
+          <span class="ux-tag">app-principal</span>
+        </header>
+        <p class="ux-desc">
+          Modal con imagen clickeable al portal de cliente. Header coloreable,
+          click fuera cierra.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('principal')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> backgroundHeader (string, default '#00966c')</li>
+          <li><strong>Outputs:</strong> close: boolean</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Contacto (formulario)</h3>
+          <span class="ux-tag">app-contacto</span>
+        </header>
+        <p class="ux-desc">
+          Modal "Adquiérelo Ahora" con app-formulario-contacto embebido. Soporta
+          modo demo.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('contacto')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> backgroundHeader (string), demoMode (boolean)</li>
+          <li><strong>Outputs:</strong> close: boolean</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Notification</h3>
+          <span class="ux-tag">app-notification</span>
+        </header>
+        <p class="ux-desc">
+          Modal de notificación reutilizable: title + message + background. Lo
+          usa formulario-contacto en éxito/error.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('notification')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> data (NotificationData, required)</li>
+          <li><strong>NotificationData:</strong> &#123; title, message, background &#125;</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Tributes (protocolo)</h3>
+          <span class="ux-tag">app-tributes</span>
+        </header>
+        <p class="ux-desc">
+          Modal con detalle de un protocolo de homenaje (id grande + título +
+          contenido). Usado en página Homenajes.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('tributes')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> protocol (TributeProtocol, required)</li>
+          <li><strong>TributeProtocol:</strong> &#123; id, title, content &#125;</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Funeral Plans</h3>
+          <span class="ux-tag">app-funeral-plans</span>
+        </header>
+        <p class="ux-desc">
+          Modal con detalle de plan funerario (descripción + coberturas via
+          innerHTML + imagen + CTA opcional). Usado en Club Más Vida.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('funeral-plans')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> plan (FuneralPlan, required)</li>
+          <li><strong>FuneralPlan:</strong> &#123; id, title, content, coverages, button &#125;</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Products (slider)</h3>
+          <span class="ux-tag">app-products</span>
+        </header>
+        <p class="ux-desc">
+          Modal con detalle de producto: titular, afiliado, métodos de pago e
+          imagen. Disparado desde slider-products en producción.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('products')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> product (PopupProduct, required)</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Relieves (Soporte Emocional)</h3>
+          <span class="ux-tag">app-relieves</span>
+        </header>
+        <p class="ux-desc">
+          Modal con grid de 4 recursos de soporte emocional (teléfono, red de
+          apoyo, grupos de duelo, atención psicológica). Sin inputs.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('relieves')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Outputs:</strong> close: boolean</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Options Relieves</h3>
+          <span class="ux-tag">app-options-relieves</span>
+        </header>
+        <p class="ux-desc">
+          Modal con 3 vistas condicionales según <code>option</code>:
+          comunidad/redes (optionOne), PDF embebido (optionTwo), lista de libros
+          de duelo (optionThree).
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('options-relieves')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> response (RelievesResponse, required)</li>
+          <li><strong>RelievesResponse:</strong> &#123; title, option &#125; con option en optionOne | optionTwo | optionThree</li>
+        </ul>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>Headquarter (sede)</h3>
+          <span class="ux-tag">app-headquarter</span>
+        </header>
+        <p class="ux-desc">
+          Modal con slider auto-rotante de imágenes de sede + grid de 12
+          servicios. Auto-slide cada 5s con prev/next/dots. Usado en Sedes.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="open('headquarter')">Abrir popup</button>
+        </div>
+        <ul class="ux-meta">
+          <li><strong>Inputs:</strong> headquarter (HeadquarterData, required)</li>
+        </ul>
+      </article>
+    </div>
+  </section>
+
+  <section id="formulario" class="ux-section">
+    <h2>Formulario de contacto</h2>
+    <p class="ux-section-desc">
+      Componente reutilizable con validaciones y reCAPTCHA. Acepta
+      <code>demoMode</code> para simular envío sin tocar el backend.
+    </p>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Live preview</h3>
+        <span class="ux-tag">app-formulario-contacto</span>
+      </header>
+      <p class="ux-note">
+        <strong>Modo demo activo:</strong> el formulario valida los campos y
+        muestra la notificación de éxito, pero
+        <strong>no envía nada al backend</strong> ni invoca reCAPTCHA.
+      </p>
+      <app-formulario-contacto
+        tipoFormulario="UX Showcase"
+        [demoMode]="true"
+      ></app-formulario-contacto>
+      <pre class="ux-snippet"><code>&lt;app-formulario-contacto
+  tipoFormulario="Contacto"
+  [demoMode]="false"
+&gt;&lt;/app-formulario-contacto&gt;</code></pre>
+      <ul class="ux-meta">
+        <li>
+          <strong>Inputs:</strong> tipoFormulario (string, required), demoMode
+          (boolean, default false)
+        </li>
+        <li><strong>Campos:</strong> name, lastName, phone, email, message</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="logos" class="ux-section">
+    <h2>Logos</h2>
+    <p class="ux-section-desc">
+      Variantes de marca disponibles en <code>/public/logos</code>.
+    </p>
+
+    <h3 class="ux-subhead">Color (logos-color/)</h3>
+    <div class="ux-logos-grid">
+      @for (slug of logosColor; track slug) {
+        <figure class="ux-logo-cell">
+          <img [src]="'/logos/logos-color/' + slug + '.svg'" [alt]="slug" />
+          <figcaption>{{ slug }}</figcaption>
+        </figure>
+      }
+    </div>
+
+    <h3 class="ux-subhead">Gris (logos-gris/)</h3>
+    <div class="ux-logos-grid">
+      @for (slug of logosGris; track slug) {
+        <figure class="ux-logo-cell">
+          <img [src]="'/logos/logos-gris/' + slug + '.svg'" [alt]="slug" />
+          <figcaption>{{ slug }}</figcaption>
+        </figure>
+      }
+    </div>
+
+    <h3 class="ux-subhead">Sueltos (raíz /logos/)</h3>
+    <div class="ux-logos-grid">
+      @for (l of logosSueltos; track l.src) {
+        <figure class="ux-logo-cell">
+          <img [src]="l.src" [alt]="l.alt" />
+          <figcaption>{{ l.alt }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <section id="iconos" class="ux-section">
+    <h2>Iconos</h2>
+    <p class="ux-section-desc">
+      SVG en <code>/public/icons</code>. Útiles para hero sections y
+      ilustraciones de servicios.
+    </p>
+
+    <h3 class="ux-subhead">Categorías (icons-categorys/)</h3>
+    <div class="ux-logos-grid">
+      @for (slug of iconosCategorias; track slug) {
+        <figure class="ux-logo-cell">
+          <img [src]="'/icons/icons-categorys/' + slug + '.svg'" [alt]="slug" />
+          <figcaption>{{ slug }}</figcaption>
+        </figure>
+      }
+    </div>
+
+    <h3 class="ux-subhead">Sueltos (raíz /icons/)</h3>
+    <div class="ux-logos-grid">
+      @for (i of iconosSueltos; track i.src) {
+        <figure class="ux-logo-cell">
+          <img [src]="i.src" [alt]="i.alt" />
+          <figcaption>{{ i.alt }}</figcaption>
+        </figure>
+      }
+    </div>
+  </section>
+
+  <section id="servicios" class="ux-section">
+    <h2>Servicios</h2>
+    <p class="ux-section-desc">
+      Singletons inyectables (<code>providedIn: 'root'</code>). Algunos exponen
+      demos en vivo.
+    </p>
+    <div class="ux-grid">
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>GtmService</h3>
+          <span class="ux-tag">push() / trackPageView()</span>
+        </header>
+        <p class="ux-desc">
+          Wrapper sobre <code>window.dataLayer</code>. No-op en SSR.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="testGtm()">
+            Push evento de prueba
+          </button>
+        </div>
+        @if (gtmLog().length) {
+          <div class="ux-demo-output">
+            @for (l of gtmLog(); track l) {
+              <div>{{ l }}</div>
+            }
+          </div>
+        }
+        <pre class="ux-snippet"><code>this.gtm.push({{ '{' }} event: 'mi_evento' {{ '}' }});</code></pre>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>MobileService</h3>
+          <span class="ux-tag">isMobile()</span>
+        </header>
+        <p class="ux-desc">
+          Detecta si el user agent es móvil. Devuelve <code>false</code> en SSR.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="testMobile()">
+            Ejecutar isMobile()
+          </button>
+        </div>
+        @if (mobileResult() !== null) {
+          <div class="ux-demo-output">
+            Resultado: <strong>{{ mobileResult() }}</strong>
+          </div>
+        }
+        <pre class="ux-snippet"><code>const esMovil = this.mobile.isMobile();</code></pre>
+      </article>
+
+      <article class="ux-card">
+        <header class="ux-card-head">
+          <h3>RecaptchaService</h3>
+          <span class="ux-tag">execute(action)</span>
+        </header>
+        <p class="ux-desc">
+          reCAPTCHA v3 invisible. Devuelve un token para validar en backend.
+          No-op en SSR.
+        </p>
+        <div class="ux-card-actions">
+          <button type="button" class="ux-btn" (click)="testRecaptcha()">
+            Ejecutar reCAPTCHA
+          </button>
+        </div>
+        @if (recaptchaToken()) {
+          <div class="ux-demo-output">Token: {{ recaptchaToken() }}</div>
+        }
+        <pre class="ux-snippet"><code>const token = await this.recaptcha.execute('contacto');</code></pre>
+      </article>
+
+      @for (s of serviciosDoc; track s.nombre) {
+        <article class="ux-card">
+          <header class="ux-card-head">
+            <h3>{{ s.nombre }}</h3>
+            <span class="ux-tag">{{ s.api }}</span>
+          </header>
+          <p class="ux-desc">{{ s.desc }}</p>
+        </article>
+      }
+    </div>
+  </section>
+  <section id="bloques" class="ux-section">
+    <h2>Bloques temáticos (iteración 2)</h2>
+    <p class="ux-section-desc">
+      Componentes standalone reutilizables, portados desde el proyecto Cali (prod).
+      Cada uno vive en <code>src/app/secciones/</code> y se importa directamente al
+      construir páginas nuevas. Los previews se renderizan con datos de demo.
+    </p>
+
+    <h3 class="ux-subhead">app-header-page-section</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Header de página interna</h3>
+        <span class="ux-tag">app-header-page-section</span>
+      </header>
+      <p class="ux-desc">
+        Banner con imagen de fondo + botón play decorativo. Se usa al inicio de
+        páginas internas (Nosotros, Homenajes, Apoyo Inmediato, etc.).
+      </p>
+      <div class="ux-block-controls">
+        @for (bg of pageBackgrounds; track bg.src) {
+          <button
+            type="button"
+            class="ux-chip"
+            [class.is-active]="currentBackground() === bg.src"
+            (click)="setBackground(bg.src)"
+          >
+            {{ bg.label }}
+          </button>
+        }
+      </div>
+      <div class="ux-block-preview is-flush">
+        <app-header-page-section
+          logo="/logos/bienestar-integral.svg"
+          color="#fdbf24"
+          [background]="currentBackground()"
+        ></app-header-page-section>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#fdbf24"
+  background="/img/page-backgrounds/background-us.png"
+&gt;&lt;/app-header-page-section&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> logo (string, required), color (string, required), background (string, required)</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-progress-bar</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Barra de progreso</h3>
+        <span class="ux-tag">app-progress-bar</span>
+      </header>
+      <p class="ux-desc">
+        Barra de N segmentos para indicar avance. Usada en Bienestar Integral
+        (1/4), Apoyo Inmediato (2/4), Repatriación (4/4), etc.
+      </p>
+      <div class="ux-block-controls">
+        @for (n of [0, 1, 2, 3, 4]; track n) {
+          <button
+            type="button"
+            class="ux-chip"
+            [class.is-active]="progressFilled() === n"
+            (click)="setProgress(n)"
+          >
+            filled = {{ n }}
+          </button>
+        }
+      </div>
+      <div class="ux-block-preview is-light">
+        <app-progress-bar [filled]="progressFilled()"></app-progress-bar>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-progress-bar [filled]="2"&gt;&lt;/app-progress-bar&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> total (number, default 4), filled (number, default 1)</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-contact-cta</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>CTA "¿Necesitas ayuda?"</h3>
+        <span class="ux-tag">app-contact-cta</span>
+      </header>
+      <p class="ux-desc">
+        Banner de contacto con CTAs WhatsApp + Llámanos. El click en "Llámanos"
+        emite <code>(phoneClick)</code>; aquí abre el popup de Línea Ética.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-contact-cta
+          background="white"
+          (phoneClick)="onContactPhoneClick()"
+        ></app-contact-cta>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-contact-cta
+  background="white"
+  (phoneClick)="abrirPopupLlamanos()"
+&gt;&lt;/app-contact-cta&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> background (string, default 'white')</li>
+        <li><strong>Outputs:</strong> phoneClick: void</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-separator</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Separador decorativo</h3>
+        <span class="ux-tag">app-separator</span>
+      </header>
+      <p class="ux-desc">
+        Divisor entre secciones: dos líneas punteadas con un círculo central.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-separator></app-separator>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-separator&gt;&lt;/app-separator&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> — (sin inputs)</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-section-information-contact</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Bloque informativo con teléfono</h3>
+        <span class="ux-tag">app-section-information-contact</span>
+      </header>
+      <p class="ux-desc">
+        Bloque centrado con título, párrafo y teléfono grande. Usado en Nosotros
+        y Apoyo Inmediato para resaltar la línea de contacto.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-section-information-contact></app-section-information-contact>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-section-information-contact
+  phone="300 913 2223"
+  intro="Si necesita ayuda en este momento contáctenos"
+&gt;&lt;/app-section-information-contact&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> phone (string, default '300 913 2223'), intro (string)</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-tributes-grid</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Grid de tributos</h3>
+        <span class="ux-tag">app-tributes-grid</span>
+      </header>
+      <p class="ux-desc">
+        Grid 4 columnas (2 en mobile) con icono + texto y palabra resaltada.
+        Usado en la página Nosotros (16 servicios funerarios).
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-tributes-grid [tributes]="tributesDemo"></app-tributes-grid>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-tributes-grid [tributes]="misTributos"&gt;&lt;/app-tributes-grid&gt;
+
+// TS
+misTributos = [
+  {{ '{' }} img: '/img/icons-tributes/tribute-attendance.svg',
+    text: 'Asistencia', highlight: '24/7' {{ '}' }},
+  ...
+];</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> tributes (Tribute[], required) — &#123; img, text, highlight?, small? &#125;</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-options-list</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Lista de opciones numeradas</h3>
+        <span class="ux-tag">app-options-list</span>
+      </header>
+      <p class="ux-desc">
+        Lista de N items con número grande + label en una pastilla, navegables
+        por <code>routerLink + fragment</code>. Colores configurables.
+      </p>
+
+      <p class="ux-page-tag">Variante 1 — Protocolos (homenajes), violeta sobre lila</p>
+      <div class="ux-block-preview is-light">
+        <app-options-list
+          [options]="optionsProtocolsDemo"
+          numberBg="#eae7ef"
+          bodyBg="#eae7ef"
+          bodyColor="#71577f"
+          [columns]="4"
+        ></app-options-list>
+      </div>
+
+      <p class="ux-page-tag">Variante 2 — Productos (club vida), blanco sobre azul</p>
+      <div class="ux-block-preview is-light">
+        <app-options-list
+          [options]="optionsProductsDemo"
+          numberBg="#004176"
+          bodyBg="#004176"
+          bodyColor="white"
+          [columns]="4"
+        ></app-options-list>
+      </div>
+
+      <pre class="ux-snippet"><code>&lt;app-options-list
+  [options]="misOpciones"
+  numberBg="#004176"
+  bodyBg="#004176"
+  bodyColor="white"
+  [columns]="4"
+&gt;&lt;/app-options-list&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> options (OptionItem[], required), columns (number, default 4), numberBg, bodyBg, bodyColor (strings)</li>
+        <li><strong>OptionItem:</strong> &#123; number, label, link, fragment? &#125;</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-plans-grid</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Grid de planes (vertical)</h3>
+        <span class="ux-tag">app-plans-grid</span>
+      </header>
+      <p class="ux-desc">
+        Lista de planes con imagen circular (esquinas redondas en primero/último)
+        + título + descripción + HR naranja. Usado en home/welcome.
+      </p>
+      <div class="ux-block-preview">
+        <app-plans-grid [plans]="plansDemo"></app-plans-grid>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-plans-grid [plans]="misPlanes"&gt;&lt;/app-plans-grid&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> plans (Plan[], required) — &#123; id, title, description, img, link &#125;</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-categories-grid</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Grid de categorías</h3>
+        <span class="ux-tag">app-categories-grid</span>
+      </header>
+      <p class="ux-desc">
+        Grid configurable (default 6 cols) con icono dentro de un cuadro de
+        borde colorido dinámico. Usado en Club Más Vida para categorías de
+        beneficios.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-categories-grid [categories]="categoriesDemo"></app-categories-grid>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-categories-grid
+  [categories]="misCategorias"
+  [columns]="6"
+&gt;&lt;/app-categories-grid&gt;
+
+// TS
+misCategorias = [
+  {{ '{' }} img: '/icons/.../category-youths.svg',
+    text: 'Jóvenes', background: '#fd8e13' {{ '}' }},
+  ...
+];</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> categories (Category[], required), columns (number, default 6)</li>
+        <li><strong>Category:</strong> &#123; img, text, background &#125;</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-tributes-grid (con datos)</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Grid de tributos completo (16 items)</h3>
+        <span class="ux-tag">app-tributes-grid</span>
+      </header>
+      <p class="ux-desc">Render real con los 16 servicios funerarios.</p>
+      <div class="ux-block-preview is-light">
+        <app-tributes-grid [tributes]="tributesDemo"></app-tributes-grid>
+      </div>
+    </article>
+
+    <h3 class="ux-subhead">app-death-abroad</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Defunción en el extranjero</h3>
+        <span class="ux-tag">app-death-abroad</span>
+      </header>
+      <p class="ux-desc">
+        Bloque informativo con fondo "Manos-luto" + mapa clickeable que enruta
+        a <code>/repatriacion</code>. Usado en Nosotros y Apoyo Inmediato.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-death-abroad></app-death-abroad>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-death-abroad&gt;&lt;/app-death-abroad&gt;</code></pre>
+    </article>
+
+    <h3 class="ux-subhead">app-our-tributes-section</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>"¿Conoce más sobre nuestros homenajes?"</h3>
+        <span class="ux-tag">app-our-tributes-section</span>
+      </header>
+      <p class="ux-desc">
+        Bloque CTA con fondo morado, botones Escríbenos / Llámanos. El click
+        en "Llámanos" emite <code>(phoneClick)</code>; aquí abre el popup de
+        líneas.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-our-tributes-section (phoneClick)="onContactPhoneClick()"></app-our-tributes-section>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-our-tributes-section
+  (phoneClick)="abrirPopupLineas()"
+&gt;&lt;/app-our-tributes-section&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Outputs:</strong> phoneClick: void</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-tribute-section</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>"Estamos junto a las familias"</h3>
+        <span class="ux-tag">app-tribute-section</span>
+      </header>
+      <p class="ux-desc">
+        Bloque CTA con fondo claro, mismo patrón que our-tributes pero con
+        copy y colores diferentes. Usado en Homenajes.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-tribute-section
+  (phoneClick)="abrirPopupLineas()"
+&gt;&lt;/app-tribute-section&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Outputs:</strong> phoneClick: void</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-buy-tribute-section</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Banner "Demuestra tu afecto"</h3>
+        <span class="ux-tag">app-buy-tribute-section</span>
+      </header>
+      <p class="ux-desc">
+        Banner pequeño con fondo decorativo + frase motivacional. Sin lógica.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-buy-tribute-section></app-buy-tribute-section>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-buy-tribute-section&gt;&lt;/app-buy-tribute-section&gt;</code></pre>
+    </article>
+
+    <h3 class="ux-subhead">app-show-your-affection</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Catálogo Demuestra tu afecto</h3>
+        <span class="ux-tag">app-show-your-affection</span>
+      </header>
+      <p class="ux-desc">
+        Sección completa con grid CSS dispuesto en items small/medium + low/high.
+        Mezcla textos, imágenes de productos y separadores. Usado en la página
+        Demuestra tu Afecto. Reutiliza <code>app-progress-bar</code>.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-show-your-affection></app-show-your-affection>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-show-your-affection&gt;&lt;/app-show-your-affection&gt;</code></pre>
+    </article>
+
+    <h3 class="ux-subhead">app-mapa</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Cobertura nacional con selector de regiones</h3>
+        <span class="ux-tag">app-mapa</span>
+      </header>
+      <p class="ux-desc">
+        Versión simplificada del mapa de Cali. Selector de 6 regiones + lista
+        dinámica de ciudades + mapa estático <code>Mapa-solo.svg</code>. Usado
+        en Red Nacional y Empresas. La versión interactiva con departamentos
+        coloreables queda para una iteración posterior.
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-mapa></app-mapa>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-mapa&gt;&lt;/app-mapa&gt;</code></pre>
+    </article>
+
+    <h3 class="ux-subhead">app-slider-products</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Carrusel de productos</h3>
+        <span class="ux-tag">app-slider-products</span>
+      </header>
+      <p class="ux-desc">
+        Carrusel manual prev/next + dots, con título, subtitle, descripción,
+        precio e imagen por producto. Usado en Bienestar Integral, Apoyo
+        Inmediato, Homenajes y Alivia. Versión simplificada (sin pop-ups
+        anidados de detalle del producto Cali; eso queda para más adelante).
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-slider-products [products]="productsDemo"></app-slider-products>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-slider-products [products]="misProductos"&gt;
+&lt;/app-slider-products&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> products (SliderProduct[], required)</li>
+        <li><strong>SliderProduct:</strong> &#123; id, title, subtitle?, description, price?, img &#125;</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-search-overlay</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Buscador overlay</h3>
+        <span class="ux-tag">app-search-overlay</span>
+      </header>
+      <p class="ux-desc">
+        Modal full-screen con input de búsqueda. Al enviar, navega a
+        <code>/busqueda?s=…</code> y emite <code>(close)</code>. Usa
+        <code>SearchService</code> (catálogo local). Usado por el botón lupa
+        del header.
+      </p>
+      <div class="ux-card-actions">
+        <button type="button" class="ux-btn" (click)="openSearchOverlay()">
+          Abrir overlay de búsqueda
+        </button>
+      </div>
+      <pre class="ux-snippet"><code>&lt;!-- &commat;if (searchOpen()) --&gt;
+&lt;app-search-overlay (close)="closeSearch()"&gt;&lt;/app-search-overlay&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Outputs:</strong> close: boolean</li>
+        <li><strong>Servicio:</strong> SearchService.search(query) → SearchResult[]</li>
+      </ul>
+    </article>
+
+    <h3 class="ux-subhead">app-lineas (popup contact-phones)</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Popup de líneas de atención</h3>
+        <span class="ux-tag">app-lineas</span>
+      </header>
+      <p class="ux-desc">
+        Popup con teléfonos nacional + celular + dirección oficina, botón a
+        contacto e imagen lateral. Header con color configurable. Es lo que
+        abren <code>contact-cta</code>, <code>our-tributes-section</code> y
+        <code>tribute-section</code> al disparar <code>phoneClick</code>.
+      </p>
+      <div class="ux-card-actions">
+        <button type="button" class="ux-btn" (click)="open('lineas')">
+          Abrir popup
+        </button>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-lineas
+  backgroundHeader="#00966c"
+  (close)="cerrar()"&gt;&lt;/app-lineas&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> backgroundHeader (string, default '#00966c')</li>
+        <li><strong>Outputs:</strong> close: boolean</li>
+      </ul>
+    </article>
+  </section>
+
+  <section id="paginas" class="ux-section">
+    <h2>Páginas — secciones extraídas</h2>
+    <p class="ux-section-desc">
+      Vista previa estática de cada sección de las páginas implementadas.
+      <strong>Bienvenido</strong> e <strong>Inicio</strong> se toman del proyecto
+      Tolima; <strong>Canales de Recaudo</strong> y <strong>Error Page</strong>
+      del proyecto Cali. Los sliders se muestran apilados en lugar de rotando.
+    </p>
+
+    <h3 class="ux-subhead">/ — Bienvenido (Tolima)</h3>
+
+    <p class="ux-page-tag">Sección 1: 3 tarjetas verticales (vista desktop)</p>
+    <div class="ux-page-preview is-bienvenido">
+      <div class="ux-page-stage">
+        <div class="container-rigth">
+          <section>
+            <div class="container-img container-navbar-top">
+              <img src="/logos/bienestar-integral.svg" alt="Bienestar Integral" />
+            </div>
+            <div class="container-content">
+              <h2>Bienestar integral</h2>
+              <p>
+                ¡Conoce nuestros planes de previsión! <br />
+                Porque garantizar el bienestar de tu familia es el mejor regalo
+                que puedes darle.
+              </p>
+            </div>
+          </section>
+          <hr />
+          <section>
+            <div class="container-img">
+              <img src="/logos/apoyo-inmediato.svg" alt="Apoyo Inmediato" />
+            </div>
+            <div class="container-content">
+              <h2>Apoyo Inmediato</h2>
+              <p>¿Ha ocurrido un fallecimiento o está cerca de suceder?</p>
+            </div>
+          </section>
+          <hr />
+          <section>
+            <div class="container-img container-navbar-buttom">
+              <img src="/logos/demuestra-afecto.svg" alt="Demuestra tu Afecto" />
+            </div>
+            <div class="container-content">
+              <h2>Demuestra tu afecto</h2>
+              <p>
+                Manifiesta tu solidaridad y empatía, compra un detalle y hazte
+                presente en este difícil momento.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <p class="ux-page-tag">Sección 2: Footer-bottom (vista desktop)</p>
+    <div class="ux-page-preview is-bienvenido">
+      <div class="ux-page-stage compact">
+        <div class="footer-bottom">
+          <div class="footer-links">
+            <a [routerLink]="['/planes-empresariales']">Empresas</a> |
+            <a [routerLink]="['/prevision']">Previsión</a> |
+            <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a> |
+            <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a> |
+            <a [routerLink]="['/contacto']">PQRS</a> |
+            <a [routerLink]="['/contacto']">Contáctenos</a>
+          </div>
+          <div class="footer-social">
+            <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <p class="ux-page-tag">Sección 3: Slider mobile (estático — en producción rota cada 5s)</p>
+    <div class="ux-page-preview is-bienvenido is-mobile-stack">
+      <div class="ux-page-stage">
+        <div class="slider-static">
+          @for (plan of plansBienvenido; track plan.id) {
+            <section class="slide">
+              <div class="container-img">
+                <img [src]="plan.img" [alt]="plan.title" />
+              </div>
+              <div class="container-content">
+                <h2>{{ plan.title }}</h2>
+                <p>{{ plan.description }}</p>
+              </div>
+            </section>
+          }
+        </div>
+        <div class="footer-bottom-mobile">
+          <a [routerLink]="['/planes-empresariales']">Empresas</a>
+          <a [routerLink]="['/prevision']">Previsión</a>
+          <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a>
+          <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a>
+          <a [routerLink]="['/contacto']">PQRS</a>
+          <a [routerLink]="['/contacto']">Contáctenos</a>
+          <div class="social">
+            <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook">
+              <i class="fa-brands fa-facebook-f"></i>
+            </a>
+            <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram">
+              <i class="fa-brands fa-instagram"></i>
+            </a>
+            <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp">
+              <i class="fa-brands fa-whatsapp"></i>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ux-subhead">/inicio — Inicio (Tolima)</h3>
+
+    <p class="ux-page-tag">Sección 1: Slider de fondo + 3 cards laterales (desktop)</p>
+    <div class="ux-page-preview is-inicio">
+      <div class="ux-page-stage">
+        <div class="background-slider">
+          @for (slide of slidesInicio; track slide.src; let i = $index) {
+            <div class="slide-bg" [class.active]="i === 0">
+              <img [src]="slide.src" [alt]="slide.alt" />
+            </div>
+          }
+        </div>
+        <div class="container-rigth">
+          <section>
+            <div class="container-img container-navbar-top">
+              <img src="/logos/bienestar-integral.svg" alt="" />
+            </div>
+            <div class="container-content">
+              <h2>Bienestar integral</h2>
+              <p>
+                ¡Conoce nuestros planes de previsión! Porque garantizar el
+                bienestar de tu familia es el mejor regalo que puedes darle.
+              </p>
+            </div>
+          </section>
+          <hr />
+          <section>
+            <div class="container-img">
+              <img src="/logos/apoyo-inmediato.svg" alt="" />
+            </div>
+            <div class="container-content">
+              <h2>Apoyo Inmediato</h2>
+              <p>¿Ha ocurrido un fallecimiento o está cerca de suceder?</p>
+            </div>
+          </section>
+          <hr />
+          <section>
+            <div class="container-img container-navbar-buttom">
+              <img src="/logos/demuestra-afecto.svg" alt="" />
+            </div>
+            <div class="container-content">
+              <h2>Demuestra tu afecto</h2>
+              <p>
+                Manifiesta tu solidaridad y empatía, compra un detalle y hazte
+                presente en este difícil momento.
+              </p>
+            </div>
+          </section>
+        </div>
+      </div>
+    </div>
+
+    <p class="ux-page-tag">Sección 2: Footer-bottom (desktop, esquema claro)</p>
+    <div class="ux-page-preview is-inicio">
+      <div class="ux-page-stage compact light-bg">
+        <div class="footer-bottom">
+          <a [routerLink]="['/planes-empresariales']">Empresas</a> |
+          <a [routerLink]="['/prevision']">Previsión</a> |
+          <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a> |
+          <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a> |
+          <a [routerLink]="['/contacto']">PQRS</a> |
+          <a [routerLink]="['/contacto']">Contáctenos</a>
+          <a class="icon" href="https://www.facebook.com/losolivoscali" target="_blank" rel="noopener" aria-label="Facebook">
+            <i class="fa-brands fa-facebook-f"></i>
+          </a>
+          <a class="icon" href="https://www.instagram.com/losolivoscali" target="_blank" rel="noopener" aria-label="Instagram">
+            <i class="fa-brands fa-instagram"></i>
+          </a>
+          <a class="icon" href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp">
+            <i class="fa-brands fa-whatsapp"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+
+    <h3 class="ux-subhead">/canales-de-recaudo — Canales de Recaudo (portado de Cali)</h3>
+
+    <p class="ux-page-tag">Sección 1: Page hero (título + subtítulo)</p>
+    <div class="ux-page-preview is-canales">
+      <div class="ux-page-stage">
+        <section class="page-hero">
+          <h1>Canales de Recaudo</h1>
+          <p>
+            Elige la opción que más te convenga para pagar tu plan exequial.<br />
+            Ten a la mano tu número de contrato o cédula.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <p class="ux-page-tag">Sección 2: Grid de 6 canales de pago</p>
+    <div class="ux-page-preview is-canales">
+      <div class="ux-page-stage">
+        <section class="canales-grid" aria-label="Opciones de pago disponibles">
+          @for (canal of canales; track canal.id) {
+            <article class="canal-card">
+              <div class="canal-icon">
+                <i [class]="canal.icon" aria-hidden="true"></i>
+              </div>
+              <div class="canal-body">
+                <h2>{{ canal.nombre }}</h2>
+                <p>{{ canal.descripcion }}</p>
+                @if (canal.link && canal.externo) {
+                  <a [href]="canal.link" target="_blank" rel="noopener" class="canal-link">
+                    {{ canal.detalle }}
+                    <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                  </a>
+                }
+                @if (canal.link && !canal.externo) {
+                  <a [href]="canal.link" class="canal-link">
+                    {{ canal.detalle }}
+                  </a>
+                }
+              </div>
+            </article>
+          }
+        </section>
+      </div>
+    </div>
+
+    <p class="ux-page-tag">Sección 3: Nota informativa</p>
+    <div class="ux-page-preview is-canales">
+      <div class="ux-page-stage">
+        <section class="nota-info" aria-label="Información importante para el pago">
+          <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+          <p>
+            Para realizar tu pago ten a la mano tu <strong>número de contrato</strong> o
+            <strong>número de cédula</strong> del titular del plan.
+            ¿Tienes dudas? Contáctanos al
+            <a href="tel:+573009132223">300 913 2223</a> o escríbenos por
+            <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener">WhatsApp</a>.
+          </p>
+        </section>
+      </div>
+    </div>
+
+    <h3 class="ux-subhead">/404 — Error Page (portado de Cali)</h3>
+
+    <p class="ux-page-tag">Sección única: código + heading + mensaje + CTA</p>
+    <div class="ux-page-preview is-error">
+      <div class="ux-page-stage">
+        <section class="error-page__content" aria-labelledby="error-heading-demo">
+          <p class="error-page__code" aria-hidden="true">{{ errorConfigEjemplo.code }}</p>
+          <h1 id="error-heading-demo" class="error-page__heading">{{ errorConfigEjemplo.heading }}</h1>
+          <p class="error-page__message">{{ errorConfigEjemplo.message }}</p>
+          <nav class="error-page__actions" aria-label="Opciones de navegación">
+            <a [routerLink]="['/']" class="error-page__btn-home">Volver al inicio</a>
+          </nav>
+        </section>
+      </div>
+    </div>
+  </section>
+</main>
+
+<app-footer></app-footer>
+
+<aside class="ux-territory-panel" [class.is-open]="territoryPanelOpen()">
+  <button
+    type="button"
+    class="ux-territory-toggle"
+    (click)="toggleTerritoryPanel()"
+    [attr.aria-expanded]="territoryPanelOpen()"
+    aria-label="Selector de territorio y plantilla"
+  >
+    @if (territoryPanelOpen()) {
+      <i class="fa-solid fa-xmark"></i>
+    } @else {
+      <i class="fa-solid fa-palette"></i>
+    }
+  </button>
+  @if (territoryPanelOpen()) {
+    <div class="ux-territory-body">
+      <header class="ux-territory-head">
+        <div class="ux-territory-head-row">
+          <h4>Territorio · Plantilla</h4>
+          <button
+            type="button"
+            class="ux-territory-edit"
+            (click)="toggleEditor()"
+            [class.is-on]="editorOpen()"
+          >
+            <i class="fa-solid" [class.fa-pen]="!editorOpen()" [class.fa-eye]="editorOpen()"></i>
+            {{ editorOpen() ? 'Vista' : 'Editar' }}
+          </button>
+        </div>
+        <p>
+          {{
+            editorOpen()
+              ? 'Edita los colores de la plantilla activa. Se guardan en este navegador.'
+              : 'Selecciona una variante para aplicar la paleta al showcase.'
+          }}
+        </p>
+      </header>
+
+      <div class="ux-territory-groups">
+        @for (group of territoryThemes; track group.id) {
+          <section class="ux-territory-group">
+            <h5>{{ group.label }}</h5>
+            <div class="ux-territory-templates">
+              @for (tpl of group.templates; track tpl.id) {
+                <button
+                  type="button"
+                  class="ux-territory-tpl"
+                  [class.is-active]="territory() === group.id && template() === tpl.id"
+                  (click)="setTheme(group.id, tpl.id)"
+                  [attr.aria-pressed]="territory() === group.id && template() === tpl.id"
+                >
+                  <span class="swatches">
+                    <span class="sw" [style.background]="paletteOf(group.id, tpl.id).primary"></span>
+                    <span class="sw" [style.background]="paletteOf(group.id, tpl.id).cta"></span>
+                    <span class="sw" [style.background]="paletteOf(group.id, tpl.id).accent"></span>
+                  </span>
+                  <span class="label">{{ tpl.label }}</span>
+                </button>
+              }
+            </div>
+          </section>
+        }
+      </div>
+
+      @if (editorOpen()) {
+        <div class="ux-editor-tabs">
+          <button
+            type="button"
+            class="ux-editor-tab"
+            [class.is-active]="editorTab() === 'paleta'"
+            (click)="setEditorTab('paleta')"
+          >
+            <i class="fa-solid fa-droplet"></i> Paleta
+          </button>
+          <button
+            type="button"
+            class="ux-editor-tab"
+            [class.is-active]="editorTab() === 'elementos'"
+            (click)="setEditorTab('elementos')"
+          >
+            <i class="fa-solid fa-shapes"></i> Elementos
+          </button>
+        </div>
+
+        @if (editorTab() === 'paleta') {
+          <div class="ux-palette-editor">
+            <p class="ux-palette-key">
+              <strong>{{ activeKey() }}</strong>
+              @if (hasCustomActive()) {
+                <span class="ux-badge">editada</span>
+              }
+            </p>
+            @for (f of paletteFields; track f.key) {
+              <label class="ux-palette-field">
+                <span class="name">{{ f.label }}</span>
+                <input
+                  type="color"
+                  [value]="activePalette()[f.key]"
+                  (input)="updateColor(f.key, $any($event.target).value)"
+                />
+                <input
+                  type="text"
+                  class="hex-input"
+                  [value]="activePalette()[f.key]"
+                  (change)="
+                    normalizeHex($any($event.target).value) &&
+                      updateColor(f.key, normalizeHex($any($event.target).value))
+                  "
+                  spellcheck="false"
+                  autocomplete="off"
+                />
+              </label>
+            }
+            <div class="ux-palette-preview" [style.background]="activeGradient()">
+              <span>gradient</span>
+            </div>
+            <div class="ux-palette-actions">
+              <button
+                type="button"
+                (click)="resetActivePalette()"
+                [disabled]="!hasCustomActive()"
+                title="Vuelve esta plantilla a sus colores originales"
+              >
+                <i class="fa-solid fa-rotate-left"></i> Restaurar
+              </button>
+              <button
+                type="button"
+                (click)="copyScss()"
+                title="Copia SOLO esta plantilla como bloque SCSS al portapapeles (para pegar en src/styles.scss)"
+              >
+                <i class="fa-solid fa-code"></i> SCSS
+              </button>
+              <button
+                type="button"
+                (click)="exportJson()"
+                title="Descarga un archivo .json con las 9 paletas + overrides — para enviar al cliente"
+              >
+                <i class="fa-solid fa-download"></i> Exportar
+              </button>
+            </div>
+
+            <details class="ux-palette-import">
+              <summary>Importar tema desde archivo</summary>
+              <p class="ux-import-help">
+                Sube el .json que te devuelva tu cliente, o pega el contenido en
+                el área de texto.
+              </p>
+              <label class="ux-file-input">
+                <i class="fa-solid fa-file-arrow-up"></i>
+                <span>Elegir archivo .json</span>
+                <input
+                  type="file"
+                  accept="application/json,.json"
+                  (change)="importFromFile($any($event.target).files?.[0])"
+                />
+              </label>
+              <textarea
+                rows="4"
+                placeholder='{"version":1,"palettes":{...},"elements":{...}}'
+                (input)="importJson($any($event.target).value)"
+              ></textarea>
+              @if (importError()) {
+                <small class="ux-import-error">{{ importError() }}</small>
+              }
+              <button type="button" class="ux-reset-all" (click)="resetAll()">
+                Restaurar TODAS las plantillas
+              </button>
+            </details>
+          </div>
+        }
+
+        @if (editorTab() === 'elementos') {
+          <div class="ux-elements-editor">
+            <p class="ux-elements-hint">
+              Sobrescribe propiedades por tipo de elemento. Vacío = hereda de la
+              paleta. Se guarda en este navegador.
+            </p>
+            @for (cat of elementCategories; track cat.id) {
+              <section
+                class="ux-element-cat"
+                [class.is-open]="expandedCategory() === cat.id"
+              >
+                <button
+                  type="button"
+                  class="ux-element-cat-head"
+                  (click)="toggleCategory(cat.id)"
+                  [attr.aria-expanded]="expandedCategory() === cat.id"
+                >
+                  <i class="fa-solid" [class]="cat.icon"></i>
+                  <span>{{ cat.label }}</span>
+                  <i
+                    class="fa-solid chev"
+                    [class.fa-chevron-down]="expandedCategory() !== cat.id"
+                    [class.fa-chevron-up]="expandedCategory() === cat.id"
+                  ></i>
+                </button>
+                @if (expandedCategory() === cat.id) {
+                  <div class="ux-element-props">
+                    @for (p of cat.props; track p.key) {
+                      <div class="ux-element-prop" [class.is-set]="hasElementOverride(cat.id, p.key)">
+                        <span class="prop-label">{{ p.label }}</span>
+                        @if (p.kind === 'color') {
+                          <input
+                            type="color"
+                            [value]="getElementValue(cat.id, p.key) || '#000000'"
+                            (input)="updateElementProp(cat.id, p.key, $any($event.target).value)"
+                          />
+                          <input
+                            type="text"
+                            class="hex-input"
+                            [value]="getElementValue(cat.id, p.key)"
+                            placeholder="hereda"
+                            (change)="
+                              updateElementProp(
+                                cat.id,
+                                p.key,
+                                normalizeHex($any($event.target).value) ||
+                                  $any($event.target).value
+                              )
+                            "
+                            spellcheck="false"
+                            autocomplete="off"
+                          />
+                        } @else {
+                          <input
+                            type="text"
+                            class="size-input"
+                            [value]="getElementValue(cat.id, p.key)"
+                            [placeholder]="p.placeholder || 'hereda'"
+                            (change)="updateElementProp(cat.id, p.key, $any($event.target).value)"
+                            spellcheck="false"
+                            autocomplete="off"
+                          />
+                        }
+                        <button
+                          type="button"
+                          class="prop-reset"
+                          (click)="resetElementProp(cat.id, p.key)"
+                          [disabled]="!hasElementOverride(cat.id, p.key)"
+                          aria-label="Restaurar"
+                          title="Restaurar default"
+                        >
+                          <i class="fa-solid fa-rotate-left"></i>
+                        </button>
+                      </div>
+                    }
+                  </div>
+                }
+              </section>
+            }
+            <button type="button" class="ux-reset-all" (click)="resetAllElements()">
+              Limpiar TODOS los overrides de elementos
+            </button>
+          </div>
+        }
+      }
+
+      <footer class="ux-territory-foot">
+        <code>data-territory="{{ territory() }}" data-template="{{ template() }}"</code>
+      </footer>
+    </div>
+  }
+</aside>
+
+@if (openPopup() === 'linea-etica') {
+  <popup-linea-etica
+    backgroundHeader="#f5821f"
+    [demoMode]="true"
+    (close)="close()"
+  ></popup-linea-etica>
+}
+
+@if (openPopup() === 'lineas') {
+  <app-lineas backgroundHeader="#00966c" (close)="close()"></app-lineas>
+}
+
+@if (searchOverlayOpen()) {
+  <app-search-overlay (close)="closeSearchOverlay()"></app-search-overlay>
+}
+
+@if (openPopup() === 'principal') {
+  <app-principal (close)="close()"></app-principal>
+}
+
+@if (openPopup() === 'contacto') {
+  <app-contacto [demoMode]="true" (close)="close()"></app-contacto>
+}
+
+@if (openPopup() === 'notification') {
+  <app-notification [data]="notificationDemo" (close)="close()"></app-notification>
+}
+
+@if (openPopup() === 'tributes') {
+  <app-tributes [protocol]="tributeProtocolDemo" (close)="close()"></app-tributes>
+}
+
+@if (openPopup() === 'funeral-plans') {
+  <app-funeral-plans [plan]="funeralPlanDemo" (close)="close()"></app-funeral-plans>
+}
+
+@if (openPopup() === 'products') {
+  <app-products [product]="popupProductDemo" (close)="close()"></app-products>
+}
+
+@if (openPopup() === 'relieves') {
+  <app-relieves (close)="close()"></app-relieves>
+}
+
+@if (openPopup() === 'options-relieves') {
+  <app-options-relieves [response]="relievesResponseDemo" (close)="close()"></app-options-relieves>
+}
+
+@if (openPopup() === 'headquarter') {
+  <app-headquarter [headquarter]="headquarterDemo" (close)="close()"></app-headquarter>
+}

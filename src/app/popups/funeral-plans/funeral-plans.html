@@ -1,0 +1,27 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header">
+        <h1>{{ plan().id }} - {{ plan().title }}</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-description">
+        <p [innerHTML]="plan().content"></p>
+      </div>
+      <div class="container-details">
+        <div class="sections">
+          <section>
+            <h3>Coberturas:</h3>
+            <div class="content-coverages" [innerHTML]="plan().coverages"></div>
+          </section>
+          @if (plan().button) {
+            <button type="button">Comprar ahora</button>
+          }
+        </div>
+        <div class="img">
+          <img src="/img/image-popUp-funeral-plans.png" alt="" />
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,21 @@
+<div class="popup">
+  <div class="border-pop-up">
+    <div class="popup-content">
+      <div class="header" [ngStyle]="{ background: data().background }">
+        <h1>{{ data().title }}</h1>
+        <i (click)="closeModal()" class="fa-solid fa-xmark" aria-label="Cerrar"></i>
+      </div>
+      <div class="container-message">
+        <div class="contacts">
+          <p>{{ data().message }}</p>
+        </div>
+        <div class="img">
+          <img src="/img/necesitas-ayuda-2.png" alt="" />
+        </div>
+      </div>
+      <div class="button">
+        <button type="button" (click)="closeModal()">Aceptar</button>
+      </div>
+    </div>
+  </div>
+</div>

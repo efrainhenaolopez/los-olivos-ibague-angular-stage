@@ -1,0 +1,24 @@
+.progress-container {
+  .progress-bar {
+    width: 20%;
+    display: flex;
+  }
+
+  .progress-segment {
+    flex: 1;
+    margin: 0 4px;
+    height: 5px;
+    border-radius: 50px;
+    background: #bdbfc1;
+
+    &.filled {
+      background: #fd8e13;
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .progress-container .progress-bar {
+    width: 60%;
+  }
+}

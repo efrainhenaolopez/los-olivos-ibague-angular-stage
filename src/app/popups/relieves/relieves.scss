@@ -1,0 +1,126 @@
+.popup {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000;
+  padding: 16px;
+  overflow-y: auto;
+
+  .border-pop-up {
+    width: 60%;
+    max-width: 880px;
+    background: #908e8e61;
+    border-radius: 20px;
+    padding: 1%;
+    box-shadow: 0 4px 10px rgba(92, 80, 80, 0.2);
+  }
+
+  .popup-content {
+    .header {
+      align-items: center;
+      padding: 1% 8%;
+      background: #add501;
+      color: white;
+      display: flex;
+      justify-content: space-between;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+
+      h1 {
+        font-weight: 100;
+        font-size: 32px;
+        font-family: var(--font-headline, serif);
+        margin: 0;
+      }
+
+      i {
+        border: 2px solid white;
+        cursor: pointer;
+        padding: 3px;
+        width: 15px;
+        height: 15px;
+        text-align: center;
+        border-radius: 50%;
+        font-size: 18px;
+      }
+    }
+
+    .container-description {
+      padding: 3% 8% 1%;
+      background: white;
+
+      h1 {
+        color: #add501;
+        font-size: 56px;
+        font-family: var(--font-headline, serif);
+        margin: 0;
+      }
+
+      h2 {
+        font-weight: 300;
+        color: #add501;
+        font-family: var(--font-headline, serif);
+        margin: 8px 0 12px;
+      }
+
+      p {
+        color: #373435;
+        font-size: 17px;
+        text-align: justify;
+        line-height: 1.5;
+      }
+    }
+
+    .assistance-section {
+      background: white;
+      padding: 3% 8% 4%;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+
+      .resources-assistance {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 20px;
+
+        .container-resource {
+          img {
+            width: 100%;
+            object-fit: contain;
+          }
+
+          .text {
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            margin-top: 8px;
+
+            p {
+              font-size: 15px;
+              font-weight: bold;
+              color: #add501;
+              margin: 0;
+            }
+
+            i {
+              font-size: 18px;
+              color: #add501;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .popup .border-pop-up {
+    width: 92%;
+  }
+
+  .popup .resources-assistance {
+    grid-template-columns: repeat(2, 1fr) !important;
+  }
+}

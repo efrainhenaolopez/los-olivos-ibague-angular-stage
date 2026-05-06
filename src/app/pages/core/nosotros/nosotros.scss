@@ -1,0 +1,164 @@
+main {
+  width: 100%;
+}
+
+.content-header {
+  max-width: 100%;
+  padding: 0 10%;
+
+  h1 {
+    color: #699392;
+    font-family: var(--font-headline, serif);
+    margin: 32px 0;
+    line-height: 0.9;
+    font-weight: 300;
+    font-size: 48px;
+
+    span {
+      font-family: var(--font-headline, serif);
+      font-size: 6rem;
+      font-weight: 400;
+    }
+  }
+
+  .container-columns {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    color: #606062;
+
+    .container-text {
+      flex: 1;
+      min-width: 250px;
+
+      p {
+        font-size: 18px;
+        text-align: justify;
+        font-weight: 100;
+        line-height: 1.5;
+        margin: 12px 0;
+      }
+    }
+
+    .cifras {
+      flex: 1;
+      display: flex;
+      justify-content: center;
+      align-items: flex-start;
+
+      img {
+        width: 100%;
+        height: auto;
+      }
+    }
+  }
+}
+
+.separator-dotted {
+  display: flex;
+  align-items: center;
+  background: white;
+  padding: 3% 15%;
+  margin: 24px 0;
+
+  &::after {
+    content: '';
+    flex-grow: 1;
+    height: 1px;
+    border-bottom: 1px dotted #a0a0a0;
+  }
+}
+
+.benefits {
+  background: white;
+
+  .benefits-header {
+    padding: 0 10%;
+
+    h2 {
+      color: #699392;
+      font-size: 36px;
+      font-family: var(--font-headline, serif);
+      margin: 0 0 12px;
+    }
+
+    p {
+      font-size: 18px;
+      font-weight: 100;
+      text-align: justify;
+      line-height: 1.5;
+    }
+  }
+
+  .section-tributes {
+    display: flex;
+    padding: 5%;
+    background-image: url('/img/backgrounds/background-tributes.svg');
+    background-size: cover;
+    background-position: bottom;
+    background-repeat: no-repeat;
+
+    .title {
+      width: 10%;
+      display: flex;
+
+      h1 {
+        writing-mode: vertical-lr;
+        transform: rotate(180deg);
+        font-size: 64px;
+        color: #e6e7e8;
+        font-family: var(--font-headline, serif);
+        margin: 0;
+      }
+    }
+  }
+}
+
+@media (max-width: 768px) {
+  .content-header {
+    h1 {
+      font-size: 28px;
+
+      span {
+        font-size: 4rem;
+      }
+    }
+
+    .container-columns .container-text p {
+      font-size: 16px;
+    }
+
+    .cifras img {
+      max-width: 360px;
+      margin: 0 auto;
+    }
+  }
+
+  .benefits {
+    .benefits-header {
+      h2 {
+        font-size: 26px;
+      }
+
+      p {
+        font-size: 16px;
+      }
+    }
+
+    .section-tributes {
+      flex-direction: column;
+
+      .title {
+        width: auto;
+        margin: 16px 0;
+
+        h1 {
+          writing-mode: horizontal-tb;
+          transform: none;
+          font-size: 28px;
+          text-align: center;
+        }
+      }
+    }
+  }
+}
