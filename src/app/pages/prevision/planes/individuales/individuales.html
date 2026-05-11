@@ -1,1 +1,157 @@
-<p>individuales works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#dc4c5a"
+  background="/img/page-backgrounds/background-life-for-you.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Planes <br />
+      <span>Individuales</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro · hero + CTA ──────────────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns">
+        <div class="container-text">
+          <p>
+            Soluciones especialmente diseñadas para las familias, que ofrecen una completa
+            protección y asesoría exequial para todos los beneficiarios del grupo afiliado,
+            desde el momento del fallecimiento del ser querido hasta la definición del sitio
+            de destino final o campo santo.
+          </p>
+          <p>
+            <strong>Tranquilidad, protección y ahorro</strong>: los regalos perfectos para tu
+            familia.
+          </p>
+          <a href="#beneficios" class="cta-button">
+            Quiero más información
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/planes-individuales/hero.webp"
+            alt="Familia protegida con un Plan Individual de Previsión Exequial Los Olivos"
+            width="600"
+            height="500"
+            loading="eager"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: ¿Por qué somos tu mejor elección? ────────────── -->
+  <section class="benefits" id="beneficios">
+    <div class="benefits-header">
+      <span class="eyebrow">Beneficios de los planes individuales</span>
+      <h2>
+        ¿Por qué somos <br />
+        <span>tu mejor elección?</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <ul class="benefits-grid" aria-label="Beneficios de los planes individuales">
+      @for (benefit of benefits(); track $index) {
+        <li class="benefit-card">
+          <i [class]="benefit.icon + ' benefit-icon'" aria-hidden="true"></i>
+          <h3>{{ benefit.title }}</h3>
+          <p>{{ benefit.description }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- ─────────── Sección 3: Planes según estado civil ─────────────────────── -->
+  <section class="benefits">
+    <div class="benefits-header">
+      <span class="eyebrow">Previsión exequial</span>
+      <h2>
+        Planes que se ajustan <br />
+        <span>a tu estado civil</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <div class="marital-list">
+        @for (plan of maritalPlans(); track plan.id; let i = $index) {
+          <article
+            class="container-columns"
+            [class.container-columns--reverse]="i % 2 !== 0"
+          >
+            <div class="container-text">
+              <h3>{{ plan.title }}</h3>
+              <p>{{ plan.description }}</p>
+            </div>
+            <div class="cifras">
+              <img
+                [src]="plan.image"
+                [alt]="plan.title + ' — Los Olivos Tolima'"
+                width="600"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+          </article>
+        }
+      </div>
+
+      <ul class="marital-notes" aria-label="Notas sobre los planes individuales">
+        <li>
+          <i class="fa-solid fa-circle-plus" aria-hidden="true"></i>
+          Posibilidad de ingresar familiares adicionales al grupo, pagando un valor adicional.
+        </li>
+        <li>
+          <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+          Sin cobros adicionales por efecto de trámites de afiliación.
+        </li>
+      </ul>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 4: Banner · complementa con Microseguros ─────────── -->
+  <section class="benefits benefits--microseguros">
+    <div class="microseguros-banner">
+      <div class="microseguros-text">
+        <span class="eyebrow">Complementa tu plan</span>
+        <h2>
+          Suma nuestros <br />
+          <span>Microseguros</span>
+        </h2>
+        <p>
+          Suma a tu Plan Individual una capa extra de
+          <strong>Protección Familiar Integral</strong> con los microseguros respaldados por
+          Aseguradora Solidaria de Colombia.
+        </p>
+        <a [routerLink]="['/microseguros']" class="cta-button">
+          Ver microseguros
+          <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Estamos junto a las familias ──────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

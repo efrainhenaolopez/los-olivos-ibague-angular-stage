@@ -1,0 +1,357 @@
+main {
+  width: 100%;
+}
+
+.page-title {
+  h1 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-weight: 300;
+    margin: 0 0 16px;
+    line-height: 0.95;
+    font-size: 38px;
+
+    span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 4.5rem;
+    }
+  }
+}
+
+.benefits {
+  background: white;
+  padding: 0 10% 60px;
+
+  .benefits-header {
+    margin-bottom: 32px;
+    max-width: 760px;
+
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-cta, #f0a33d);
+      margin-bottom: 8px;
+    }
+
+    h2 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 300;
+      margin: 0 0 20px;
+      line-height: 0.95;
+      font-size: 32px;
+
+      span {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        font-size: 4.25rem;
+      }
+    }
+  }
+}
+
+.benefits--first {
+  padding-top: 120px;
+}
+
+// ═══ section-tributes (rounded card con bg-tributes) ══════════════════
+.section-tributes {
+  background-image: url('/img/backgrounds/background-tributes.svg');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 48px 32px;
+}
+
+.container-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+  gap: 40px;
+  color: #606062;
+
+  + .container-columns {
+    border-top: 1px dashed rgba(96, 96, 98, 0.18);
+    padding-top: 32px;
+    margin-top: 32px;
+  }
+
+  .container-text {
+    min-width: 0;
+    font-family: 'Raleway', sans-serif;
+
+    h3 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 700;
+      font-size: 26px;
+      line-height: 1.1;
+      margin: 0 0 14px;
+    }
+
+    p {
+      font-size: 16px;
+      text-align: justify;
+      font-weight: 300;
+      line-height: 1.6;
+      margin: 0 0 14px;
+
+      &:last-child { margin-bottom: 0; }
+    }
+
+    strong {
+      font-weight: 600;
+      color: #2c2e35;
+    }
+  }
+
+  .cifras {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img {
+      width: 100%;
+      max-width: 360px;
+      height: auto;
+      border-radius: 12px;
+    }
+  }
+}
+
+.container-columns--reverse {
+  grid-template-columns: 1fr 1.4fr;
+
+  .cifras { order: 1; }
+  .container-text { order: 2; }
+}
+
+.intro-block .container-columns .container-text p {
+  font-size: 17px;
+}
+
+// ═══ Beneficios grid (¿Por qué somos tu mejor elección?) ═══════════════
+.benefits-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 18px;
+}
+
+.benefit-card {
+  background: #f0f0f0;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 12px;
+  padding: 24px 20px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+
+  &:hover {
+    background: #eaeaea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .benefit-icon {
+    font-size: 36px;
+    color: var(--color-cta, #f0a33d);
+  }
+
+  h3 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-size: 16px;
+    font-weight: 700;
+    line-height: 1.25;
+    margin: 0;
+  }
+
+  p {
+    margin: 0;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    line-height: 1.5;
+    color: #606062;
+  }
+}
+
+// ═══ Marital-notes (notas debajo de los planes por estado civil) ════════
+.marital-list { display: block; }
+
+.marital-notes {
+  list-style: none;
+  margin: 28px 0 0;
+  padding: 24px 0 0;
+  border-top: 1px dashed rgba(96, 96, 98, 0.25);
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 400;
+  color: #2c2e35;
+
+  li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    line-height: 1.5;
+
+    i {
+      flex: 0 0 auto;
+      margin-top: 2px;
+      font-size: 16px;
+      color: var(--color-cta, #f0a33d);
+    }
+  }
+}
+
+// ═══ CTA buttons reutilizables ═════════════════════════════════════════
+.cta-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-top: 20px;
+  padding: 12px 24px;
+  background: var(--color-cta, #f0a33d);
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  text-decoration: none;
+  border-radius: 50px;
+  transition: background 0.2s ease, transform 0.2s ease;
+
+  i { transition: transform 0.2s ease; }
+
+  &:hover {
+    background: var(--color-primary, #234b50);
+    i { transform: translate(2px, 2px); }
+  }
+}
+
+// ═══ Banner Microseguros ═══════════════════════════════════════════════
+.benefits--microseguros { padding-bottom: 80px; }
+
+.microseguros-banner {
+  background: var(--color-bg-light, #fff2f4);
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 16px;
+  padding: 48px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.microseguros-text {
+  max-width: 640px;
+  text-align: center;
+
+  .eyebrow {
+    display: inline-block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--color-cta, #f0a33d);
+    margin-bottom: 8px;
+  }
+
+  h2 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-weight: 300;
+    margin: 0 0 16px;
+    line-height: 0.95;
+    font-size: 28px;
+
+    span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 3rem;
+    }
+  }
+
+  p {
+    margin: 0 0 24px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 16px;
+    font-weight: 300;
+    line-height: 1.6;
+    color: #606062;
+
+    strong {
+      color: var(--color-primary, #234b50);
+      font-weight: 600;
+    }
+  }
+}
+
+// ═══ Responsive ════════════════════════════════════════════════════════
+@media (max-width: 1024px) {
+  .benefits { padding: 0 5% 40px; }
+
+  .benefits-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .page-title h1 {
+    font-size: 26px;
+    span { font-size: 3rem; }
+  }
+
+  .benefits .benefits-header h2 {
+    font-size: 24px;
+    span { font-size: 3rem; }
+  }
+
+  .benefits--first { padding-top: 24px; }
+
+  .section-tributes { padding: 32px 16px; }
+
+  .container-columns,
+  .container-columns--reverse {
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    .cifras,
+    .container-text { order: initial; }
+
+    .cifras img {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+  }
+
+  .benefits-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .marital-notes {
+    grid-template-columns: 1fr;
+  }
+
+  .microseguros-banner { padding: 32px 22px; }
+  .microseguros-text h2 {
+    font-size: 22px;
+    span { font-size: 2.5rem; }
+  }
+}

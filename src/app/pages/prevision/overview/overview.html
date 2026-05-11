@@ -1,1 +1,131 @@
-<p>overview works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#dc4c5a"
+  background="/img/page-backgrounds/background-life-for-you.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Previsión Exequial <br />
+      <span>Los Olivos</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Tipos de planes (individuales / empresariales) ─── -->
+  <section class="benefits benefits--first">
+    <div class="benefits-header">
+      <span class="eyebrow">Elige el plan que se ajusta a tu necesidad</span>
+      <h2>
+        Tipos de <br />
+        <span>Planes</span>
+      </h2>
+      <app-progress-bar [filled]="1"></app-progress-bar>
+    </div>
+
+    <div class="planes-grid">
+      @for (plan of planes(); track plan.id) {
+        <a [routerLink]="plan.route" class="plan-card">
+          <div class="plan-image">
+            <img
+              [src]="plan.image"
+              [alt]="plan.title + ' — Los Olivos Tolima'"
+              width="600"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="plan-body">
+            <h3>{{ plan.title }}</h3>
+            <p>{{ plan.description }}</p>
+            <span class="plan-cta">
+              Conocer más
+              <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+            </span>
+          </div>
+        </a>
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Las 4 etapas del homenaje ─────────────────────── -->
+  <section class="benefits">
+    <div class="benefits-header">
+      <span class="eyebrow">¿Qué cubren nuestros planes?</span>
+      <h2>
+        Previsión exequial <br />
+        <span>Los Olivos</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+      <p class="benefits-intro">
+        Nuestros Homenajes son prestados con los estándares de nuestra filosofía única de
+        acompañamiento y personalización <strong>"Un homenaje al amor"</strong>, dignificando
+        el momento de la pérdida de tu ser querido a través de ceremonias, elogios y
+        exaltaciones, diseñadas para facilitar a las familias la expresión de su amor.
+      </p>
+    </div>
+
+    <div class="section-tributes">
+      <ol class="stages-grid" aria-label="Las 4 etapas del homenaje Los Olivos">
+        @for (stage of stages(); track stage.id) {
+          <li class="stage-card">
+            <div class="stage-image">
+              <img
+                [src]="stage.image"
+                [alt]="stage.title + ' — Los Olivos Tolima'"
+                width="600"
+                height="500"
+                loading="lazy"
+              />
+            </div>
+            <div class="stage-body">
+              <span class="stage-number">{{ stage.number }}ª etapa</span>
+              <h3>{{ stage.title }}</h3>
+              <p>{{ stage.description }}</p>
+            </div>
+          </li>
+        }
+      </ol>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 3: Microseguros (complemento del plan) ───────────── -->
+  <section class="benefits benefits--microseguros">
+    <div class="microseguros-banner">
+      <div class="microseguros-text">
+        <span class="eyebrow">Complementa tu plan</span>
+        <h2>
+          Conoce nuestros <br />
+          <span>Microseguros</span>
+        </h2>
+        <p>
+          Seguros y asistencias que complementan el Plan de Previsión Exequial, para brindar
+          a nuestros afiliados una <strong>Protección Familiar Integral</strong>. Respaldados
+          por Aseguradora Solidaria de Colombia.
+        </p>
+        <a [routerLink]="['/microseguros']" class="cta-button">
+          Ver microseguros
+          <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Estamos junto a las familias ──────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

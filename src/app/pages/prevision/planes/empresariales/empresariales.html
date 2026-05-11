@@ -1,1 +1,143 @@
-<p>empresariales works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#e8632f"
+  background="/img/page-backgrounds/background-life-for-you.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Planes <br />
+      <span>Empresariales</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro · hero + CTA ──────────────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns">
+        <div class="container-text">
+          <span class="eyebrow">Previsión Exequial</span>
+          <p>
+            Planes de previsión exequial <strong>a la medida</strong>, diseñados especialmente
+            para las necesidades de las empresas, cooperativas y asociaciones tanto privadas
+            como públicas.
+          </p>
+          <a href="#ventajas" class="cta-button">
+            Quiero más información
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/planes-empresariales/hero.webp"
+            alt="Grupo empresarial con Plan Empresarial de Previsión Exequial Los Olivos"
+            width="600"
+            height="500"
+            loading="eager"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Ventajas (4 cards) ──────────────────────────── -->
+  <section class="benefits" id="ventajas">
+    <div class="benefits-header">
+      <span class="eyebrow">Beneficios para tu equipo</span>
+      <h2>
+        Ventajas de los <br />
+        <span>Planes Empresariales</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <ul class="advantages-grid" aria-label="Ventajas de los planes empresariales">
+      @for (item of advantages(); track $index) {
+        <li class="advantage-card">
+          <i [class]="item.icon + ' advantage-icon'" aria-hidden="true"></i>
+          <h3>{{ item.title }}</h3>
+          <p>{{ item.description }}</p>
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- ─────────── Sección 3: Aliado emocional + asesoría ─────────────────── -->
+  <section class="benefits">
+    <div class="benefits-header">
+      <span class="eyebrow">Acompañamiento integral</span>
+      <h2>
+        Tu aliado en la <br />
+        <span>salud emocional</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <article class="container-columns">
+        <div class="container-text">
+          <p>
+            Nos convertimos en tu aliado para trabajar conjuntamente en la
+            <strong>salud emocional de tus empleados o asociados</strong>, a través de charlas
+            basadas en nuestra filosofía
+            <em>"un homenaje al amor, un homenaje a la vida"</em>.
+          </p>
+          <p>
+            Solicita ahora mismo una completa asesoría con un consultor especializado para
+            diseñar el plan que mejor se ajuste a tu organización.
+          </p>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/planes-empresariales/emp-04.webp"
+            alt="Charla empresarial sobre acompañamiento emocional Los Olivos"
+            width="600"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 4: Banner · complementa con Microseguros ─────────── -->
+  <section class="benefits benefits--microseguros">
+    <div class="microseguros-banner">
+      <div class="microseguros-text">
+        <span class="eyebrow">Coberturas adicionales</span>
+        <h2>
+          Suma nuestros <br />
+          <span>Microseguros</span>
+        </h2>
+        <p>
+          Refuerza tu Plan Empresarial con los microseguros Los Olivos, respaldados por
+          <strong>Aseguradora Solidaria de Colombia</strong>: protección extra para tus
+          colaboradores y sus familias.
+        </p>
+        <a [routerLink]="['/microseguros']" class="cta-button">
+          Ver microseguros
+          <i class="fa-solid fa-arrow-right-long" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Estamos junto a las familias ──────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>
