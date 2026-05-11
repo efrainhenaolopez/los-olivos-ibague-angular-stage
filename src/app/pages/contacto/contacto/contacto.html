@@ -1,1 +1,340 @@
-<p>contacto works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#fdbf24"
+  background="/img/page-backgrounds/background-our-companies.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Estamos para <br />
+      <span>Acompañarte</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Vías rápidas de contacto ─────────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text">
+          <p>
+            Comunícate con nosotros para resolver cualquier inquietud sobre tu
+            plan de previsión, coordinación de homenajes, talleres de duelo o
+            servicios del Parque Cementerio. Estamos disponibles para
+            acompañarte en cada momento.
+          </p>
+
+          <div class="quick-info-grid">
+            @for (item of quickInfo(); track item.label) {
+              <a
+                [href]="item.href"
+                class="quick-info"
+                [attr.target]="item.href.startsWith('http') ? '_blank' : null"
+                [attr.rel]="item.href.startsWith('http') ? 'noopener' : null"
+                (click)="onQuickContactClick(item.label)"
+              >
+                <i [class]="item.icon + ' quick-info__icon'" aria-hidden="true"></i>
+                <div class="quick-info__body">
+                  <span class="quick-info__label">{{ item.label }}</span>
+                  <strong>{{ item.value }}</strong>
+                </div>
+              </a>
+            }
+          </div>
+
+          <!-- PQRS · callout horizontal dentro del intro (id="pqr"
+               conservado para deep-links externos). -->
+          <a
+            id="pqr"
+            [href]="PQR_URL"
+            target="_blank"
+            rel="noopener"
+            class="pqr-card"
+            (click)="onPqrClick()"
+          >
+            <i class="fa-solid fa-file-circle-check pqr-card__icon" aria-hidden="true"></i>
+            <div class="pqr-card__body">
+              <span class="pqr-card__eyebrow">PQRS · Atención al usuario</span>
+              <strong>Sistema oficial de Peticiones, Quejas, Reclamos y Sugerencias</strong>
+              <p>
+                Radica tu solicitud en el portal Orfeo de Serfuncoop. Cada
+                comunicación queda registrada con número de radicado y se
+                responde dentro de los términos de ley.
+              </p>
+            </div>
+            <span class="pqr-card__cta">
+              Ingresar
+              <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+            </span>
+          </a>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Formulario de contacto + Mapa ────────────────── -->
+  <section class="benefits" id="formulario">
+    <div class="benefits-header">
+      <h2>
+        Escríbenos un <br />
+        <span>Mensaje</span>
+      </h2>
+      <app-progress-bar [filled]="1"></app-progress-bar>
+    </div>
+
+    <div class="contact-grid">
+      <!-- Formulario -->
+      <form
+        class="contact-form"
+        #contactForm="ngForm"
+        (ngSubmit)="onSubmit(contactForm)"
+        novalidate
+      >
+        @if (submitted()) {
+          <div class="form-success" role="status">
+            <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+            <div>
+              <strong>¡Gracias por escribirnos!</strong>
+              <p>Hemos recibido tu mensaje. Te contactaremos en breve.</p>
+            </div>
+          </div>
+        }
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="nombre">Nombre <span class="req">*</span></label>
+            <input
+              id="nombre"
+              name="nombre"
+              type="text"
+              required
+              autocomplete="given-name"
+              [ngModel]="form().nombre"
+              (ngModelChange)="form.update(f => ({ ...f, nombre: $event }))"
+              #nombre="ngModel"
+            />
+            @if (nombre.invalid && (nombre.dirty || nombre.touched)) {
+              <span class="form-error">Ingresa tu nombre.</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="apellido">Apellido <span class="req">*</span></label>
+            <input
+              id="apellido"
+              name="apellido"
+              type="text"
+              required
+              autocomplete="family-name"
+              [ngModel]="form().apellido"
+              (ngModelChange)="form.update(f => ({ ...f, apellido: $event }))"
+              #apellido="ngModel"
+            />
+            @if (apellido.invalid && (apellido.dirty || apellido.touched)) {
+              <span class="form-error">Ingresa tu apellido.</span>
+            }
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-field">
+            <label for="cedula">Cédula <span class="req">*</span></label>
+            <input
+              id="cedula"
+              name="cedula"
+              type="text"
+              inputmode="numeric"
+              pattern="[0-9]+"
+              required
+              autocomplete="off"
+              [ngModel]="form().cedula"
+              (ngModelChange)="form.update(f => ({ ...f, cedula: $event }))"
+              #cedula="ngModel"
+            />
+            @if (cedula.invalid && (cedula.dirty || cedula.touched)) {
+              <span class="form-error">Ingresa tu número de cédula.</span>
+            }
+          </div>
+
+          <div class="form-field">
+            <label for="telefono">Teléfono <span class="req">*</span></label>
+            <input
+              id="telefono"
+              name="telefono"
+              type="tel"
+              required
+              autocomplete="tel"
+              [ngModel]="form().telefono"
+              (ngModelChange)="form.update(f => ({ ...f, telefono: $event }))"
+              #telefono="ngModel"
+            />
+            @if (telefono.invalid && (telefono.dirty || telefono.touched)) {
+              <span class="form-error">Ingresa tu teléfono.</span>
+            }
+          </div>
+        </div>
+
+        <div class="form-field">
+          <label for="correo">Correo electrónico <span class="req">*</span></label>
+          <input
+            id="correo"
+            name="correo"
+            type="email"
+            required
+            autocomplete="email"
+            [ngModel]="form().correo"
+            (ngModelChange)="form.update(f => ({ ...f, correo: $event }))"
+            #correo="ngModel"
+          />
+          @if (correo.invalid && (correo.dirty || correo.touched)) {
+            <span class="form-error">Ingresa un correo válido.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="servicio">Servicio <span class="req">*</span></label>
+          <select
+            id="servicio"
+            name="servicio"
+            required
+            [ngModel]="form().servicio"
+            (ngModelChange)="form.update(f => ({ ...f, servicio: $event }))"
+            #servicio="ngModel"
+          >
+            <option value="" disabled>Selecciona un servicio</option>
+            @for (s of servicios(); track s) {
+              <option [value]="s">{{ s }}</option>
+            }
+          </select>
+          @if (servicio.invalid && (servicio.dirty || servicio.touched)) {
+            <span class="form-error">Selecciona un servicio.</span>
+          }
+        </div>
+
+        <div class="form-field">
+          <label for="mensaje">Mensaje <span class="req">*</span></label>
+          <textarea
+            id="mensaje"
+            name="mensaje"
+            rows="4"
+            required
+            [ngModel]="form().mensaje"
+            (ngModelChange)="form.update(f => ({ ...f, mensaje: $event }))"
+            #mensaje="ngModel"
+          ></textarea>
+          @if (mensaje.invalid && (mensaje.dirty || mensaje.touched)) {
+            <span class="form-error">Cuéntanos en qué podemos ayudarte.</span>
+          }
+        </div>
+
+        <label class="form-consent">
+          <input
+            id="acepta"
+            name="acepta"
+            type="checkbox"
+            required
+            [ngModel]="form().acepta"
+            (ngModelChange)="form.update(f => ({ ...f, acepta: $event }))"
+          />
+          <span>
+            Acepto la
+            <a
+              href="/docs/politica-tratamiento-datos.pdf"
+              target="_blank"
+              rel="noopener"
+            >Política de Tratamiento de Datos</a>
+            y autorizo a Serfuncoop el manejo de mi información conforme a la ley
+            estatutaria 1581 de 2012.
+          </span>
+        </label>
+
+        <button
+          type="submit"
+          class="cta-button"
+          [disabled]="contactForm.invalid || !form().acepta || submitting()"
+        >
+          @if (submitting()) {
+            <i class="fa-solid fa-circle-notch fa-spin" aria-hidden="true"></i>
+            Enviando…
+          } @else {
+            Enviar mensaje
+            <i class="fa-solid fa-paper-plane" aria-hidden="true"></i>
+          }
+        </button>
+        <p class="form-required-hint">
+          <span class="req">*</span> Campos obligatorios
+        </p>
+      </form>
+
+      <!-- Mapa Google -->
+      <aside class="contact-map">
+        <iframe
+          [src]="mapUrl"
+          title="Ubicación de Los Olivos Tolima — Cra. 5 con Calle 40, Ibagué"
+          loading="lazy"
+          referrerpolicy="no-referrer-when-downgrade"
+        ></iframe>
+        <div class="map-address">
+          <i class="fa-solid fa-location-dot" aria-hidden="true"></i>
+          <div>
+            <strong>Sede principal</strong>
+            <span>Cra. 5 con Calle 40, Ibagué — Tolima</span>
+          </div>
+        </div>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 3: FAQs (accordion) ─────────────────────────────── -->
+  <section class="benefits" id="preguntas-frecuentes">
+    <div class="benefits-header">
+      <h2>
+        Preguntas <br />
+        <span>Frecuentes</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <ul class="faq-list" aria-label="Preguntas frecuentes">
+      @for (faq of faqs(); track faq.id) {
+        <li class="faq-item" [class.is-open]="expandedFaq() === faq.id">
+          <button
+            type="button"
+            class="faq-trigger"
+            [attr.aria-expanded]="expandedFaq() === faq.id"
+            [attr.aria-controls]="'faq-panel-' + faq.id"
+            (click)="toggleFaq(faq.id)"
+          >
+            <span>{{ faq.question }}</span>
+            <i class="fa-solid fa-chevron-down faq-trigger__icon" aria-hidden="true"></i>
+          </button>
+          @if (expandedFaq() === faq.id) {
+            <div class="faq-panel" [id]="'faq-panel-' + faq.id" role="region">
+              @for (paragraph of faq.answer; track $index) {
+                <p [innerHTML]="paragraph"></p>
+              }
+            </div>
+          }
+        </li>
+      }
+    </ul>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

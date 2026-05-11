@@ -171,10 +171,12 @@
   }
 }
 
-// ═══ Forma orgánica: 3 sliders + texto copiable ════════════════════════
+// ═══ Forma orgánica: sliders + texto copiable ═════════════════════════
 .palette-fab-shape {
-  margin-top: 16px;
-  padding-top: 16px;
+  // Padding horizontal acá: las secciones .palette-fab-head/menu/groups
+  // tienen su propio padding; esta sección lo necesita también para que
+  // labels y sliders no queden pegados a los bordes del FAB.
+  padding: 16px 18px 12px;
   border-top: 1px solid #e5e7eb;
 
   h5 {
@@ -209,6 +211,7 @@
   input[type='range'] {
     width: 100%;
     height: 4px;
+    margin: 0;
     accent-color: var(--color-primary, #234b50);
     cursor: pointer;
   }

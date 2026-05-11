@@ -59,12 +59,14 @@ const TERRITORY_GROUPS: TerritoryGroup[] = [
 ];
 
 /** Estado de la "forma orgánica" para las flip cards de proyección.
- *  La forma siempre es 1:1 al 100% del ancho del card; solo controlamos
- *  rotación y posición. */
+ *  La forma siempre es 1:1 al 100% del ancho del card; controlamos
+ *  rotación, posición, radio del borde y opacidad. */
 export interface ShapeState {
-  rotation: number; // grados, ej. -17
-  x: number;        // % desde la izquierda (top-left de la forma)
-  y: number;        // % desde arriba
+  rotation: number;     // grados, ej. -17
+  x: number;            // % desde la izquierda (top-left de la forma)
+  y: number;            // % desde arriba
+  borderRadius: number; // px del border-radius
+  opacity: number;      // 0–1 (transparencia del backdrop sobre el bg)
 }
 
 /** Estado de la forma orgánica del banner tribute-section.
@@ -74,17 +76,30 @@ export interface TributeShapeState extends ShapeState {
   size: number;
 }
 
-export const DEFAULT_SHAPE: ShapeState = { rotation: 17, x: -9, y: 65 };
-export const DEFAULT_TRIBUTE_SHAPE: TributeShapeState = { rotation: -15, x: 60, y: 0, size: 35 };
+export const DEFAULT_SHAPE: ShapeState = {
+  rotation: 17,
+  x: -9,
+  y: 65,
+  borderRadius: 48,
+  opacity: 0.65,
+};
+export const DEFAULT_TRIBUTE_SHAPE: TributeShapeState = {
+  rotation: 16,
+  x: 26,
+  y: 17.5,
+  size: 99,
+  borderRadius: 300,
+  opacity: 0.5,
+};
 
 /** Helper para formatear ShapeState (sin size) como texto copiable. */
 function fmtShape(s: ShapeState): string {
-  return `rotation: ${s.rotation}deg · x: ${s.x.toFixed(2)}% · y: ${s.y.toFixed(2)}%`;
+  return `rotation: ${s.rotation}deg · x: ${s.x.toFixed(2)}% · y: ${s.y.toFixed(2)}% · radius: ${s.borderRadius.toFixed(0)}px · opacity: ${s.opacity.toFixed(2)}`;
 }
 
 /** Helper para formatear TributeShapeState (con size) como texto copiable. */
 function fmtTributeShape(s: TributeShapeState): string {
-  return `${fmtShape(s)} · size: ${s.size.toFixed(0)}%`;
+  return `rotation: ${s.rotation}deg · x: ${s.x.toFixed(2)}% · y: ${s.y.toFixed(2)}% · size: ${s.size.toFixed(0)}% · radius: ${s.borderRadius.toFixed(0)}px · opacity: ${s.opacity.toFixed(2)}`;
 }
 
 @Component({

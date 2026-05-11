@@ -1,1 +1,175 @@
-<p>apoyo-al-duelo works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#6b4e7b"
+  background="/img/page-backgrounds/immediate-support-fund.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Apoyo al <br />
+      <span>Duelo</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Pull quote · Doug Manning ─────────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text quote-block">
+          <p class="pull-quote">
+            "El <strong>DUELO</strong> es tan natural como llorar cuando te lastimas,
+            dormir cuando estás cansado, comer cuando tienes hambre y estornudar
+            cuando te pica la nariz. Es la manera que tiene la naturaleza de
+            <em>curar un corazón roto</em>."
+          </p>
+          <p class="quote-author">— Doug Manning</p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: ¿Por qué asistir a un taller de duelo? ────────── -->
+  <section class="benefits" id="por-que">
+    <div class="benefits-header">
+      <h2>
+        ¿Por qué asistir a un <br />
+        <span>Taller de Duelo?</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <article class="container-columns">
+        <div class="container-text">
+          <ul class="benefits-list" aria-label="Beneficios del taller de duelo">
+            @for (item of benefits(); track $index) {
+              <li>
+                <i [class]="item.icon + ' benefit-icon'" aria-hidden="true"></i>
+                <span>{{ item.text }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/apoyo-al-duelo/por-que-asistir.webp"
+            alt="Acompañamiento psicológico durante el duelo en Los Olivos Tolima"
+            width="600"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 3: Modalidades del Taller (Individual + Empresarial) -->
+  <section class="benefits" id="modalidades">
+    <div class="benefits-header">
+      <h2>
+        Modalidades del <br />
+        <span>Taller</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <div class="workshops-list">
+        @for (workshop of workshops(); track workshop.id; let i = $index) {
+          <article
+            class="container-columns"
+            [class.container-columns--reverse]="i % 2 !== 0"
+            [class.container-columns--solo]="!workshop.image"
+          >
+            <div class="container-text">
+              <span class="eyebrow">{{ workshop.eyebrow }}</span>
+              <h3>{{ workshop.title }}</h3>
+              <p>{{ workshop.description }}</p>
+              <a
+                [routerLink]="[]"
+                fragment="contacto"
+                class="cta-button"
+                (click)="onWorkshopCtaClick(workshop.id)"
+              >
+                {{ workshop.ctaLabel }}
+                <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+              </a>
+            </div>
+
+            @if (workshop.image) {
+              <div class="cifras">
+                <img
+                  [src]="workshop.image"
+                  [alt]="workshop.title + ' — Los Olivos Tolima'"
+                  width="600"
+                  height="500"
+                  loading="lazy"
+                />
+              </div>
+            }
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 4: "El llanto en el Duelo" ───────────────────────── -->
+  <section class="benefits" id="el-llanto">
+    <div class="benefits-header">
+      <h2>
+        El llanto en <br />
+        <span>el Duelo</span>
+      </h2>
+      <app-progress-bar [filled]="4"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <article class="container-columns container-columns--reverse">
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/apoyo-al-duelo/el-llanto.webp"
+            alt="El llanto como parte del proceso de duelo — Los Olivos Tolima"
+            width="600"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+        <div class="container-text llanto-text">
+          @for (line of llantoLines(); track $index) {
+            <p>{{ line }}</p>
+          }
+          <p class="llanto-author"><em>— B. Murillo</em></p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Aviso de modalidad ──────────────────────────────────────── -->
+  <section class="benefits notice-wrapper">
+    <p class="notice">
+      <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+      Por medidas de bioseguridad, los talleres presenciales pueden
+      reprogramarse o realizarse en modalidad virtual según las condiciones
+      sanitarias vigentes.
+    </p>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

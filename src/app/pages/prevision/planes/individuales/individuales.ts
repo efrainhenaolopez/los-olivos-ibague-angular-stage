@@ -63,10 +63,14 @@ interface MaritalPlan {
     '[style.--shape-rotation]':  'shapeCss().rotation',
     '[style.--shape-x]':         'shapeCss().x',
     '[style.--shape-y]':         'shapeCss().y',
+    '[style.--shape-radius]':   'shapeCss().borderRadius',
+    '[style.--shape-opacity]':  'shapeCss().opacity',
     '[style.--tribute-rotation]': 'tributeShapeCss().rotation',
     '[style.--tribute-x]':        'tributeShapeCss().x',
     '[style.--tribute-y]':        'tributeShapeCss().y',
     '[style.--tribute-size]':     'tributeShapeCss().size',
+    '[style.--tribute-radius]':   'tributeShapeCss().borderRadius',
+    '[style.--tribute-opacity]':  'tributeShapeCss().opacity',
   },
 })
 export class Individuales implements OnInit {
@@ -96,7 +100,7 @@ export class Individuales implements OnInit {
 
   readonly shapeCss = computed(() => {
     const s = this.shape();
-    return { rotation: `${s.rotation}deg`, x: `${s.x}%`, y: `${s.y}%` };
+    return { rotation: `${s.rotation}deg`, x: `${s.x}%`, y: `${s.y}%`, borderRadius: `${s.borderRadius}px`, opacity: `${s.opacity}` };
   });
 
   readonly tributeShapeCss = computed(() => {
@@ -106,6 +110,8 @@ export class Individuales implements OnInit {
       x: `${s.x}%`,
       y: `${s.y}%`,
       size: `${s.size}%`,
+      borderRadius: `${s.borderRadius}px`,
+      opacity: `${s.opacity}`,
     };
   });
 
@@ -204,8 +210,8 @@ export class Individuales implements OnInit {
       if (prefs.template !== undefined) this.activeTemplate.set(prefs.template);
       if (prefs.palette !== undefined) this.activePalette.set(prefs.palette);
       if (prefs.menuType) this.menuType.set(prefs.menuType);
-      if (prefs.shape) this.shape.set(prefs.shape);
-      if (prefs.tributeShape) this.tributeShape.set(prefs.tributeShape);
+      if (prefs.shape) this.shape.set({ ...DEFAULT_SHAPE, ...prefs.shape });
+      if (prefs.tributeShape) this.tributeShape.set({ ...DEFAULT_TRIBUTE_SHAPE, ...prefs.tributeShape });
     } catch {
       // localStorage corrupto o no disponible
     }

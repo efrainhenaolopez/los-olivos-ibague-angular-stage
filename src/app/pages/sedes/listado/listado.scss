@@ -1,0 +1,469 @@
+main {
+  width: 100%;
+}
+
+// ═══ Título proyectado dentro del header banner ════════════════════════
+.page-title {
+  h1 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-weight: 300;
+    margin: 0 0 16px;
+    line-height: 0.95;
+    font-size: 44px;
+
+    span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 5.5rem;
+    }
+  }
+}
+
+// ═══ Sección unificada: .benefits ═══════════════════════════════════════
+.benefits {
+  background: white;
+  padding: 0 10% 60px;
+
+  .benefits-header {
+    margin-bottom: 32px;
+
+    h2 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 300;
+      margin: 0 0 20px;
+      line-height: 0.95;
+      font-size: 32px;
+
+      span {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        font-size: 4.25rem;
+      }
+    }
+  }
+}
+
+.benefits--first {
+  padding-top: 120px;
+  // Sin H2 de "Sedes" debajo: cerramos el gap hacia el slider.
+  padding-bottom: 16px;
+}
+
+// ═══ section-tributes (rounded card) ═══════════════════════════════════
+.section-tributes {
+  background-image: url('/img/backgrounds/background-tributes.svg');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 48px 32px;
+}
+
+// ═══ Container columns ════════════════════════════════════════════════
+.container-columns {
+  display: grid;
+  grid-template-columns: 1.4fr 1fr;
+  align-items: center;
+  gap: 40px;
+  color: #606062;
+
+  .container-text {
+    font-family: 'Raleway', sans-serif;
+
+    p {
+      font-size: 16px;
+      text-align: justify;
+      font-weight: 300;
+      line-height: 1.6;
+      margin: 0 0 14px;
+
+      &:last-child { margin-bottom: 0; }
+    }
+
+    strong {
+      font-weight: 600;
+      color: var(--color-primary, #234b50);
+    }
+  }
+}
+
+.container-columns--solo {
+  grid-template-columns: 1fr;
+}
+
+.intro-block .container-text p {
+  font-size: 18px;
+}
+
+// ═══ Filtro de ciudades (city pills) ════════════════════════════════════
+.cities-filter {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 32px;
+  justify-content: center;
+}
+
+.city-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 22px;
+  background: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(15, 23, 42, 0.08);
+  border-radius: 50px;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 600;
+  font-size: 14px;
+  color: var(--color-primary, #234b50);
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease,
+    box-shadow 0.2s ease, color 0.2s ease;
+
+  &__icon {
+    font-size: 13px;
+    color: var(--color-cta, #A94D69);
+    transition: color 0.2s ease;
+  }
+
+  &:hover {
+    background: #ffffff;
+    border-color: var(--color-cta, #A94D69);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  }
+
+  &.is-active {
+    background: var(--color-primary, #234b50);
+    border-color: var(--color-primary, #234b50);
+    color: #ffffff;
+
+    .city-pill__icon { color: #ffffff; }
+  }
+}
+
+// ═══ Slider de sedes · viewport + track + páginas ═════════════════════
+.sedes-slider {
+  position: relative;
+  padding: 0 4px;
+}
+
+.slider-viewport {
+  overflow: hidden;
+  width: 100%;
+}
+
+.slider-track {
+  display: flex;
+  width: 100%;
+  transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+  will-change: transform;
+}
+
+.slider-page {
+  flex: 0 0 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  align-items: stretch;
+}
+
+// Flechas laterales (overlay sobre los bordes del viewport)
+.slider-arrow {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 2;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 23, 42, 0.12);
+  background: #ffffff;
+  color: var(--color-primary, #234b50);
+  font-size: 16px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.08);
+  transition: background 0.2s ease, color 0.2s ease, border-color 0.2s ease,
+    transform 0.2s ease;
+
+  &--prev { left: -22px; }
+  &--next { right: -22px; }
+
+  &:hover {
+    background: var(--color-primary, #234b50);
+    color: #ffffff;
+    border-color: var(--color-primary, #234b50);
+  }
+
+  &:active { transform: translateY(-50%) scale(0.95); }
+}
+
+// Dots de paginación
+.slider-dots {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  margin-top: 24px;
+}
+
+.slider-dot {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  border: 1px solid rgba(15, 23, 42, 0.18);
+  background: rgba(15, 23, 42, 0.08);
+  padding: 0;
+  cursor: pointer;
+  transition: background 0.2s ease, border-color 0.2s ease, transform 0.2s ease,
+    width 0.2s ease;
+
+  &:hover {
+    background: rgba(15, 23, 42, 0.2);
+    transform: scale(1.15);
+  }
+
+  &.is-active {
+    background: var(--color-cta, #A94D69);
+    border-color: var(--color-cta, #A94D69);
+    width: 26px;
+    border-radius: 5px;
+  }
+}
+
+.sede-card {
+  display: flex;
+  flex-direction: column;
+  background: #ffffff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 14px;
+  overflow: hidden;
+  transition: transform 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 24px rgba(15, 23, 42, 0.08);
+    border-color: rgba(15, 23, 42, 0.12);
+  }
+
+  &--inactive {
+    opacity: 0.78;
+
+    &:hover { transform: none; }
+  }
+
+  &__media {
+    width: 100%;
+    aspect-ratio: 16 / 10;
+    background: #f0f0f0;
+    overflow: hidden;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    &--placeholder {
+      background: var(--color-bg-light, #EDF5F7);
+      color: var(--color-primary, #234b50);
+
+      i { font-size: 56px; opacity: 0.45; }
+    }
+  }
+
+  &__body {
+    padding: 22px 22px 24px;
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    flex: 1;
+  }
+
+  &__head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 10px;
+
+    h3 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 700;
+      font-size: 19px;
+      line-height: 1.2;
+      margin: 0;
+      flex: 1;
+    }
+  }
+
+  &__badge {
+    display: inline-block;
+    padding: 4px 10px;
+    background: var(--color-bg-light, #EDF5F7);
+    color: var(--color-secondary, #477A7B);
+    font-family: 'Raleway', sans-serif;
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    border-radius: 50px;
+    flex: 0 0 auto;
+  }
+
+  &__info {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    color: #2c2e35;
+  }
+
+  &__services {
+    border-top: 1px dashed rgba(15, 23, 42, 0.12);
+    padding-top: 14px;
+
+    h4 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 700;
+      font-size: 12px;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      margin: 0 0 10px;
+    }
+
+    ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 400;
+      line-height: 1.4;
+      color: #2c2e35;
+
+      li {
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+      }
+    }
+  }
+}
+
+.info-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+
+  .info-content {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    min-width: 0;
+    flex: 1;
+    word-break: break-word;
+  }
+
+  a {
+    color: var(--color-primary, #234b50);
+    text-decoration: none;
+    transition: color 0.2s ease;
+
+    &:hover { color: var(--color-cta, #A94D69); }
+  }
+
+  .muted { color: #94a3b8; font-style: italic; }
+}
+
+.info-icon {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  font-size: 14px;
+  color: var(--color-cta, #A94D69);
+}
+
+.info-row--hours .info-content {
+  gap: 6px;
+}
+
+.hours-line {
+  display: flex;
+  flex-direction: column;
+  gap: 1px;
+  font-size: 13px;
+  line-height: 1.4;
+
+  strong {
+    font-weight: 700;
+    color: var(--color-primary, #234b50);
+  }
+}
+
+.service-icon {
+  flex: 0 0 auto;
+  margin-top: 3px;
+  font-size: 12px;
+  color: var(--color-cta, #A94D69);
+}
+
+// ═══ Responsive ════════════════════════════════════════════════════════
+@media (max-width: 1024px) {
+  .benefits { padding: 0 5% 40px; }
+}
+
+@media (max-width: 768px) {
+  .page-title h1 {
+    font-size: 28px;
+    span { font-size: 3.5rem; }
+  }
+
+  .benefits .benefits-header h2 {
+    font-size: 24px;
+    span { font-size: 3rem; }
+  }
+
+  .benefits--first { padding-top: 24px; }
+
+  .section-tributes { padding: 32px 16px; }
+
+  .cities-filter { gap: 8px; }
+
+  .city-pill { padding: 10px 16px; font-size: 13px; }
+
+  .slider-page {
+    grid-template-columns: 1fr;
+    gap: 18px;
+  }
+
+  .slider-arrow {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+
+    &--prev { left: -8px; }
+    &--next { right: -8px; }
+  }
+
+  .sede-card__body { padding: 18px; }
+}
+
+@media (min-width: 769px) and (max-width: 1023px) {
+  .slider-page {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 18px;
+  }
+}

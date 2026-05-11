@@ -1,1 +1,186 @@
-<p>pagos works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#DC4C5A"
+  background="/img/page-backgrounds/background-channels.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Medios de <br />
+      <span>Pago</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro · Instrucciones generales ──────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text">
+          <p>
+            Realiza los pagos relacionados con tu plan de previsión exequial y
+            homenajes funerarios a través de nuestros canales de recaudo.
+            Asegúrate de que tu pago sea dirigido a la razón social
+            <strong>SERFUNCOOP</strong> (Servicios Funerarios Cooperativos del
+            Tolima).
+          </p>
+          <div class="notice">
+            <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
+            <div>
+              <p class="notice-title">Una vez realices tu pago, envíanos a:</p>
+              <a
+                [href]="'mailto:' + afiliacionesEmail"
+                class="notice-email"
+              >{{ afiliacionesEmail }}</a>
+              <ol class="notice-list">
+                <li>Soporte de pago.</li>
+                <li>
+                  Nombre completo y número de documento del titular del plan de
+                  previsión exequial.
+                </li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Filtro + slider de canales ───────────────────── -->
+  <section class="benefits" id="canales">
+    <div class="section-tributes">
+      <!-- Segmentadores por categoría (Todos + 4 categorías) -->
+      <nav class="categories-filter" aria-label="Filtro por categoría de canal">
+        @for (cat of categories; track cat.id) {
+          <button
+            type="button"
+            class="category-pill"
+            [class.is-active]="selectedCategory() === cat.id"
+            (click)="selectCategory(cat.id)"
+          >
+            {{ cat.label }}
+          </button>
+        }
+      </nav>
+
+      <!-- Slider 3 por página -->
+      <div class="channels-slider">
+        @if (showSliderControls()) {
+          <button
+            type="button"
+            class="slider-arrow slider-arrow--prev"
+            (click)="prevPage()"
+            aria-label="Página anterior"
+          >
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="slider-arrow slider-arrow--next"
+            (click)="nextPage()"
+            aria-label="Página siguiente"
+          >
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        }
+
+        <div class="slider-viewport">
+          <div class="slider-track" [style.transform]="trackTransform()">
+            @for (page of pages(); track $index) {
+              <div class="slider-page">
+                @for (channel of page; track channel.id) {
+                  @if (channel.external && channel.url) {
+                    <a
+                      [href]="channel.url"
+                      target="_blank"
+                      rel="noopener"
+                      class="channel-card"
+                      (click)="onChannelClick(channel.id)"
+                    >
+                      <div class="channel-card__logo">
+                        <img [src]="channel.logo" [alt]="channel.logoAlt" loading="lazy" />
+                      </div>
+                      <div class="channel-card__body">
+                        <span class="channel-card__brand">{{ channel.brand }}</span>
+                        <h3>{{ channel.title }}</h3>
+                        @if (channel.description) {
+                          <p>{{ channel.description }}</p>
+                        }
+                        <span class="channel-card__cta">
+                          {{ channel.ctaLabel }}
+                          <i class="fa-solid fa-arrow-up-right-from-square" aria-hidden="true"></i>
+                        </span>
+                      </div>
+                    </a>
+                  } @else {
+                    <article class="channel-card">
+                      <div class="channel-card__logo">
+                        <img [src]="channel.logo" [alt]="channel.logoAlt" loading="lazy" />
+                      </div>
+                      <div class="channel-card__body">
+                        <span class="channel-card__brand">{{ channel.brand }}</span>
+                        <h3>{{ channel.title }}</h3>
+                        @if (channel.description) {
+                          <p>{{ channel.description }}</p>
+                        }
+                        @if (channel.fields?.length) {
+                          <ul class="channel-card__fields">
+                            @for (f of channel.fields; track f.label) {
+                              <li>
+                                <strong>{{ f.label }}:</strong>
+                                <span>{{ f.value }}</span>
+                              </li>
+                            }
+                          </ul>
+                        }
+                        @if (channel.maxAmount) {
+                          <p class="channel-card__limit">
+                            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+                            {{ channel.maxAmount }}
+                          </p>
+                        }
+                      </div>
+                    </article>
+                  }
+                }
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      @if (showSliderControls()) {
+        <div class="slider-dots" role="tablist" aria-label="Paginación del slider">
+          @for (page of pages(); track $index; let i = $index) {
+            <button
+              type="button"
+              class="slider-dot"
+              [class.is-active]="currentPage() === i"
+              (click)="goToPage(i)"
+              [attr.aria-label]="'Página ' + (i + 1) + ' de ' + totalPages()"
+              [attr.aria-current]="currentPage() === i ? 'true' : null"
+            ></button>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

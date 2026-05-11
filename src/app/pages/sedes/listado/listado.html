@@ -1,1 +1,224 @@
-<p>listado works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#fdbf24"
+  background="/img/page-backgrounds/background-our-headquarters.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Nuestras <br />
+      <span>Sedes</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro ─────────────────────────────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text">
+          <p>
+            En Los Olivos hemos dispuesto cada detalle para que el último
+            adiós de un ser querido sea un homenaje a su memoria. En nuestras
+            sedes y salas de homenajes encontrarás todo lo necesario —desde lo
+            presencial hasta la velación virtual— para acompañar a la familia
+            en ese momento y compartir entre quienes hicieron parte de su vida.
+          </p>
+          <p>
+            Encuentra aquí la ubicación, teléfonos, horarios y servicios de
+            cada una de nuestras sedes en
+            <strong>Ibagué, El Espinal, Girardot, Fresno y Venadillo</strong>.
+          </p>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Filtro de ciudades + grid de sedes ───────────── -->
+  <section class="benefits" id="sedes">
+    <div class="section-tributes">
+      <!-- Filtro de ciudades (pills) -->
+      <nav class="cities-filter" aria-label="Filtro de ciudades">
+        @for (city of cities(); track city) {
+          <button
+            type="button"
+            class="city-pill"
+            [class.is-active]="selectedCity() === city"
+            (click)="selectCity(city)"
+          >
+            <i class="fa-solid fa-location-dot city-pill__icon" aria-hidden="true"></i>
+            <span>{{ city }}</span>
+          </button>
+        }
+      </nav>
+
+      <!-- Slider de sedes (3 por página, flechas laterales + dots) -->
+      <div class="sedes-slider">
+        @if (showSliderControls()) {
+          <button
+            type="button"
+            class="slider-arrow slider-arrow--prev"
+            (click)="prevPage()"
+            aria-label="Página anterior"
+          >
+            <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+          </button>
+          <button
+            type="button"
+            class="slider-arrow slider-arrow--next"
+            (click)="nextPage()"
+            aria-label="Página siguiente"
+          >
+            <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+          </button>
+        }
+
+        <div class="slider-viewport">
+          <div class="slider-track" [style.transform]="trackTransform()">
+            @for (page of pages(); track $index) {
+              <div class="slider-page">
+                @for (sede of page; track sede.id) {
+                  <article class="sede-card" [class.sede-card--inactive]="sede.inactive">
+                    @if (sede.image) {
+                      <div class="sede-card__media">
+                        <img
+                          [src]="sede.image"
+                          [alt]="sede.name + ' — Los Olivos Tolima'"
+                          width="600"
+                          height="400"
+                          loading="lazy"
+                        />
+                      </div>
+                    } @else {
+                      <div class="sede-card__media sede-card__media--placeholder" aria-hidden="true">
+                        <i class="fa-solid fa-building"></i>
+                      </div>
+                    }
+
+                    <div class="sede-card__body">
+                      <header class="sede-card__head">
+                        <h3>{{ sede.name }}</h3>
+                        @if (sede.inactive) {
+                          <span class="sede-card__badge">Sin servicio</span>
+                        }
+                      </header>
+
+                      <div class="sede-card__info">
+                        <!-- Dirección -->
+                        <div class="info-row">
+                          <i class="fa-solid fa-location-dot info-icon" aria-hidden="true"></i>
+                          <div class="info-content">
+                            @if (sede.mapUrl) {
+                              <a
+                                [href]="sede.mapUrl"
+                                target="_blank"
+                                rel="noopener"
+                                (click)="onMapClick(sede.id)"
+                              >{{ sede.address }}</a>
+                            } @else {
+                              <span>{{ sede.address }}</span>
+                            }
+                          </div>
+                        </div>
+
+                        <!-- Teléfonos -->
+                        @if (sede.phones.length) {
+                          <div class="info-row">
+                            <i class="fa-solid fa-phone info-icon" aria-hidden="true"></i>
+                            <div class="info-content">
+                              @for (phone of sede.phones; track phone) {
+                                @if (phone === 'Pendiente') {
+                                  <span class="muted">Pendiente</span>
+                                } @else {
+                                  <a
+                                    [href]="toTelHref(phone)"
+                                    (click)="onPhoneClick(sede.id, phone)"
+                                  >{{ phone }}</a>
+                                }
+                              }
+                            </div>
+                          </div>
+                        }
+
+                        <!-- Email -->
+                        @if (sede.email) {
+                          <div class="info-row">
+                            <i class="fa-solid fa-envelope info-icon" aria-hidden="true"></i>
+                            <div class="info-content">
+                              <a [href]="'mailto:' + sede.email">{{ sede.email }}</a>
+                            </div>
+                          </div>
+                        }
+
+                        <!-- Horarios -->
+                        @if (sede.hours.length) {
+                          <div class="info-row info-row--hours">
+                            <i class="fa-solid fa-clock info-icon" aria-hidden="true"></i>
+                            <div class="info-content">
+                              @for (h of sede.hours; track $index) {
+                                <div class="hours-line">
+                                  <strong>{{ h.label }}:</strong>
+                                  <span>{{ h.value }}</span>
+                                </div>
+                              }
+                            </div>
+                          </div>
+                        }
+                      </div>
+
+                      <!-- Servicios -->
+                      <div class="sede-card__services">
+                        <h4>Servicios</h4>
+                        <ul>
+                          @for (service of sede.services; track $index) {
+                            <li>
+                              <i class="fa-solid fa-check service-icon" aria-hidden="true"></i>
+                              <span>{{ service }}</span>
+                            </li>
+                          }
+                        </ul>
+                      </div>
+                    </div>
+                  </article>
+                }
+              </div>
+            }
+          </div>
+        </div>
+      </div>
+
+      @if (showSliderControls()) {
+        <div class="slider-dots" role="tablist" aria-label="Paginación del slider">
+          @for (page of pages(); track $index; let i = $index) {
+            <button
+              type="button"
+              class="slider-dot"
+              [class.is-active]="currentPage() === i"
+              (click)="goToPage(i)"
+              [attr.aria-label]="'Página ' + (i + 1) + ' de ' + totalPages()"
+              [attr.aria-current]="currentPage() === i ? 'true' : null"
+            ></button>
+          }
+        </div>
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

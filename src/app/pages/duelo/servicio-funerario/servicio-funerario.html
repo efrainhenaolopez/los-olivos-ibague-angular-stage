@@ -1,1 +1,193 @@
-<p>servicio-funerario works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#6b4e7b"
+  background="/img/page-backgrounds/background-tributes.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Servicio <br />
+      <span>Funerario</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro · Un Homenaje al Amor ──────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns">
+        <div class="container-text">
+          <span class="eyebrow">Un homenaje al amor</span>
+          <h2>
+            Más que <br />
+            <span>una despedida</span>
+          </h2>
+          <p>
+            Dignificamos el momento de la pérdida del ser querido a través de
+            ceremonias, elogios y exaltaciones diseñadas para facilitar a las
+            familias expresar su amor y vivir el proceso de despedida; rindiendo
+            un homenaje a su memoria y a su legado.
+          </p>
+          <p>
+            Hacemos que cada momento del homenaje sea memorable y significativo
+            a través de las diferentes etapas que enmarcan los protocolos del
+            <strong>Homenaje al Amor</strong>.
+          </p>
+          <a
+            href="tel:6082771001"
+            class="cta-button"
+            (click)="onCoordinarHomenajeClick()"
+          >
+            Solicita la coordinación de un homenaje
+            <i class="fa-solid fa-phone" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/servicio-funerario/intro.webp"
+            alt="Acompañamiento familiar durante el homenaje — Los Olivos Tolima"
+            width="600"
+            height="500"
+            loading="eager"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Etapas del Homenaje (selector + detalle) ─────── -->
+  <section class="benefits" id="etapas">
+    <div class="benefits-header">
+      <h2>
+        Etapas del <br />
+        <span>Homenaje</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <!-- Selector de etapas (pills numeradas) -->
+      <nav class="stages-selector" aria-label="Etapas del homenaje">
+        @for (stage of stages(); track stage.id; let i = $index) {
+          <button
+            type="button"
+            class="stage-pill"
+            [class.is-active]="selectedStageIndex() === i"
+            (click)="selectStage(i)"
+          >
+            <span class="stage-pill__number">{{ stage.number }}</span>
+            <span class="stage-pill__name">{{ stage.name }}</span>
+          </button>
+        }
+      </nav>
+
+      <!-- Panel de detalle de la etapa activa -->
+      @if (selectedStage(); as stage) {
+        <article class="stage-detail container-columns">
+          <div class="container-text">
+            <span class="eyebrow">{{ stage.subtitle }}</span>
+            <h3>{{ stage.name }}</h3>
+            <p>{{ stage.description }}</p>
+            <ul class="services-list" aria-label="Servicios incluidos en la etapa">
+              @for (service of stage.services; track $index) {
+                <li>
+                  <i class="fa-solid fa-check service-icon" aria-hidden="true"></i>
+                  <span>{{ service }}</span>
+                </li>
+              }
+            </ul>
+            @if (stage.id === 'encuentro') {
+              <p class="footnote">
+                * Excepto Antioquia, donde el servicio es hasta por 12 horas.<br />
+                ** Donde exista el servicio de transporte urbano.
+              </p>
+            }
+          </div>
+          <div class="cifras">
+            <img
+              [src]="stage.image"
+              [alt]="'Etapa ' + stage.number + ': ' + stage.name + ' — Los Olivos Tolima'"
+              width="600"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </article>
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 3: Velación Virtual (cards de salas) ────────────── -->
+  <section class="benefits" id="velacion-virtual">
+    <div class="benefits-header">
+      <h2>
+        Velación <br />
+        <span>Virtual</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <article class="container-columns">
+        <div class="container-text">
+          <p>
+            Esta herramienta permite a familiares y allegados asistir
+            virtualmente al homenaje, a través de las cámaras web situadas en
+            nuestras salas de homenajes. Facilitamos la despedida desde
+            cualquier parte del mundo.
+          </p>
+          <p>
+            Sede de homenajes Cra 5ta Ibagué (4to piso). Consulta con nuestros
+            asesores la disponibilidad de este servicio.
+          </p>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/servicio-funerario/velacion-virtual-02.webp"
+            alt="Velación virtual — Los Olivos Tolima"
+            width="600"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+      </article>
+
+      <div class="rooms-grid" aria-label="Salas con velación virtual">
+        @for (room of virtualRooms(); track room.id) {
+          <a
+            [href]="room.streamUrl"
+            target="_blank"
+            rel="noopener"
+            class="room-card"
+            (click)="onRoomClick(room.id)"
+          >
+            <i class="fa-solid fa-video room-card__icon" aria-hidden="true"></i>
+            <span class="room-card__label">{{ room.label }}</span>
+            <span class="room-card__cta">
+              Ingresar a la transmisión
+              <i class="fa-solid fa-arrow-right" aria-hidden="true"></i>
+            </span>
+          </a>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

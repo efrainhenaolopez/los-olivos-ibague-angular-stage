@@ -107,6 +107,36 @@
           />
         </label>
 
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Border-radius</span>
+            <strong>{{ shape().borderRadius }}px</strong>
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="500"
+            step="1"
+            [value]="shape().borderRadius"
+            (input)="onShapeChange('borderRadius', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Opacidad</span>
+            <strong>{{ (shape().opacity * 100).toFixed(0) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            [value]="shape().opacity"
+            (input)="onShapeChange('opacity', $any($event.target).value)"
+          />
+        </label>
+
         <div class="palette-fab-shape-out">
           <input type="text" readonly [value]="shapeText()" />
           <button type="button" (click)="copyShape('shape')" [disabled]="copied() === 'shape'">
@@ -184,6 +214,36 @@
             step="1"
             [value]="tributeShape().size"
             (input)="onTributeShapeChange('size', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Border-radius</span>
+            <strong>{{ tributeShape().borderRadius }}px</strong>
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="500"
+            step="1"
+            [value]="tributeShape().borderRadius"
+            (input)="onTributeShapeChange('borderRadius', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Opacidad</span>
+            <strong>{{ (tributeShape().opacity * 100).toFixed(0) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="1"
+            step="0.01"
+            [value]="tributeShape().opacity"
+            (input)="onTributeShapeChange('opacity', $any($event.target).value)"
           />
         </label>
 

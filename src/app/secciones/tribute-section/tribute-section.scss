@@ -14,18 +14,17 @@
     padding: 13% 4%;
     text-align: right;
 
-    // Forma orgánica de marca (cuadrado redondeado rotado, color territorial,
-    // opacity 0.65). Mismo lenguaje que las flip cards de proyección, pero
-    // con CSS vars independientes (--tribute-*) porque el banner tiene una
-    // proporción muy distinta y necesita sus propios offsets.
+    // Forma orgánica de marca (cuadrado redondeado rotado, color territorial).
+    // Capa intermedia (z-index 1) entre el background y el contenido (z-index 2
+    // de los hijos > *). La opacidad la controla el FAB vía --tribute-opacity.
     &::before {
       content: '';
       position: absolute;
       width: var(--tribute-size, 35%);
       aspect-ratio: 1;
-      background: var(--color-primary, #234b50);
-      opacity: 0.65;
-      border-radius: 48px;
+      background: #ffffff;
+      opacity: var(--tribute-opacity, 0.5);
+      border-radius: var(--tribute-radius, 48px);
       top: var(--tribute-y, 0%);
       left: var(--tribute-x, 60%);
       transform: rotate(var(--tribute-rotation, -15deg));

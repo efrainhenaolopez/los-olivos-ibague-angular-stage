@@ -153,10 +153,17 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/utilidades/registros-defuncion/registros-defuncion').then((m) => m.RegistrosDefuncion),
   },
+  // Slug del WP original `/otros-medios-de-recaudo`: redirige a la página
+  // canónica de medios de pago para preservar enlaces externos legacy.
   {
     path: 'otros-medios-recaudo',
-    loadComponent: () =>
-      import('./pages/utilidades/otros-medios-recaudo/otros-medios-recaudo').then((m) => m.OtrosMediosRecaudo),
+    redirectTo: '/pagos',
+    pathMatch: 'full',
+  },
+  {
+    path: 'otros-medios-de-recaudo',
+    redirectTo: '/pagos',
+    pathMatch: 'full',
   },
 
   // Funnels — Thank You Pages
