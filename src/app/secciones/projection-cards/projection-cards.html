@@ -1,0 +1,28 @@
+<!-- Grid de flip cards: 3 cols, altura uniforme. El flip se dispara con :hover
+     (mouse) y con :focus / :focus-within (tap en mobile, sin JS state). La
+     "forma orgánica" del front consume CSS vars del ancestro: --shape-x,
+     --shape-y, --shape-rotation; --color-primary aplica el tinte territorial. -->
+<div class="projection-grid">
+  @for (card of cards(); track card.id) {
+    <article
+      class="projection-card"
+      [style.--card-bg]="'url(' + card.image + ')'"
+      tabindex="0"
+      role="button"
+      [attr.aria-label]="card.ariaLabel"
+    >
+      <div class="projection-card-inner">
+        <div class="projection-card-front">
+          @if (card.subtitle) {
+            <h5>{{ card.subtitle }}</h5>
+          }
+          <h4>{{ card.title }}</h4>
+        </div>
+        <div class="projection-card-back">
+          <h4>{{ card.backTitle }}</h4>
+          <p>{{ card.description }}</p>
+        </div>
+      </div>
+    </article>
+  }
+</div>

@@ -1,52 +1,13 @@
-import { Component } from '@angular/core';
-import { RouterLink, RouterLinkActive } from '@angular/router';
-import { MobileService } from '../../servicios/mobile';
+import { Component, input } from '@angular/core';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-footer',
-  imports: [RouterLink, RouterLinkActive, /*PopUpEthicalLineComponentComponent, PopUpContactPhonesComponentComponent, PopUpOptionsRelievesComponentComponent*/],
+  imports: [RouterLink],
   templateUrl: './footer.html',
   styleUrl: './footer.scss',
 })
-export class FooterSection {public isMobile: boolean = false;
-  public modal:boolean = false;
-  public modalPhones: boolean = false;
-
-  public modalRelieves = false;
-  public optionRelieves = {};
-
-
-  constructor(private MobileService: MobileService) {
-    this.isMobile = this.MobileService.isMobile();
-  }
-
-  openModal(){
-    this.modal = true;
-  }
-
-  closeModal(){
-    this.modal = false;
-  }
-
-  openModalPhones(){
-    this.modalPhones = true;
-  }
-
-  closeModalPhones(){
-    this.modalPhones = false;
-  }
-
-  openModalRelieves(title: string, option: string){
-    this.modalRelieves = true;
-
-    this.optionRelieves = {
-      title,
-      option
-    }
-  }
-
-  closeModalRelieves() {
-    this.modalRelieves = false;
-  }
-
+export class FooterSection {
+  /** Color/imagen de fondo opcional para `.footer-bottom`. Si se omite queda transparente (caso bienvenido). */
+  background = input<string>('');
 }

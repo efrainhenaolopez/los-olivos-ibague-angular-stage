@@ -785,6 +785,41 @@ misCategorias = [
       </ul>
     </article>
 
+    <h3 class="ux-subhead">app-projection-cards</h3>
+    <article class="ux-card ux-card-wide">
+      <header class="ux-card-head">
+        <h3>Flip cards Misión · Visión · Política</h3>
+        <span class="ux-tag">app-projection-cards</span>
+      </header>
+      <p class="ux-desc">
+        Grid de 3 cards que se voltean al hacer hover (mouse) o focus (tap en
+        mobile, sin JS). El front muestra una foto enmarcada en blanco con una
+        "forma orgánica" de marca (cuadrado redondeado rotado, color territorial,
+        opacity 0.65). El back muestra fondo neutro <code>#f0f0f0</code> con
+        título y descripción justificada. Estrenado en la página
+        <code>/nosotros</code> (Nuestra Proyección).
+      </p>
+      <div class="ux-block-preview is-light">
+        <app-projection-cards [cards]="projectionDemo"></app-projection-cards>
+      </div>
+      <pre class="ux-snippet"><code>&lt;app-projection-cards
+  [cards]="projectionCards()"
+&gt;&lt;/app-projection-cards&gt;</code></pre>
+      <ul class="ux-meta">
+        <li><strong>Inputs:</strong> cards (ProjectionCard[], required)</li>
+        <li>
+          <strong>ProjectionCard:</strong>
+          &#123; id, subtitle?, title, backTitle, description, image, ariaLabel &#125;
+        </li>
+        <li>
+          <strong>CSS vars que consume del ancestro:</strong>
+          <code>--shape-x</code>, <code>--shape-y</code>,
+          <code>--shape-rotation</code>, <code>--color-primary</code>,
+          <code>--color-cta</code> (para el outline de focus).
+        </li>
+      </ul>
+    </article>
+
     <h3 class="ux-subhead">app-buy-tribute-section</h3>
     <article class="ux-card ux-card-wide">
       <header class="ux-card-head">
@@ -1184,7 +1219,7 @@ misCategorias = [
   </section>
 </main>
 
-<app-footer></app-footer>
+<app-content-footer></app-content-footer>
 
 <aside class="ux-territory-panel" [class.is-open]="territoryPanelOpen()">
   <button

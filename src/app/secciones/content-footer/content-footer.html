@@ -1,0 +1,59 @@
+<div class="content-footer">
+  <!-- Banda gris con logos de marcas -->
+  <div class="logos-section">
+    <a [routerLink]="['/bienestar-integral']">
+      <img src="/logos/logos-gris/logo-vida-gris.svg" alt="Más vida" id="vida" />
+    </a>
+    <a [routerLink]="['/apoyo-inmediato']">
+      <img src="/logos/logos-gris/logo-olivos-gris.svg" alt="Los Olivos" id="olivos" />
+    </a>
+    <a [routerLink]="['/demuestra-tu-afecto']">
+      <img src="/logos/logos-gris/logo-alivia-gris.svg" alt="Alivia" id="alivia" />
+    </a>
+    <a href="https://aseguradorasolidaria.com.co/" target="_blank" rel="noopener">
+      <img src="/logos/logos-gris/logo-aseguradora-gris.svg" alt="Aseguradora Solidaria de Colombia" id="aseguradora" />
+    </a>
+  </div>
+
+  <!-- Columnas de enlaces (rutas Tolima) -->
+  <div class="footer-section">
+    <div class="footer-links">
+      <div class="column logo-column">
+        <img src="/logos/logo_olivos_color.svg" alt="Los Olivos Tolima" />
+      </div>
+      <div class="column separator-column">
+        <div class="separador"></div>
+      </div>
+      <div class="column">
+        <h4>Bienestar Integral</h4>
+        <ul>
+          <li><a [routerLink]="['/prevision']">Previsión</a></li>
+          <li><a [routerLink]="['/planes-individuales']">Planes individuales</a></li>
+          <li><a [routerLink]="['/planes-empresariales']">Planes empresariales</a></li>
+          <li><a [routerLink]="['/microseguros']">Microseguros</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Apoyo Inmediato</h4>
+        <ul>
+          <li><a [routerLink]="['/servicio-funerario']">Servicio funerario</a></li>
+          <li><a [routerLink]="['/cremacion']">Cremación</a></li>
+          <li><a [routerLink]="['/parque-cementerio']">Parque cementerio</a></li>
+          <li><a [routerLink]="['/sedes']">Nuestras sedes</a></li>
+        </ul>
+      </div>
+      <div class="column">
+        <h4>Demuestra tu afecto</h4>
+        <ul>
+          <li><a [routerLink]="['/obituarios']">Obituarios</a></li>
+          <li><a [routerLink]="['/condolencias']">Condolencias</a></li>
+          <li><a [routerLink]="['/conmemoraciones']">Conmemoraciones</a></li>
+          <li><a [routerLink]="['/palabras-de-amor']">Palabras de amor</a></li>
+        </ul>
+      </div>
+    </div>
+  </div>
+
+  <!-- Banda inferior: usa <app-footer> con fondo de marca -->
+  <app-footer background="var(--color-cta)"></app-footer>
+</div>

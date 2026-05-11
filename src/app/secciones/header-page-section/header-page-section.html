@@ -1,11 +1,18 @@
-<div class="header-page">
-  <app-header [logo]="logo()" [color]="color()"></app-header>
+<div class="header-page" [class.is-tradicional]="menuType() === 'tradicional'">
+  @if (menuType() === 'desplegable') {
+    <app-header [logo]="logo()" [color]="color()"></app-header>
+  } @else {
+    <app-header-menu [logo]="logo()"></app-header-menu>
+  }
   <div class="header-page-banner">
     <div class="background-header">
       <img [src]="background()" alt="" />
     </div>
     <div class="button-ready">
       <a aria-label="Reproducir video"><i class="fa-solid fa-play"></i></a>
+    </div>
+    <div class="header-page-title">
+      <ng-content></ng-content>
     </div>
   </div>
 </div>

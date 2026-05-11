@@ -2,12 +2,13 @@ import { Component, OnInit, OnDestroy, inject, HostBinding } from '@angular/core
 import { Title, Meta } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { HeaderMenu } from '../../../secciones/header-menu/header-menu';
+import { FooterSection } from '../../../secciones/footer/footer';
 import { LineaEtica } from '../../../popups/linea-etica/linea-etica';
 import { GtmService } from '../../../servicios/gtm';
 
 @Component({
   selector: 'app-bienvenido-menu',
-  imports: [RouterLink, HeaderMenu, LineaEtica],
+  imports: [RouterLink, HeaderMenu, FooterSection, LineaEtica],
   templateUrl: './bienvenido-menu.component.html',
   styleUrl: './bienvenido-menu.component.scss',
 })

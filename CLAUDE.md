@@ -2,6 +2,10 @@
 
 Guía oficial para trabajar este proyecto con Claude Code.
 
+> **Migración WP → Angular en curso.** Lee primero
+> [.claude/MIGRATION_STATUS.md](.claude/MIGRATION_STATUS.md) para conocer
+> el estado, las convenciones establecidas y los próximos pasos.
+
 ---
 
 ## Contexto del Proyecto

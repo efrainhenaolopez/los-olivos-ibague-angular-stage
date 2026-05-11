@@ -67,7 +67,10 @@
 
         // Teléfono destacado dentro del top-bar
         &.phone {
-            font-family: var(--font-headline);
+            // Comfortaa fija (no var --font-headline) porque entre territorios
+            // 'Hind Vadodara' vs 'Comfortaa' tienen métricas distintas y la
+            // .top-bar (flex) reacomoda visualmente al cambiar paleta.
+            font-family: 'Comfortaa', sans-serif;
             font-weight: 700;
             font-size: 14px;
 
@@ -167,11 +170,13 @@
             }
         }
 
-        // Iniciar sesión — CTA secundario (outlined transparente)
+        // Iniciar sesión — CTA secundario (outlined). El borde responde al
+        // color territorial (--color-cta) para acompañar al primario en cada
+        // territorio/plantilla.
         .cta--secondary {
             background: transparent;
             color: white;
-            border: 2px solid rgba(255, 255, 255, 0.6);
+            border: 2px solid var(--color-cta);
 
             &:hover {
                 background: var(--color-cta);

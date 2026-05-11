@@ -3,6 +3,9 @@
   background: white;
 
   .container-information {
+    position: relative;
+    overflow: hidden;
+    border: 6px solid #ffffff;
     background-image: url('/img/backgrounds-sections/ja.png');
     background-repeat: no-repeat;
     background-size: cover;
@@ -10,6 +13,31 @@
     color: #201e1e;
     padding: 13% 4%;
     text-align: right;
+
+    // Forma orgánica de marca (cuadrado redondeado rotado, color territorial,
+    // opacity 0.65). Mismo lenguaje que las flip cards de proyección, pero
+    // con CSS vars independientes (--tribute-*) porque el banner tiene una
+    // proporción muy distinta y necesita sus propios offsets.
+    &::before {
+      content: '';
+      position: absolute;
+      width: var(--tribute-size, 35%);
+      aspect-ratio: 1;
+      background: var(--color-primary, #234b50);
+      opacity: 0.65;
+      border-radius: 48px;
+      top: var(--tribute-y, 0%);
+      left: var(--tribute-x, 60%);
+      transform: rotate(var(--tribute-rotation, -15deg));
+      z-index: 1;
+      pointer-events: none;
+    }
+
+    // El contenido textual y los botones siempre por encima de la forma.
+    > * {
+      position: relative;
+      z-index: 2;
+    }
 
     h1 {
       font-size: 32px;

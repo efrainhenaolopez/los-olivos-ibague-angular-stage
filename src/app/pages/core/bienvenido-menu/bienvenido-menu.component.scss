@@ -123,53 +123,6 @@ main {
         }
     }
 
-    .footer-bottom {
-        padding: 0 8% 2% 7%;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-
-        .footer-links {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 4px;
-            color: var(--color-cta);
-
-            a {
-                color: white;
-                text-decoration: none;
-                font-size: 17px;
-                cursor: pointer;
-                white-space: nowrap;
-            }
-        }
-
-        .footer-social {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-
-            a {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                width: 32px;
-                height: 32px;
-                background: var(--color-cta);
-                color: #ffffff;
-                border-radius: 50%;
-                cursor: pointer;
-                text-decoration: none;
-                flex-shrink: 0;
-
-                i {
-                    font-size: 15px;
-                }
-            }
-        }
-    }
 }
 
 .isMobile{
@@ -270,48 +223,5 @@ main {
             }
         }
 
-        .footer-bottom-mobile {
-            background: #908e8e61;
-            padding: 1% 5%;
-            display: grid;
-
-            .social {
-                padding: 4% 0;
-                border-top: 1px solid #231f20;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                gap: 8px;
-
-                a {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: 32px;
-                    height: 32px;
-                    min-width: 32px;
-                    min-height: 32px;
-                    background: var(--color-cta);
-                    color: #ffffff;
-                    border-radius: 50%;
-                    text-decoration: none;
-                    flex-shrink: 0;
-                    box-sizing: border-box;
-
-                    i {
-                        font-size: 15px;
-                        line-height: 1;
-                    }
-                }
-            }
-
-            a {
-                color: white;
-                font-size: 18px;
-                width: 100%;
-                padding: 2% 0;
-                border-bottom: 1px solid #231f20;
-            }
-        }
     }
 }

@@ -2,7 +2,7 @@ import { Component, ElementRef, OnInit, computed, effect, inject, signal } from 
 import { Meta, Title } from '@angular/platform-browser';
 import { RouterLink } from '@angular/router';
 import { HeaderSection } from '../../../secciones/header/header';
-import { FooterSection } from '../../../secciones/footer/footer';
+import { ContentFooter } from '../../../secciones/content-footer/content-footer';
 import { FormularioContacto } from '../../../secciones/formulario-contacto/formulario-contacto';
 import { LineaEtica } from '../../../popups/linea-etica/linea-etica';
 import { HeaderPageSection } from '../../../secciones/header-page-section/header-page-section';
@@ -17,6 +17,7 @@ import { CategoriesGrid, Category } from '../../../secciones/categories-grid/cat
 import { DeathAbroad } from '../../../secciones/death-abroad/death-abroad';
 import { OurTributesSection } from '../../../secciones/our-tributes-section/our-tributes-section';
 import { TributeSection } from '../../../secciones/tribute-section/tribute-section';
+import { ProjectionCards, ProjectionCard } from '../../../secciones/projection-cards/projection-cards';
 import { ShowYourAffection } from '../../../secciones/show-your-affection/show-your-affection';
 import { BuyTributeSection } from '../../../secciones/buy-tribute-section/buy-tribute-section';
 import { SearchOverlay } from '../../../secciones/search-overlay/search-overlay';
@@ -215,7 +216,7 @@ type ElementOverrides = Record<string, Record<string, string>>;
   imports: [
     RouterLink,
     HeaderSection,
-    FooterSection,
+    ContentFooter,
     FormularioContacto,
     LineaEtica,
     HeaderPageSection,
@@ -230,6 +231,7 @@ type ElementOverrides = Record<string, Record<string, string>>;
     DeathAbroad,
     OurTributesSection,
     TributeSection,
+    ProjectionCards,
     ShowYourAffection,
     BuyTributeSection,
     SearchOverlay,
@@ -853,6 +855,39 @@ export class Ux implements OnInit {
   ];
 
   readonly plansDemo: Plan[] = this.plansBienvenido;
+
+  // Demo de las 3 flip cards de Nuestra Proyección (Misión, Visión, Política).
+  // Mismo dataset que /nosotros para mostrar el componente con su contenido real.
+  readonly projectionDemo: ProjectionCard[] = [
+    {
+      id: 'mision',
+      title: 'Misión',
+      backTitle: 'Misión',
+      description:
+        'En SERFUNCOOP exaltamos la vida enfocados en la previsión integral, brindamos homenajes enmarcados en el respeto de la dignidad humana; siendo innovadores y garantizando la creación de valor para nuestros grupos de interés.',
+      image: '/img/wp-migrated/nosotros/mision.webp',
+      ariaLabel: 'Misión — toca para ver más',
+    },
+    {
+      id: 'vision',
+      title: 'Visión',
+      backTitle: 'Visión',
+      description:
+        'Ser reconocidos por el liderazgo en el apoyo integral a las familias en todos los momentos de su vida, a través de un modelo sostenible e innovador.',
+      image: '/img/wp-migrated/nosotros/vision.webp',
+      ariaLabel: 'Visión — toca para ver más',
+    },
+    {
+      id: 'politica',
+      subtitle: 'Política de',
+      title: 'Calidad',
+      backTitle: 'Política de calidad',
+      description:
+        'Ofrecemos soluciones innovadoras en previsión integral y servicios exequiales, generando confianza al proporcionar la experiencia en forma oportuna, buscando satisfacer las necesidades y expectativas de nuestros grupos de interés, cumpliendo los requisitos aplicables y enfocados en la mejora continua.',
+      image: '/img/wp-migrated/nosotros/politica-calidad.webp',
+      ariaLabel: 'Política de calidad — toca para ver más',
+    },
+  ];
 
   readonly categoriesDemo: Category[] = [
     { img: '/icons/icons-categorys/category-youths.svg', text: 'Jóvenes', background: '#fd8e13' },

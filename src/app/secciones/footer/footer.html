@@ -1,185 +1,41 @@
-<div class="contact-section">
-  <div
-    class="space"
-    style="background: #f5f6f6; height: 25px; margin-bottom: 10px"
-  ></div>
-
-  <div class="logos-section">
-    <a [routerLink]="['/bienestar-integral']">
-      <img src="/logos/logos-gris/logo-vida-gris.svg" alt="vida" id="vida" />
+<div class="footer-bottom" [style.background]="background()">
+  <div class="footer-links">
+    <a [routerLink]="['/planes-empresariales']">Empresas</a> |
+    <a [routerLink]="['/prevision']">Previsión</a> |
+    <a [routerLink]="['/apoyo-al-duelo']">Apoyo al Duelo</a> |
+    <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a> |
+    <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a> |
+    <a [routerLink]="['/contacto']">PQRS</a>
+  </div>
+  <div class="footer-social">
+    <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook Los Olivos Tolima">
+      <i class="fa-brands fa-facebook-f"></i>
     </a>
-    <a [routerLink]="['/apoyo-inmediato']">
-      <img
-        src="/logos/logos-gris/logo-olivos-gris.svg"
-        alt="olivos"
-        id="olivos"
-      />
+    <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram Los Olivos Tolima">
+      <i class="fa-brands fa-instagram"></i>
     </a>
-    <a [routerLink]="['/demuestra-tu-afecto']">
-      <img
-        src="/logos/logos-gris/logo-alivia-gris.svg"
-        alt="alivia"
-        id="alivia"
-      />
-    </a>
-    <a href="https://aseguradorasolidaria.com.co/">
-      <img
-        src="/logos/logos-gris/logo-aseguradora-gris.svg"
-        alt="aseguradora"
-        id="aseguradora"
-      />
+    <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp Los Olivos Tolima">
+      <i class="fa-brands fa-whatsapp"></i>
     </a>
   </div>
-
-  @if (!isMobile) {
-  <div class="footer-section">
-    <div class="footer-links">
-      <div class="column" style="display: flex">
-        <img src="/logos/logo_olivos_color.svg" alt="" />
-      </div>
-      <div class="column">
-        <div
-          class="separador"
-          style="width: 1px; background: #606062; height: 100%"
-        ></div>
-      </div>
-      <div class="column">
-        <h4>Bienestar Integral</h4>
-        <ul>
-          <li>
-            <a
-              [routerLink]="['/bienestar-integral']"
-              [routerLinkActive]="['active']"
-            >
-              Planifica en vida
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/nosotros']" [routerLinkActive]="['active']">
-              Nosotros
-            </a>
-          </li>
-          <li>
-            <a
-              [routerLink]="['/club-mas-vida-para-ti']"
-              [routerLinkActive]="['active']"
-            >
-              Más vida
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/red-nacional']" [routerLinkActive]="['active']">
-              Red Nacional
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <h4>Apoyo Inmediato</h4>
-        <ul>
-          <li>
-            <a [routerLink]="['/homenajes']" [routerLinkActive]="['active']">
-              Homenajes
-            </a>
-          </li>
-          <li>
-            <a [routerLink]="['/alivia']" [routerLinkActive]="['active']">
-              Alivia
-            </a>
-          </li>
-          <li>
-            <a
-              [routerLink]="['/nuestras-sedes']"
-              [routerLinkActive]="['active']"
-            >
-              Nuestras sedes
-            </a>
-          </li>
-        </ul>
-      </div>
-      <div class="column">
-        <h4>Demuestra tu afecto</h4>
-        <ul>
-          <li>
-            <a [routerLink]="['/alivia']" [routerLinkActive]="['active']">
-              Alivia
-            </a>
-          </li>
-          <li>
-            <a href="#"> Tienda virtual </a>
-          </li>
-          <!-- <li>
-            <a
-              [routerLink]="['/homenajes']"
-              fragment="obituaries"
-              [routerLinkActive]="['active']"
-            >
-              Obituarios
-            </a>
-          </li> -->
-          <li>
-            <a
-              (click)="openModalRelieves('Libros recomendados', 'optionThree')"
-            >
-              Libros
-            </a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <div class="footer-bottom">
-      <a [routerLink]="['/empresas']">Empresas</a> |
-      <a [routerLink]="['/nuestras-sedes']">Directorio de sedes</a> |
-      <a (click)="openModalPhones()">Contáctenos</a> |
-      <a [routerLink]="['/tratamiento-de-datos']">Tratamiento de datos</a> |
-      <a (click)="openModal()">Linea ética</a> |
-      <a href="https://www.losolivoscali.com/certificados/">Proveedores</a>
-
-      <a class="icon" href="https://www.facebook.com/losolivoscali">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-      <a class="icon" href="https://www.instagram.com/losolivoscali">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-    </div>
-  </div>
-  }
-
-  @if (isMobile) {
-  <div class="footer-bottom-mobile">
-    <div class="social">
-      <a class="icon" href="https://www.facebook.com/losolivoscali">
-        <i class="fa-brands fa-facebook-f"></i>
-      </a>
-      <a class="icon" href="https://www.instagram.com/losolivoscali">
-        <i class="fa-brands fa-instagram"></i>
-      </a>
-    </div>
-    <a [routerLink]="['/empresas']">Empresas</a>
-    <a [routerLink]="['/nuestras-sedes']">Directorio de sedes</a>
-    <a (click)="openModalPhones()">Contáctenos</a>
-    <a [routerLink]="['/tratamiento-de-datos']">Tratamiento de datos</a>
-    <a (click)="openModal()">Linea Ética</a>
-    <a href="https://www.losolivoscali.com/certificados/">Proveedores</a>
-  </div>
-  }
 </div>
-<!--
-<app-pop-up-ethical-line-component
-  *ngIf="modal"
-  backgroundHeader="#f5821f"
-  (close)="closeModal()"
-></app-pop-up-ethical-line-component>
 
-<app-pop-up-contact-phones-component
-  (close)="closeModalPhones()"
-  backgroundHeader="#00966c"
-  *ngIf="modalPhones"
-></app-pop-up-contact-phones-component>
-
-<app-pop-up-options-relieves-component
-  *ngIf="modalRelieves"
-  [response]="optionRelieves"
-  (close)="closeModalRelieves()"
-></app-pop-up-options-relieves-component>
--->
+<div class="footer-bottom-mobile">
+  <a [routerLink]="['/planes-empresariales']">Empresas</a>
+  <a [routerLink]="['/prevision']">Previsión</a>
+  <a [routerLink]="['/apoyo-al-duelo']">Apoyo al Duelo</a>
+  <a [routerLink]="['/gestion-financiera']">Gestión Financiera</a>
+  <a [routerLink]="['/tratamiento-datos']">Tratamiento de Datos</a>
+  <a [routerLink]="['/contacto']">PQRS</a>
+  <div class="social">
+    <a href="https://www.facebook.com/losolivostolima" target="_blank" rel="noopener" aria-label="Facebook Los Olivos Tolima">
+      <i class="fa-brands fa-facebook-f"></i>
+    </a>
+    <a href="https://www.instagram.com/losolivostolima" target="_blank" rel="noopener" aria-label="Instagram Los Olivos Tolima">
+      <i class="fa-brands fa-instagram"></i>
+    </a>
+    <a href="https://api.whatsapp.com/send/?phone=573104171085" target="_blank" rel="noopener" aria-label="WhatsApp Los Olivos Tolima">
+      <i class="fa-brands fa-whatsapp"></i>
+    </a>
+  </div>
+</div>

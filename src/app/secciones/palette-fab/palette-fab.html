@@ -1,0 +1,206 @@
+<aside class="palette-fab" [class.is-open]="open()">
+  <button
+    type="button"
+    class="palette-fab-toggle"
+    (click)="toggle()"
+    [attr.aria-expanded]="open()"
+    aria-label="Selector de paleta de colores"
+  >
+    @if (open()) {
+      <i class="fa-solid fa-xmark"></i>
+    } @else {
+      <i class="fa-solid fa-palette"></i>
+    }
+  </button>
+
+  @if (open()) {
+    <div class="palette-fab-body">
+      <header class="palette-fab-head">
+        <h4>Territorio · Plantilla</h4>
+        <p>Selecciona una variante para aplicar la paleta a la página.</p>
+      </header>
+
+      <div class="palette-fab-menu">
+        <label for="palette-fab-menu-select">Tipo de menú</label>
+        <select
+          id="palette-fab-menu-select"
+          [value]="menuType()"
+          (change)="onMenuTypeChange($any($event.target).value)"
+        >
+          <option value="tradicional">Tradicional</option>
+          <option value="desplegable">Desplegable</option>
+        </select>
+      </div>
+
+      <div class="palette-fab-groups">
+        @for (group of groups; track group.id) {
+          <section class="palette-fab-group">
+            <h5>{{ group.label }}</h5>
+            <div class="palette-fab-templates">
+              @for (tpl of group.templates; track tpl.id) {
+                <button
+                  type="button"
+                  class="palette-fab-tpl"
+                  [class.is-active]="isActive(group.id, tpl.id)"
+                  [attr.aria-pressed]="isActive(group.id, tpl.id)"
+                  (click)="select(group.id, tpl)"
+                >
+                  <span class="swatches">
+                    <span class="sw" [style.background]="tpl.palette.primary"></span>
+                    <span class="sw" [style.background]="tpl.palette.cta"></span>
+                    <span class="sw" [style.background]="tpl.palette.accent"></span>
+                  </span>
+                  <span class="label">{{ tpl.label }}</span>
+                </button>
+              }
+            </div>
+          </section>
+        }
+      </div>
+
+      <!-- Ajuste fino de la forma orgánica sobre las flip cards (proyección). -->
+      <section class="palette-fab-shape">
+        <h5>Forma · Proyección</h5>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Rotación</span>
+            <strong>{{ shape().rotation }}°</strong>
+          </span>
+          <input
+            type="range"
+            min="-180"
+            max="180"
+            step="1"
+            [value]="shape().rotation"
+            (input)="onShapeChange('rotation', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>X</span>
+            <strong>{{ shape().x.toFixed(2) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="-100"
+            max="150"
+            step="0.5"
+            [value]="shape().x"
+            (input)="onShapeChange('x', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Y</span>
+            <strong>{{ shape().y.toFixed(2) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="-100"
+            max="150"
+            step="0.5"
+            [value]="shape().y"
+            (input)="onShapeChange('y', $any($event.target).value)"
+          />
+        </label>
+
+        <div class="palette-fab-shape-out">
+          <input type="text" readonly [value]="shapeText()" />
+          <button type="button" (click)="copyShape('shape')" [disabled]="copied() === 'shape'">
+            @if (copied() === 'shape') {
+              <i class="fa-solid fa-check"></i>
+            } @else {
+              <i class="fa-regular fa-copy"></i>
+            }
+          </button>
+          <button type="button" class="reset" (click)="resetShape()" aria-label="Reiniciar forma">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        </div>
+      </section>
+
+      <!-- Forma orgánica del banner app-tribute-section. CSS vars independientes
+           porque la proporción del banner es muy distinta a la de las cards. -->
+      <section class="palette-fab-shape">
+        <h5>Forma · Tribute</h5>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Rotación</span>
+            <strong>{{ tributeShape().rotation }}°</strong>
+          </span>
+          <input
+            type="range"
+            min="-180"
+            max="180"
+            step="1"
+            [value]="tributeShape().rotation"
+            (input)="onTributeShapeChange('rotation', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>X</span>
+            <strong>{{ tributeShape().x.toFixed(2) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="-100"
+            max="150"
+            step="0.5"
+            [value]="tributeShape().x"
+            (input)="onTributeShapeChange('x', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Y</span>
+            <strong>{{ tributeShape().y.toFixed(2) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="-100"
+            max="150"
+            step="0.5"
+            [value]="tributeShape().y"
+            (input)="onTributeShapeChange('y', $any($event.target).value)"
+          />
+        </label>
+
+        <label class="palette-fab-slider">
+          <span class="slider-label">
+            <span>Tamaño (1:1)</span>
+            <strong>{{ tributeShape().size.toFixed(0) }}%</strong>
+          </span>
+          <input
+            type="range"
+            min="0"
+            max="1000"
+            step="1"
+            [value]="tributeShape().size"
+            (input)="onTributeShapeChange('size', $any($event.target).value)"
+          />
+        </label>
+
+        <div class="palette-fab-shape-out">
+          <input type="text" readonly [value]="tributeShapeText()" />
+          <button type="button" (click)="copyShape('tribute')" [disabled]="copied() === 'tribute'">
+            @if (copied() === 'tribute') {
+              <i class="fa-solid fa-check"></i>
+            } @else {
+              <i class="fa-regular fa-copy"></i>
+            }
+          </button>
+          <button type="button" class="reset" (click)="resetTributeShape()" aria-label="Reiniciar forma del tribute">
+            <i class="fa-solid fa-rotate-left"></i>
+          </button>
+        </div>
+      </section>
+    </div>
+  }
+</aside>

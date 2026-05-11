@@ -1,73 +1,231 @@
-<main>
-  <app-header-page-section
-    logo="/logos/bienestar-integral.svg"
-    color="#fdbf24"
-    background="/img/page-backgrounds/background-us.png"
-  ></app-header-page-section>
-
-  <div class="content-header">
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#fdbf24"
+  background="/img/page-backgrounds/background-us.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
     <h1>
-      Todos merecemos <br />
-      <span>lo mejor...</span>
+      Serfuncoop <br />
+      <span>Los Olivos</span>
     </h1>
-    <div class="container-columns">
-      <div class="container-text">
-        <p>
-          Somos una empresa con 49 años de existencia protegiendo a las familias
-          colombianas. Más de 7 millones de afiliados que con su confianza nos
-          motivan para seguir transformando historias y dando un nuevo
-          significado a la vida; lo que nos convierte en la red funeraria más
-          importante de Colombia, con la mayor cobertura geográfica a nivel
-          nacional.
-        </p>
-        <p>
-          Una empresa con responsabilidad social cada día trabajando por
-          reforzar nuestro compromiso con el medio ambiente, el crecimiento de
-          la comunidad, una prestación de servicios de calidad y el desarrollo
-          de nuestros socios y colaboradores.
-        </p>
-        <p>
-          De manera complementaria a la cobertura, Los Olivos ha fortalecido sus
-          planes de previsión exequial con microseguros, en alianza con
-          Aseguradora Solidaria, en busca del amparo de las familias tras su
-          pérdida.
-        </p>
-      </div>
-      <div class="cifras">
-        <img src="/img/cifras-nosotros.jpg" alt="Cifras de Los Olivos" />
-      </div>
-    </div>
+    <app-progress-bar [filled]="1"></app-progress-bar>
   </div>
+</app-header-page-section>
 
-  <div class="separator-dotted"></div>
+<main>
+  <!-- ───────────── Sección 1: Nuestra historia (sidebar 3/12) ─────────────
+       Agrupa los 3 bloques del WP (intro Plan Familiar + 1987 + expansión/ISO).
+       Layout grid 12-col: col-3 sidebar (vertical title) + col-9 contenido. -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes section-tributes--historia">
+      <div class="historia-blocks">
+        <article class="container-columns">
+          <div class="container-text">
+            <p>
+              Hace unos años, en el Valle del Cauca, un grupo de cooperativistas con el objetivo
+              de apoyar a sus asociados y brindarles protección en uno de los momentos más
+              difíciles de la vida como lo es la pérdida de un ser querido; idearon un mecanismo
+              para que sus asociados y su núcleo familiar contaran con una Protección Exequial,
+              mediante el pago de una módica suma mensual que cubriría los gastos funerarios
+              cuando se presentara una defunción. Fue una gran innovación que denominaron
+              <strong>Plan Familiar en Grupo.</strong>
+            </p>
+          </div>
+          <div class="cifras">
+            <img
+              src="/img/wp-migrated/nosotros/hero.webp"
+              alt="Familia acompañada por Serfuncoop Los Olivos Tolima"
+              width="600"
+              height="500"
+              loading="eager"
+            />
+          </div>
+        </article>
 
-  <div class="benefits">
+        <article class="container-columns container-columns--reverse">
+          <div class="cifras">
+            <img
+              src="/img/wp-migrated/nosotros/historia-1987.webp"
+              alt="Fundación de Serfuncoop en el Tolima en 1987"
+              width="600"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+          <div class="container-text">
+            <p>
+              Años después, replicando este modelo de beneficios nace en diciembre de 1987 en el
+              departamento del Tolima, <strong>SERFUNCOOP – Servicios Funerarios Cooperativos del
+              Tolima</strong>, gracias a la unión de empresas Cooperativas como: Coopetive,
+              Coopserfun, Cooperativa de Profesores y Trabajadores de la Universidad del Tolima,
+              Cooperamos, el Fondo de Empleados del Hospital Federico Lleras Acosta y
+              Coopdesarrollo.
+            </p>
+          </div>
+        </article>
+
+        <article class="container-columns">
+          <div class="container-text">
+            <p>
+              Posteriormente se integraron a esta gran familia: Sercofun (Olivos Cali y Olivos
+              Pereira), Emcofun, Financiacoop, Seguros La Equidad, Cotrautol, Coopcrecer,
+              Atolpore, Uconal, Cupocrédito, Seguros Uconal, Coinsalud, Cooperativa San Simón y
+              Cescot.
+            </p>
+            <p>
+              Con el mismo sentido de solidaridad y equidad que ha caracterizado a la Red, nos
+              hemos convertido en la cooperativa líder de la Previsión y Servicio Exequial en la
+              región, innovando y permaneciendo a la vanguardia de las necesidades de las
+              familias.
+            </p>
+            <p class="iso-titulo">
+              <strong>Alcance de la certificación ISO 9001: Sistema de Gestión de la
+              Calidad</strong>
+            </p>
+            <p>
+              Prestación de servicios funerarios: asistencia al usuario, traslado, velación en
+              sala, previsión, tanatopraxia en las sedes de Ibagué, El Espinal, Girardot y destino
+              final en Ibagué.
+            </p>
+          </div>
+          <div class="cifras">
+            <img
+              src="/img/wp-migrated/nosotros/expansion-iso.webp"
+              alt="Red Olivos y certificación ISO 9001"
+              width="600"
+              height="500"
+              loading="lazy"
+            />
+          </div>
+        </article>
+
+        <!-- Fechas memorables: integradas en el mismo bloque, 4 cols. 15 hitos = 4+4+4+3
+             (la última fila deja un espacio vacío en la 4ª columna). -->
+        <div class="fechas-memorables">
+          <h2>
+            Nuestras Fechas <br />
+            <span>Memorables</span>
+          </h2>
+          <app-progress-bar [filled]="2"></app-progress-bar>
+          <ol class="timeline-grid" aria-label="Hitos históricos de Serfuncoop Los Olivos">
+        <li class="timeline-card">
+          <i class="fa-solid fa-handshake timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Diciembre de 1987</time>
+          <h3 class="timeline-title">Constitución</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-location-dot timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">1992</time>
+          <h3 class="timeline-title">Apertura sede Girardot</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-location-dot timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">1995</time>
+          <h3 class="timeline-title">Apertura sede El Espinal</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-fire timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">1998</time>
+          <h3 class="timeline-title">Instalación hornos crematorios</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-place-of-worship timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">2001</time>
+          <h3 class="timeline-title">
+            Inauguración Capilla y 1ª etapa del Panteón del Parque Cementerio
+          </h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-award timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Marzo 2006</time>
+          <h3 class="timeline-title">Certificación de Calidad ISO 9001:2008</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-location-dot timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Año 2010</time>
+          <h3 class="timeline-title">Apertura sede Cádiz</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-screwdriver-wrench timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Octubre de 2012</time>
+          <h3 class="timeline-title">Remodelación sede Cra 5ta Ibagué</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-heart timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Año 2015</time>
+          <h3 class="timeline-title">Lanzamiento del homenaje al amor</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-vault timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Año 2016</time>
+          <h3 class="timeline-title">
+            Inauguración 1er módulo de Columbarios en Parque Cementerio
+          </h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-cake-candles timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Diciembre de 2017</time>
+          <h3 class="timeline-title">Aniversario 40 años de la Red Olivos</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-cake-candles timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Agosto 2018</time>
+          <h3 class="timeline-title">Celebración 30 años de la Entidad</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-arrow-up-right-dots timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Año 2019</time>
+          <h3 class="timeline-title">
+            Actualización a la versión 2015 de la Certificación ISO 9001
+          </h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-vault timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Año 2019</time>
+          <h3 class="timeline-title">Instalación de 2do módulo de Columbarios</h3>
+        </li>
+        <li class="timeline-card">
+          <i class="fa-solid fa-screwdriver-wrench timeline-icon" aria-hidden="true"></i>
+          <time class="timeline-date">Marzo 2020</time>
+          <h3 class="timeline-title">Remodelación sede El Espinal</h3>
+        </li>
+          </ol>
+        </div>
+      </div>
+
+      <aside class="title">
+        <h2>Conoce Nuestra Historia</h2>
+      </aside>
+    </div>
+  </section>
+
+  <!-- ──────────────── Sección 3: Estamos junto a las familias (CTA) ──────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+
+  <!-- ──────────────── Sección 4: Nuestra Proyección (M·V·P) ──────────────── -->
+  <section class="benefits benefits--mvp">
     <div class="benefits-header">
-      <h2>Nuestros Beneficios</h2>
-      <p>
-        Te brindamos una atención integral pensada para acompañar y apoyar este
-        momento de la vida en el que hemos aprendido que lo más importante es
-        honrar la memoria de nuestros seres queridos con el mejor de los
-        homenajes.
-      </p>
+      <h2>
+        Nuestra <br />
+        <span>Proyección</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
     </div>
-    <div class="section-tributes">
-      <div class="title">
-        <h1>Nuestro homenaje</h1>
-      </div>
-      <app-tributes-grid [tributes]="tributes"></app-tributes-grid>
-    </div>
-  </div>
 
-  <app-death-abroad></app-death-abroad>
-
-  <app-section-information-contact></app-section-information-contact>
+    <app-projection-cards [cards]="projectionCards()"></app-projection-cards>
+  </section>
 </main>
 
-<app-contact-cta background="white" (phoneClick)="openLineas()"></app-contact-cta>
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
 
-<app-footer></app-footer>
-
-@if (showLineas()) {
-  <app-lineas backgroundHeader="#00966c" (close)="closeLineas()"></app-lineas>
-}
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

@@ -2,163 +2,350 @@ main {
   width: 100%;
 }
 
-.content-header {
-  max-width: 100%;
-  padding: 0 10%;
-
+// ═══ Título proyectado dentro del header banner ════════════════════════
+// Vive en el "ojo" blanco que deja la curva del banner. Mismo lenguaje
+// tipográfico que los headers de sección (Raleway 300/700).
+.page-title {
   h1 {
-    color: #699392;
-    font-family: var(--font-headline, serif);
-    margin: 32px 0;
-    line-height: 0.9;
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
     font-weight: 300;
-    font-size: 48px;
+    margin: 0 0 16px;
+    line-height: 0.95;
+    font-size: 44px;
 
     span {
-      font-family: var(--font-headline, serif);
-      font-size: 6rem;
-      font-weight: 400;
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 5.5rem;
+    }
+  }
+}
+
+// ═══ Sección unificada: .benefits ═══════════════════════════════════════
+// Todas las secciones usan los mismos márgenes horizontales (10%) — ningún
+// elemento queda "por fuera de las márgenes". Bootstrap-like: contenido al
+// 80% del ancho, con grid interno de 12 cols (3fr + 9fr o auto-fill).
+.benefits {
+  background: white;
+  padding: 0 10% 60px;
+
+  .benefits-header {
+    margin-bottom: 32px;
+
+    .eyebrow {
+      display: inline-block;
+      font-family: 'Raleway', sans-serif;
+      font-size: 13px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--color-cta, #f0a33d);
+      margin-bottom: 8px;
+    }
+
+    // Títulos SIEMPRE en Raleway (regla de marca, ver styles.scss font-body).
+    h2 {
+      font-family: 'Raleway', sans-serif;
+      color: var(--color-primary, #234b50);
+      font-weight: 300;
+      margin: 0 0 20px;
+      line-height: 0.95;
+      font-size: 32px;
+
+      span {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 700;
+        font-size: 4.25rem;
+      }
+    }
+  }
+}
+
+// La primera sección compensa el margin-bottom: -90px del .header-page-banner
+// y deja respiro entre el título proyectado en el header y el contenido.
+.benefits--first {
+  padding-top: 120px;
+}
+
+// ═══ Sección 1: Historia (sidebar 3/12 + contenido 9/12) ═══════════════
+.section-tributes {
+  background-image: url('/img/backgrounds/background-tributes.svg');
+  background-size: cover;
+  background-position: bottom;
+  background-repeat: no-repeat;
+  border-radius: 16px;
+  padding: 48px 32px;
+}
+
+.section-tributes--historia {
+  // Layout 4/5 + 1/5: contenido a la izquierda, sidebar con título vertical
+  // "Nuestra Historia" a la derecha (mismo ratio que la grilla de 5 columnas
+  // del Timeline).
+  display: grid;
+  grid-template-columns: 4fr 1fr;
+  gap: 32px;
+  align-items: stretch;
+
+  > .title {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    h2 {
+      // Raleway 700, vertical, sin letter-spacing: caracteres compactos y
+      // sólidos. font-size grande para que la longitud visual cubra los 3
+      // sub-bloques de historia.
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      writing-mode: vertical-lr;
+      transform: rotate(180deg);
+      font-size: 140px;
+      color: #d6d8db;
+      text-transform: uppercase;
+      line-height: 0.95;
+      letter-spacing: normal;
+      margin: 0;
+      white-space: nowrap;
     }
   }
 
-  .container-columns {
+  > .historia-blocks {
     display: flex;
-    flex-wrap: wrap;
-    gap: 20px;
+    flex-direction: column;
+    gap: 24px;
+  }
+
+  .container-columns {
+    display: grid;
+    grid-template-columns: 1.4fr 1fr; // texto más ancho que imagen
+    align-items: center;
+    gap: 40px;
     color: #606062;
 
+    + .container-columns {
+      border-top: 1px dashed rgba(96, 96, 98, 0.18);
+      padding-top: 32px;
+    }
+
     .container-text {
-      flex: 1;
-      min-width: 250px;
+      min-width: 0;
+      font-family: 'Raleway', sans-serif;
 
       p {
-        font-size: 18px;
+        font-size: 16px;
         text-align: justify;
-        font-weight: 100;
-        line-height: 1.5;
-        margin: 12px 0;
+        font-weight: 300;
+        line-height: 1.6;
+        margin: 0 0 14px;
+
+        &:last-child { margin-bottom: 0; }
+      }
+
+      strong {
+        font-weight: 600;
+        color: #2c2e35;
+      }
+
+      .iso-titulo {
+        margin-top: 20px;
+        color: var(--color-primary, #234b50);
       }
     }
 
     .cifras {
-      flex: 1;
       display: flex;
       justify-content: center;
-      align-items: flex-start;
+      align-items: center;
 
       img {
         width: 100%;
+        max-width: 320px;
         height: auto;
+        border-radius: 12px;
       }
     }
   }
+
+  // Alternancia texto/imagen
+  .container-columns--reverse {
+    grid-template-columns: 1fr 1.4fr; // imagen-izq texto-der
+
+    .cifras { order: 1; }
+    .container-text { order: 2; }
+  }
 }
 
-.separator-dotted {
+// ═══ Fechas memorables: integradas dentro del bloque .section-tributes--historia
+.fechas-memorables {
+  border-top: 1px dashed rgba(96, 96, 98, 0.18);
+  padding-top: 32px;
+
+  // Mismo lenguaje de h2 que las demás secciones: 1ra línea Raleway 300,
+  // 2da línea (span) Raleway 700 más grande.
+  h2 {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-weight: 300;
+    margin: 0 0 16px;
+    line-height: 0.95;
+    font-size: 32px;
+
+    span {
+      font-family: 'Raleway', sans-serif;
+      font-weight: 700;
+      font-size: 4.25rem;
+    }
+  }
+
+  app-progress-bar {
+    display: block;
+    margin-bottom: 28px;
+  }
+}
+
+.timeline-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr); // 4+4+4+3, último hueco vacío
+  gap: 16px;
+}
+
+.timeline-card {
+  background: #f0f0f0;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-radius: 12px;
+  padding: 24px 20px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  background: white;
-  padding: 3% 15%;
-  margin: 24px 0;
+  text-align: center;
+  gap: 10px;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
 
-  &::after {
-    content: '';
-    flex-grow: 1;
-    height: 1px;
-    border-bottom: 1px dotted #a0a0a0;
+  &:hover {
+    background: #eaeaea;
+    transform: translateY(-3px);
+    box-shadow: 0 8px 20px rgba(15, 23, 42, 0.08);
+  }
+
+  .timeline-icon {
+    font-size: 36px;
+    color: var(--color-cta, #f0a33d);
+    margin-bottom: 4px;
+  }
+
+  .timeline-date {
+    display: block;
+    font-family: 'Raleway', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-cta, #f0a33d);
+  }
+
+  .timeline-title {
+    font-family: 'Raleway', sans-serif;
+    color: var(--color-primary, #234b50);
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.35;
+    margin: 0;
   }
 }
 
-.benefits {
-  background: white;
+// ═══ Sección 4: Nuestra Proyección ═══════════════════════════════════════
+// El grid de flip cards vive ahora en <app-projection-cards>; aquí solo se
+// controla el padding inferior de la sección.
+.benefits--mvp {
+  padding-bottom: 80px;
+}
 
-  .benefits-header {
-    padding: 0 10%;
-
-    h2 {
-      color: #699392;
-      font-size: 36px;
-      font-family: var(--font-headline, serif);
-      margin: 0 0 12px;
-    }
-
-    p {
-      font-size: 18px;
-      font-weight: 100;
-      text-align: justify;
-      line-height: 1.5;
-    }
+// ═══ Responsive ═══════════════════════════════════════════════════════════
+@media (max-width: 1024px) {
+  .benefits {
+    padding: 0 5% 40px;
   }
 
-  .section-tributes {
-    display: flex;
-    padding: 5%;
-    background-image: url('/img/backgrounds/background-tributes.svg');
-    background-size: cover;
-    background-position: bottom;
-    background-repeat: no-repeat;
+  .section-tributes--historia {
+    grid-template-columns: 1fr; // colapsa el sidebar arriba
 
-    .title {
-      width: 10%;
-      display: flex;
+    > .title {
+      justify-content: flex-start;
+      padding-top: 0;
+      margin-bottom: 16px;
 
-      h1 {
-        writing-mode: vertical-lr;
-        transform: rotate(180deg);
-        font-size: 64px;
-        color: #e6e7e8;
-        font-family: var(--font-headline, serif);
-        margin: 0;
+      h2 {
+        writing-mode: horizontal-tb;
+        transform: none;
+        font-size: 28px;
       }
     }
   }
 }
 
 @media (max-width: 768px) {
-  .content-header {
+  .page-title {
     h1 {
       font-size: 28px;
-
-      span {
-        font-size: 4rem;
-      }
-    }
-
-    .container-columns .container-text p {
-      font-size: 16px;
-    }
-
-    .cifras img {
-      max-width: 360px;
-      margin: 0 auto;
+      span { font-size: 3.5rem; }
     }
   }
 
   .benefits {
     .benefits-header {
       h2 {
-        font-size: 26px;
-      }
-
-      p {
-        font-size: 16px;
-      }
-    }
-
-    .section-tributes {
-      flex-direction: column;
-
-      .title {
-        width: auto;
-        margin: 16px 0;
-
-        h1 {
-          writing-mode: horizontal-tb;
-          transform: none;
-          font-size: 28px;
-          text-align: center;
-        }
+        font-size: 24px;
+        span { font-size: 3rem; }
       }
     }
   }
+
+  .fechas-memorables h2 {
+    font-size: 24px;
+    span { font-size: 3rem; }
+  }
+
+  .benefits--first {
+    padding-top: 24px; // banner sin overlap negativo en mobile
+  }
+
+  .section-tributes {
+    padding: 32px 16px;
+  }
+
+  .section-tributes--historia .container-columns,
+  .section-tributes--historia .container-columns--reverse {
+    grid-template-columns: 1fr;
+    gap: 20px;
+
+    .cifras,
+    .container-text {
+      order: initial;
+    }
+
+    .cifras img {
+      max-width: 280px;
+      margin: 0 auto;
+    }
+  }
+
+  .timeline-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+  }
+
+  .timeline-card {
+    padding: 18px 14px;
+
+    .timeline-icon { font-size: 30px; }
+    .timeline-title { font-size: 13px; }
+  }
+
+  // Las reglas mobile de las flip cards (.mvp-grid, .mvp-card-*) se
+  // movieron a <app-projection-cards>.
 }

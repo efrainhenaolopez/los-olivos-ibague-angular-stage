@@ -1,1 +1,177 @@
-<p>microseguros works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#dc4c5a"
+  background="/img/page-backgrounds/background-life-for-you.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Microseguros <br />
+      <span>Los Olivos</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro · Protección Familiar Integral ───────────
+       Texto + imagen del hero del WP. Menciona y enlaza a Aseguradora
+       Solidaria desde el primer párrafo (al igual que en el WP). -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns">
+        <div class="container-text">
+          <p>
+            Seguros y asistencias que complementan el <strong>Plan de Previsión Exequial</strong>,
+            para brindarle a nuestros afiliados una
+            <strong>PROTECCIÓN FAMILIAR INTEGRAL</strong>. Además, estarán respaldados por la
+            <a
+              href="https://aseguradorasolidaria.com.co/"
+              target="_blank"
+              rel="noopener"
+              class="partner-link-inline"
+              (click)="onPartnerClick()"
+            ><strong>Aseguradora Solidaria de Colombia</strong></a>, entidad de la Red Olivos.
+          </p>
+          <a href="#tipos" class="cta-button">
+            Quiero más información
+            <i class="fa-solid fa-arrow-down" aria-hidden="true"></i>
+          </a>
+        </div>
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/microseguros/microseguros-01.webp"
+            alt="Familia protegida por los microseguros Los Olivos en Ibagué"
+            width="600"
+            height="500"
+            loading="eager"
+          />
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Tipos de Microseguros ─────────────────────────── -->
+  <section class="benefits" id="tipos">
+    <div class="benefits-header">
+      <h2>
+        Tipos de <br />
+        <span>Microseguros</span>
+      </h2>
+      <app-progress-bar [filled]="2"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <div class="products-list">
+        @for (product of products(); track product.id; let i = $index) {
+          <article
+            class="container-columns"
+            [class.container-columns--reverse]="i % 2 !== 0"
+            [class.container-columns--solo]="!product.image"
+          >
+            <div class="container-text">
+              @if (product.eyebrow) {
+                <span class="eyebrow">{{ product.eyebrow }}</span>
+              }
+              <h3>{{ product.title }}</h3>
+              <p>{{ product.description }}</p>
+
+              @if (product.coverages?.length) {
+                <ol class="coverages-list">
+                  @for (cov of product.coverages; track $index) {
+                    <li>{{ cov }}</li>
+                  }
+                </ol>
+              }
+
+              @if (product.variants?.length) {
+                <ul class="variants-list">
+                  @for (variant of product.variants; track variant.name) {
+                    <li>
+                      <strong>{{ variant.name }}.</strong> {{ variant.description }}
+                    </li>
+                  }
+                </ul>
+              }
+
+              @if (product.highlight) {
+                <p class="product-highlight">{{ product.highlight }}</p>
+              }
+            </div>
+
+            @if (product.image) {
+              <div class="cifras">
+                <img
+                  [src]="product.image"
+                  [alt]="product.title + ' — Microseguros Los Olivos'"
+                  width="600"
+                  height="500"
+                  loading="lazy"
+                />
+              </div>
+            } @else if (product.icon) {
+              <div class="cifras cifras--icon" aria-hidden="true">
+                <i [class]="product.icon"></i>
+              </div>
+            }
+          </article>
+        }
+      </div>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 3: Asistencias al hogar Los Olivos ──────────────── -->
+  <section class="benefits">
+    <div class="benefits-header">
+      <h2>
+        Asistencias al <br />
+        <span>Hogar</span>
+      </h2>
+      <app-progress-bar [filled]="3"></app-progress-bar>
+    </div>
+
+    <div class="section-tributes">
+      <article class="container-columns container-columns--reverse">
+        <div class="cifras">
+          <img
+            src="/img/wp-migrated/microseguros/microseguros-04.webp"
+            alt="Asistencias al hogar incluidas con los microseguros Los Olivos"
+            width="600"
+            height="500"
+            loading="lazy"
+          />
+        </div>
+        <div class="container-text">
+          <p>
+            Múltiples y oportunas ayudas para el titular del plan exequial, que le permiten
+            solucionar los contratiempos que se pueden presentar en su hogar.
+          </p>
+          <ul class="assistance-grid" aria-label="Servicios de asistencia al hogar">
+            @for (item of homeAssistance(); track $index) {
+              <li>
+                <i [class]="item.icon + ' assistance-icon'" aria-hidden="true"></i>
+                <span>{{ item.text }}</span>
+              </li>
+            }
+          </ul>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Estamos junto a las familias ──────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>
