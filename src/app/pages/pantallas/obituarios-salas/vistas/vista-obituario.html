@@ -1,0 +1,97 @@
+@if (obituario(); as o) {
+  <article class="obituario" [attr.data-scene]="currentScene()">
+
+    <!-- Decoración persistente: flores en esquinas + logo footer -->
+    <img class="deco deco--top-left"     src="/img/pantallas/flores-superior.svg" alt="" aria-hidden="true">
+    <img class="deco deco--bottom-right" src="/img/pantallas/flores-inferior.svg" alt="" aria-hidden="true">
+
+    <!-- ============== ESCENA 1 · DATOS DEL FALLECIDO ============== -->
+    <section class="escena escena--datos">
+      <p class="en-memoria">En memoria de</p>
+
+      <img class="cinta" src="/img/pantallas/cinta-morada.svg" alt="" aria-hidden="true">
+
+      <h1 class="nombre">{{ o.nombre }}</h1>
+
+      @if (o.sedeYSala) {
+        <div class="bloque bloque--sala">
+          <h2 class="bloque__titulo">Sala:</h2>
+          <p class="bloque__contenido">{{ o.sedeYSala }}</p>
+        </div>
+      }
+
+      @if (o.exequias || fechaExequias() || horaExequias()) {
+        <div class="bloque bloque--exequias">
+          <h2 class="bloque__titulo">Exequias</h2>
+          @if (o.exequias) {
+            <p class="dato"><strong>Lugar:</strong> {{ o.exequias }}</p>
+          }
+          @if (fechaExequias()) {
+            <p class="dato"><strong>Fecha:</strong> {{ fechaExequias() }}</p>
+          }
+          @if (horaExequias()) {
+            <p class="dato"><strong>Hora:</strong> {{ horaExequias() }}</p>
+          }
+        </div>
+      }
+
+      @if (o.destinoFinal) {
+        <div class="bloque bloque--destino">
+          <h2 class="bloque__titulo">Destino Final</h2>
+          <p class="dato"><strong>Lugar:</strong> {{ o.destinoFinal }}</p>
+          @if (horaDestino()) {
+            <p class="dato"><strong>Hora:</strong> {{ horaDestino() }}</p>
+          }
+        </div>
+      }
+    </section>
+
+    <!-- ============== ESCENA 2 · FOTOS POLAROID ============== -->
+    @if (tieneFotos()) {
+      <section class="escena escena--fotos">
+        <ul class="polaroids">
+          @for (foto of fotos(); track foto.id) {
+            <li class="polaroid">
+              <img [src]="foto.url" [alt]="foto.alt || o.nombre">
+            </li>
+          }
+        </ul>
+      </section>
+
+      <!-- ============== ESCENA 3 · MENSAJE "HONRAMOS TU AMOR" ============== -->
+      <section class="escena escena--mensaje">
+        @if (fotos()[0]; as f0) {
+          <div class="polaroid polaroid--top">
+            <img [src]="f0.url" [alt]="f0.alt || o.nombre">
+          </div>
+        }
+
+        <div class="mensaje">
+          <h2 class="mensaje__titulo">Honramos tu amor</h2>
+          <p class="mensaje__texto">
+            que sigue vivo en nuestras memorias, y que vivirá en todo lo
+            que somos y en lo que seguiremos construyendo con tu luz.
+          </p>
+        </div>
+
+        @if (fotos()[1]; as f1) {
+          <div class="polaroid polaroid--bottom">
+            <img [src]="f1.url" [alt]="f1.alt || o.nombre">
+          </div>
+        }
+      </section>
+    }
+
+    <!-- Footer persistente -->
+    <footer class="footer">
+      <img class="footer__logo" src="/img/pantallas/logo-olivos.svg" alt="Los Olivos">
+      <span class="footer__tagline">Un homenaje al amor</span>
+    </footer>
+
+  </article>
+} @else {
+  <section class="vacio">
+    <h1>Sala disponible</h1>
+    <p>No hay obituario activo en esta sala.</p>
+  </section>
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder · rama de cerezo en flor (esquina inferior derecha). Reemplazar por PNG. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <path d="M400 300 Q 320 290 260 240 T 120 160 T 20 80" stroke="#6b3a1f" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M350 320 Q 280 270 220 270" stroke="#6b3a1f" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <g transform="translate(320 310)">
+    <circle r="22" fill="#fce8eb" opacity="0.95"/>
+    <circle r="14" cx="-12" cy="-8" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="12" cy="-8" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="-12" cy="10" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="12" cy="10" fill="#fff" opacity="0.9"/>
+    <circle r="6" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(230 260)">
+    <circle r="26" fill="#fce8eb" opacity="0.95"/>
+    <circle r="16" cx="-15" cy="-10" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="15" cy="-10" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="-15" cy="12" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="15" cy="12" fill="#fff" opacity="0.9"/>
+    <circle r="7" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(140 190)">
+    <circle r="20" fill="#fce8eb" opacity="0.95"/>
+    <circle r="13" cx="-11" cy="-7" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="11" cy="-7" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="-11" cy="9" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="11" cy="9" fill="#fff" opacity="0.9"/>
+    <circle r="5" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(70 120)">
+    <circle r="18" fill="#fce8eb" opacity="0.95"/>
+    <circle r="12" cx="-10" cy="-6" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="10" cy="-6" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="-10" cy="8" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="10" cy="8" fill="#fff" opacity="0.9"/>
+    <circle r="5" fill="#f4c2c8"/>
+  </g>
+</svg>

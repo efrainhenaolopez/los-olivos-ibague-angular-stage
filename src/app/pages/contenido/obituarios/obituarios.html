@@ -1,1 +1,286 @@
-<p>obituarios works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#234b50"
+  background="/img/page-backgrounds/background-relieves.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Obituarios <br />
+      <span>Los Olivos</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro + Filtros (live search) ─────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text">
+          <span class="eyebrow">En memoria</span>
+          <p>
+            Conoce los nombres de los <strong>seres queridos</strong> a quienes
+            hoy hacemos un homenaje y exaltamos su legado. Ingresa los datos
+            de tu ser querido para ubicar la <strong>sede</strong> donde se
+            está realizando el homenaje.
+          </p>
+          <p class="note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>
+              <strong>Nota.</strong> Los homenajes mostrados corresponden a
+              servicios funerarios prestados actualmente por Serfuncoop Los
+              Olivos. Para enviar una condolencia, usa el botón al final de
+              cada tarjeta.
+            </span>
+          </p>
+
+          <div class="filters">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="nombre">Nombre del ser querido</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-magnifying-glass input-icon" aria-hidden="true"></i>
+                  <input
+                    id="nombre"
+                    name="nombre"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Ej. Jorge Alberto Rojas"
+                    [ngModel]="form().nombre"
+                    (ngModelChange)="updateNombre($event)"
+                  />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="sede">Sede o sala de homenaje</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-location-dot input-icon" aria-hidden="true"></i>
+                  <input
+                    id="sede"
+                    name="sede"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Ej. Sala Gerencial, Sede Cádiz"
+                    [ngModel]="form().sede"
+                    (ngModelChange)="updateSede($event)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="filters-footer">
+              <p class="filters-hint">
+                Los filtros se aplican en vivo y son acumulativos: puedes usar uno o ambos.
+              </p>
+              @if (hasActiveFilters()) {
+                <button type="button" class="ghost-button" (click)="clearFilters()">
+                  <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                  Limpiar filtros
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Resultados · slider 3×3 + paginación ─────────── -->
+  <section class="benefits results-section" id="resultados">
+    <div class="section-tributes">
+      @if (loading()) {
+        <div class="state state--loading" role="status" aria-live="polite">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <p>Cargando obituarios…</p>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="state state--error" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>{{ errorMessage() }}</p>
+          <button type="button" class="ghost-button" (click)="retryLoad()">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+            Reintentar
+          </button>
+        </div>
+      } @else if (total() === 0 && hasActiveFilters()) {
+        <div class="state state--no-results">
+          <i class="fa-solid fa-folder-open"></i>
+          <p>
+            <strong>Búsqueda no encontrada.</strong>
+            <span>
+              No hay obituarios que coincidan con los criterios actuales.
+              Verifica los datos y vuelve a intentarlo.
+            </span>
+          </p>
+        </div>
+      } @else if (total() === 0) {
+        <div class="state state--empty">
+          <i class="fa-solid fa-folder"></i>
+          <p>Aún no hay obituarios publicados.</p>
+        </div>
+      } @else {
+        <div class="results-summary" aria-live="polite">
+          <span>
+            @if (hasActiveFilters()) {
+              <strong>{{ total() }}</strong>
+              {{ total() === 1 ? 'obituario coincidente' : 'obituarios coincidentes' }}
+              de {{ allObituarios().length }} totales
+            } @else {
+              <strong>{{ total() }}</strong>
+              {{ total() === 1 ? 'obituario disponible' : 'obituarios disponibles' }}
+            }
+          </span>
+          @if (showSliderControls()) {
+            <span class="page-indicator">
+              Página {{ currentPage() }} de {{ totalPages() }}
+            </span>
+          }
+        </div>
+
+        <div class="records-slider">
+          <div class="slider-viewport">
+            <div class="slider-track" [style.transform]="trackTransform()">
+              @for (page of pages(); track $index) {
+                <div class="slider-page" aria-label="Página de obituarios">
+                  @for (obituario of page; track obituario.id) {
+                    <article class="record-card">
+                      <a
+                        class="record-card__link"
+                        routerLink="/obituario"
+                        [queryParams]="{ id: obituario.id }"
+                        [attr.aria-label]="'Ver obituario de ' + obituario.nombre"
+                      ></a>
+                      <div class="record-card__icon">
+                        <img
+                          src="/img/wp-migrated/obituarios/obituario-icon.svg"
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="record-card__body">
+                        <div class="record-card__heading">
+                          <span class="record-card__brand">En memoria de</span>
+                          <h3>{{ obituario.nombre }}</h3>
+                        </div>
+
+                        <ul class="record-card__fields">
+                          <li>
+                            <strong>Fecha de fallecimiento</strong>
+                            <span>{{ obituario.fechaFallecimiento }}</span>
+                          </li>
+                          <li>
+                            <strong>Sede y Sala</strong>
+                            <span>{{ obituario.sedeYSala }}</span>
+                          </li>
+                          <li>
+                            <strong>Ciudad</strong>
+                            <span>{{ obituario.ciudad }}</span>
+                          </li>
+                        </ul>
+
+                        @if (obituario.exequias || obituario.fechaHoraExequias) {
+                          <div class="record-card__block">
+                            <span class="record-card__block-label">Exequias</span>
+                            @if (obituario.exequias) {
+                              <p class="record-card__block-text">{{ obituario.exequias }}</p>
+                            }
+                            @if (obituario.fechaHoraExequias) {
+                              <p class="record-card__block-meta">
+                                <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                                {{ obituario.fechaHoraExequias }}
+                              </p>
+                            }
+                          </div>
+                        }
+
+                        @if (obituario.destinoFinal) {
+                          <div class="record-card__block">
+                            <span class="record-card__block-label">Destino final</span>
+                            <p class="record-card__block-text">{{ obituario.destinoFinal }}</p>
+                            @if (obituario.horaDestinoFinal) {
+                              <p class="record-card__block-meta">
+                                <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                                {{ obituario.horaDestinoFinal }}
+                              </p>
+                            }
+                          </div>
+                        }
+
+                        <a
+                          routerLink="/obituario"
+                          [queryParams]="{ id: obituario.id }"
+                          fragment="condolencia"
+                          class="record-card__cta"
+                          (click)="onCondolenceClick(obituario)"
+                        >
+                          <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+                          Enviar condolencia
+                        </a>
+                      </div>
+                    </article>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        @if (showSliderControls()) {
+          <nav class="results-pagination" aria-label="Paginación de obituarios">
+            <button
+              type="button"
+              class="page-btn"
+              (click)="prevPage()"
+              [disabled]="currentPage() <= 1"
+              aria-label="Página anterior"
+            >
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            @for (page of pages(); track $index; let i = $index) {
+              <button
+                type="button"
+                class="page-num"
+                [class.is-active]="currentPage() === i + 1"
+                (click)="goToPage(i)"
+                [attr.aria-label]="'Ir a la página ' + (i + 1)"
+                [attr.aria-current]="currentPage() === i + 1 ? 'page' : null"
+              >
+                {{ i + 1 }}
+              </button>
+            }
+
+            <button
+              type="button"
+              class="page-btn"
+              (click)="nextPage()"
+              [disabled]="currentPage() >= totalPages()"
+              aria-label="Página siguiente"
+            >
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </nav>
+        }
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

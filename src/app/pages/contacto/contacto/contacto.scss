@@ -466,6 +466,25 @@ main {
   }
 }
 
+.form-error-banner {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 16px 18px;
+  margin-top: 12px;
+  background: rgba(193, 67, 47, 0.08);
+  border-left: 4px solid #c1432f;
+  border-radius: 10px;
+
+  i { font-size: 22px; color: #c1432f; margin-top: 2px; flex: 0 0 auto; }
+  span {
+    font-family: 'Raleway', sans-serif;
+    font-size: 14px;
+    color: #7f2417;
+    line-height: 1.4;
+  }
+}
+
 // ═══ Mapa de Google ═════════════════════════════════════════════════════
 .contact-map {
   display: flex;

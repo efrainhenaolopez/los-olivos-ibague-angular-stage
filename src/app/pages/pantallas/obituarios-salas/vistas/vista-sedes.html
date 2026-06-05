@@ -1,0 +1,24 @@
+<section class="vista">
+  <header class="vista__header">
+    <h1>Salas de velación</h1>
+    <p>Seleccione una sede</p>
+  </header>
+
+  @if (sedes().length === 0) {
+    <p class="vista__empty">Sin información disponible</p>
+  } @else {
+    <ul class="vista__grid">
+      @for (s of sedes(); track s.id) {
+        <li class="card">
+          <h2 class="card__nombre">{{ s.nombre }}</h2>
+          <p class="card__count">
+            {{ s.count }} {{ s.count === 1 ? 'velatorio' : 'velatorios' }}
+          </p>
+          <a class="card__url" [href]="'/obituarios-salas?sede=' + s.id">
+            /obituarios-salas?sede={{ s.id }}
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

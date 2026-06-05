@@ -1,0 +1,13 @@
+# Copyright (C) 2026 Efrain Henao Lopez
+# This file is distributed under the GPLv2 or later license.
+msgid ""
+msgstr ""
+"Project-Id-Version: Los Olivos Ibague 1.0.0\n"
+"Report-Msgid-Bugs-To: https://www.brivalabs.com\n"
+"POT-Creation-Date: 2026-06-02 00:00+0000\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Language: es_CO\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Domain: los-olivos-ibague\n"

@@ -101,6 +101,12 @@
             </div>
           </div>
         }
+        @if (submitError(); as e) {
+          <div class="form-error-banner" role="alert">
+            <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+            <span>{{ e }}</span>
+          </div>
+        }
 
         <div class="form-row">
           <div class="form-field">

@@ -16,6 +16,7 @@ import {
 import { ProgressBar } from '../../../secciones/progress-bar/progress-bar';
 import { TributeSection } from '../../../secciones/tribute-section/tribute-section';
 import { GtmService } from '../../../servicios/gtm';
+import { FormularioService } from '../../../servicios/formulario';
 
 const STORAGE_KEY = 'contacto-fab-prefs';
 
@@ -196,6 +197,9 @@ export class Contacto implements OnInit {
 
   readonly submitting = signal<boolean>(false);
   readonly submitted = signal<boolean>(false);
+  readonly submitError = signal<string | null>(null);
+
+  private readonly formularioService = inject(FormularioService);
 
   /** URL del iframe del mapa, sanitizada para Angular SSR. */
   readonly mapUrl: SafeResourceUrl;
@@ -301,27 +305,75 @@ export class Contacto implements OnInit {
   onSubmit(formRef: NgForm): void {
     if (formRef.invalid || !this.form().acepta) return;
     this.submitting.set(true);
-    // TODO: integrar backend real. Por ahora notificamos GTM y simulamos éxito.
-    this.gtm.push({
-      event: 'contact_form_submit',
-      servicio: this.form().servicio,
-      page: '/contacto',
-    });
-    setTimeout(() => {
-      this.submitting.set(false);
-      this.submitted.set(true);
-      formRef.resetForm();
-      this.form.set({
-        nombre: '',
-        apellido: '',
-        cedula: '',
-        telefono: '',
-        correo: '',
-        servicio: '',
-        mensaje: '',
-        acepta: false,
+    this.submitError.set(null);
+
+    const data = this.form();
+
+    this.formularioService
+      .sendFormData({
+        name: data.nombre,
+        lastName: data.apellido,
+        cedula: data.cedula,
+        phone: data.telefono,
+        email: data.correo,
+        servicio: data.servicio,
+        message: data.mensaje,
+        page: '/contacto',
+      })
+      .subscribe({
+        next: (response) => {
+          this.submitting.set(false);
+          if (response.status === 'success') {
+            this.gtm.push({
+              event: 'contact_form_submit',
+              servicio: data.servicio,
+              page: '/contacto',
+            });
+            this.submitted.set(true);
+            formRef.resetForm();
+            this.form.set({
+              nombre: '',
+              apellido: '',
+              cedula: '',
+              telefono: '',
+              correo: '',
+              servicio: '',
+              mensaje: '',
+              acepta: false,
+            });
+          } else {
+            const translated = this.traducirError(response.code);
+            this.submitError.set(
+              translated
+                ?? response.message
+                ?? 'No pudimos enviar tu mensaje. Intenta nuevamente.',
+            );
+          }
+        },
+        error: () => {
+          this.submitting.set(false);
+          this.submitError.set('Error de red. Verifica tu conexión e intenta nuevamente.');
+        },
       });
-    }, 400);
+  }
+
+  private traducirError(code?: string): string | null {
+    switch (code) {
+      case 'olvibg_missing_fields':
+        return 'Faltan campos obligatorios.';
+      case 'olvibg_invalid_email':
+        return 'El correo no es válido.';
+      case 'olvibg_missing_consent':
+        return 'Debes aceptar el tratamiento de datos.';
+      case 'olvibg_rate_limited':
+        return 'Has enviado demasiados mensajes en poco tiempo. Intenta en unos minutos.';
+      case 'olvibg_origin_forbidden':
+        return 'Origen no autorizado. El administrador debe agregar este sitio en Ajustes del plugin → Orígenes CORS permitidos.';
+      case 'network_error':
+        return 'No se pudo contactar al servidor. Probablemente el origen no está en la allowlist de CORS y el preflight fue bloqueado.';
+      default:
+        return null;
+    }
   }
 
   onContactPhoneClick(): void {

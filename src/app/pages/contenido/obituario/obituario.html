@@ -1,0 +1,257 @@
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#234b50"
+  background="/img/page-backgrounds/background-relieves.png"
+>
+  <div class="page-title">
+    <h1>
+      En memoria de <br />
+      <span>{{ obituario()?.nombre || 'nuestro ser querido' }}</span>
+    </h1>
+  </div>
+</app-header-page-section>
+
+<main>
+  @if (loading()) {
+    <section class="benefits state-wrap">
+      <div class="section-tributes">
+        <div class="state state--loading" role="status" aria-live="polite">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <p>Cargando obituario…</p>
+        </div>
+      </div>
+    </section>
+  } @else if (noEncontrado()) {
+    <section class="benefits state-wrap">
+      <div class="section-tributes">
+        <div class="state state--empty">
+          <i class="fa-regular fa-folder-open"></i>
+          <p>
+            <strong>Este obituario ya no está disponible.</strong>
+            <span>
+              Puede haber finalizado el periodo de homenaje o el enlace ya no
+              es válido.
+            </span>
+          </p>
+          <a routerLink="/obituarios" class="ghost-button">
+            <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+            Volver a obituarios
+          </a>
+        </div>
+      </div>
+    </section>
+  } @else if (errorMessage()) {
+    <section class="benefits state-wrap">
+      <div class="section-tributes">
+        <div class="state state--error" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>{{ errorMessage() }}</p>
+        </div>
+      </div>
+    </section>
+  } @else if (obituario(); as o) {
+
+    <!-- ─────────── Datos del fallecido ─────────────────────────── -->
+    <section class="benefits benefits--first">
+      <div class="section-tributes">
+        <article class="memorial-card">
+          @if (fotoPrincipal(); as foto) {
+            <div class="memorial-card__photo">
+              <img [src]="foto" [alt]="o.nombre" loading="eager" />
+            </div>
+          } @else {
+            <div class="memorial-card__photo memorial-card__photo--placeholder" aria-hidden="true">
+              <img src="/img/wp-migrated/obituarios/obituario-icon.svg" alt="" />
+            </div>
+          }
+
+          <div class="memorial-card__body">
+            <span class="eyebrow">En memoria de</span>
+            <h2>{{ o.nombre }}</h2>
+
+            <ul class="memorial-card__fields">
+              <li>
+                <strong>Fecha de fallecimiento</strong>
+                <span>{{ o.fechaFallecimiento }}</span>
+              </li>
+              <li>
+                <strong>Sede y Sala</strong>
+                <span>{{ o.sedeYSala }}</span>
+              </li>
+              <li>
+                <strong>Ciudad</strong>
+                <span>{{ o.ciudad }}</span>
+              </li>
+            </ul>
+
+            @if (o.exequias || o.fechaHoraExequias) {
+              <div class="memorial-card__block">
+                <span class="memorial-card__block-label">Exequias</span>
+                @if (o.exequias) {
+                  <p class="memorial-card__block-text">{{ o.exequias }}</p>
+                }
+                @if (o.fechaHoraExequias) {
+                  <p class="memorial-card__block-meta">
+                    <i class="fa-regular fa-calendar" aria-hidden="true"></i>
+                    {{ o.fechaHoraExequias }}
+                  </p>
+                }
+              </div>
+            }
+
+            @if (o.destinoFinal) {
+              <div class="memorial-card__block">
+                <span class="memorial-card__block-label">Destino final</span>
+                <p class="memorial-card__block-text">{{ o.destinoFinal }}</p>
+                @if (o.horaDestinoFinal) {
+                  <p class="memorial-card__block-meta">
+                    <i class="fa-regular fa-clock" aria-hidden="true"></i>
+                    {{ o.horaDestinoFinal }}
+                  </p>
+                }
+              </div>
+            }
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- ─────────── Pared de condolencias ────────────────────────── -->
+    <section class="benefits wall-section" id="condolencias-wall">
+      <div class="section-tributes">
+        <header class="wall-header">
+          <span class="eyebrow">Mensajes de amor</span>
+          <h2>Condolencias para la familia</h2>
+        </header>
+
+        @if (condolencias().length === 0) {
+          <div class="wall-empty">
+            <i class="fa-regular fa-comment-dots" aria-hidden="true"></i>
+            <p>
+              Aún no hay mensajes publicados. Sé el primero en enviar tus
+              palabras de apoyo.
+            </p>
+          </div>
+        } @else {
+          <ul class="wall-list">
+            @for (c of condolencias(); track c.id) {
+              <li class="wall-item">
+                <div class="wall-item__avatar" aria-hidden="true">
+                  {{ c.autorNombre.charAt(0).toUpperCase() }}
+                </div>
+                <div class="wall-item__body">
+                  <p class="wall-item__author">{{ c.autorNombre }}</p>
+                  <p class="wall-item__message">{{ c.mensaje }}</p>
+                </div>
+              </li>
+            }
+          </ul>
+        }
+      </div>
+    </section>
+
+    <!-- ─────────── Formulario para enviar condolencia ───────────── -->
+    <section class="benefits form-section" id="condolencia">
+      <div class="section-tributes">
+        <header class="wall-header">
+          <span class="eyebrow">Envía un mensaje</span>
+          <h2>Comparte tus palabras con la familia</h2>
+          <p class="form-hint">
+            Tu mensaje será revisado y publicado en este obituario una vez
+            sea aprobado por el equipo de Los Olivos.
+          </p>
+        </header>
+
+        <form
+          class="condolencia-form"
+          [formGroup]="formulario"
+          (ngSubmit)="onSubmitCondolencia()"
+          autocomplete="off"
+        >
+          <div class="form-row">
+            <div class="form-field">
+              <label for="autorNombre">Tu nombre *</label>
+              <input
+                id="autorNombre"
+                type="text"
+                formControlName="autorNombre"
+                autocomplete="name"
+                maxlength="120"
+              />
+              @if (formulario.get('autorNombre')?.invalid && formulario.get('autorNombre')?.touched) {
+                <small class="field-error">Ingresa tu nombre.</small>
+              }
+            </div>
+
+            <div class="form-field">
+              <label for="autorEmail">Correo electrónico (opcional)</label>
+              <input
+                id="autorEmail"
+                type="email"
+                formControlName="autorEmail"
+                autocomplete="email"
+                maxlength="190"
+              />
+              @if (formulario.get('autorEmail')?.invalid && formulario.get('autorEmail')?.touched) {
+                <small class="field-error">Ingresa un correo válido.</small>
+              }
+            </div>
+          </div>
+
+          <div class="form-field">
+            <label for="mensaje">Tu mensaje *</label>
+            <textarea
+              id="mensaje"
+              formControlName="mensaje"
+              rows="5"
+              maxlength="2000"
+              placeholder="Comparte una palabra de aliento, un recuerdo, una oración…"
+            ></textarea>
+            @if (formulario.get('mensaje')?.invalid && formulario.get('mensaje')?.touched) {
+              <small class="field-error">Escribe un mensaje (mínimo 8 caracteres).</small>
+            }
+          </div>
+
+          <!-- Honeypot · oculto a usuarios, visible a bots -->
+          <div class="hp-field" aria-hidden="true">
+            <label for="website">No completar</label>
+            <input id="website" type="text" formControlName="website" tabindex="-1" autocomplete="off" />
+          </div>
+
+          @if (mensajeError(); as e) {
+            <p class="form-feedback form-feedback--error" role="alert">
+              <i class="fa-solid fa-circle-exclamation" aria-hidden="true"></i>
+              {{ e }}
+            </p>
+          }
+          @if (mensajeExito(); as s) {
+            <p class="form-feedback form-feedback--success" role="status">
+              <i class="fa-solid fa-circle-check" aria-hidden="true"></i>
+              {{ s }}
+            </p>
+          }
+
+          <div class="form-actions">
+            <button type="submit" class="primary-button" [disabled]="enviando()">
+              <i class="fa-regular fa-paper-plane" aria-hidden="true"></i>
+              {{ enviando() ? 'ENVIANDO…' : 'ENVIAR CONDOLENCIA' }}
+            </button>
+            <a routerLink="/obituarios" class="ghost-button">
+              <i class="fa-solid fa-arrow-left" aria-hidden="true"></i>
+              Volver a obituarios
+            </a>
+          </div>
+
+          <p class="form-legal">
+            Al enviar este mensaje aceptas nuestra
+            <a routerLink="/tratamiento-datos" target="_blank">Política de Tratamiento de datos</a>.
+          </p>
+        </form>
+      </div>
+    </section>
+  }
+
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>

@@ -1,1 +1,237 @@
-<p>registros-defuncion works!</p>
+<app-header-page-section
+  logo="/logos/bienestar-integral.svg"
+  color="#fdbf24"
+  background="/img/page-backgrounds/background-relieves.png"
+  [menuType]="menuType()"
+>
+  <div class="page-title">
+    <h1>
+      Registros de <br />
+      <span>Defunción</span>
+    </h1>
+    <app-progress-bar [filled]="1"></app-progress-bar>
+  </div>
+</app-header-page-section>
+
+<main>
+  <!-- ─────────── Sección 1: Intro + Filtros (live search) ─────────────────── -->
+  <section class="benefits benefits--first">
+    <div class="section-tributes intro-block">
+      <article class="container-columns container-columns--solo">
+        <div class="container-text">
+          <span class="eyebrow">Consulta</span>
+          <p>
+            Si requieres conocer el <strong>N° de Registro de Defunción</strong>
+            y la <strong>notaría</strong> donde quedó registrado tu ser querido
+            fallecido, filtra los registros con su nombre y/o número de cédula.
+            Recuerda que el documento físico debe ser tramitado directamente en
+            la notaría.
+          </p>
+          <p class="note">
+            <i class="fa-solid fa-circle-info" aria-hidden="true"></i>
+            <span>
+              <strong>Nota.</strong> La información disponible corresponde a
+              servicios funerarios prestados por Serfuncoop Los Olivos a
+              partir del 1 de enero de 2021.
+            </span>
+          </p>
+
+          <div class="filters">
+            <div class="form-row">
+              <div class="form-field">
+                <label for="serQuerido">Nombre completo del ser querido</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-magnifying-glass input-icon" aria-hidden="true"></i>
+                  <input
+                    id="serQuerido"
+                    name="serQuerido"
+                    type="search"
+                    autocomplete="off"
+                    placeholder="Ej. Luisa Fernanda Martínez"
+                    [ngModel]="form().serQuerido"
+                    (ngModelChange)="updateSerQuerido($event)"
+                  />
+                </div>
+              </div>
+
+              <div class="form-field">
+                <label for="documento">N° de documento de identidad</label>
+                <div class="input-wrap">
+                  <i class="fa-solid fa-magnifying-glass input-icon" aria-hidden="true"></i>
+                  <input
+                    id="documento"
+                    name="documento"
+                    type="search"
+                    inputmode="numeric"
+                    autocomplete="off"
+                    placeholder="Ej. 14198761"
+                    [ngModel]="form().documento"
+                    (ngModelChange)="updateDocumento($event)"
+                  />
+                </div>
+              </div>
+            </div>
+
+            <div class="filters-footer">
+              <p class="filters-hint">
+                Los filtros se aplican en vivo y son acumulativos: puedes usar uno o ambos.
+              </p>
+              @if (hasActiveFilters()) {
+                <button type="button" class="ghost-button" (click)="clearFilters()">
+                  <i class="fa-solid fa-xmark" aria-hidden="true"></i>
+                  Limpiar filtros
+                </button>
+              }
+            </div>
+          </div>
+        </div>
+      </article>
+    </div>
+  </section>
+
+  <!-- ─────────── Sección 2: Resultados · slider 3×3 ──────────────────────── -->
+  <section class="benefits results-section" id="resultados">
+    <div class="section-tributes">
+      @if (loading()) {
+        <div class="state state--loading" role="status" aria-live="polite">
+          <i class="fa-solid fa-circle-notch fa-spin"></i>
+          <p>Cargando registros…</p>
+        </div>
+      } @else if (errorMessage()) {
+        <div class="state state--error" role="alert">
+          <i class="fa-solid fa-circle-exclamation"></i>
+          <p>{{ errorMessage() }}</p>
+          <button type="button" class="ghost-button" (click)="retryLoad()">
+            <i class="fa-solid fa-rotate-right" aria-hidden="true"></i>
+            Reintentar
+          </button>
+        </div>
+      } @else if (total() === 0 && hasActiveFilters()) {
+        <div class="state state--no-results">
+          <i class="fa-solid fa-folder-open"></i>
+          <p>
+            <strong>Búsqueda no encontrada.</strong>
+            <span>
+              No hay registros que coincidan con los criterios actuales.
+              Verifica los datos y vuelve a intentarlo.
+            </span>
+          </p>
+        </div>
+      } @else if (total() === 0) {
+        <div class="state state--empty">
+          <i class="fa-solid fa-folder"></i>
+          <p>Aún no hay registros disponibles.</p>
+        </div>
+      } @else {
+        <div class="results-summary" aria-live="polite">
+          <span>
+            @if (hasActiveFilters()) {
+              <strong>{{ total() }}</strong>
+              {{ total() === 1 ? 'registro coincidente' : 'registros coincidentes' }}
+              de {{ allRecords().length }} totales
+            } @else {
+              <strong>{{ total() }}</strong>
+              {{ total() === 1 ? 'registro disponible' : 'registros disponibles' }}
+            }
+          </span>
+          @if (showSliderControls()) {
+            <span class="page-indicator">
+              Página {{ currentPage() }} de {{ totalPages() }}
+            </span>
+          }
+        </div>
+
+        <div class="records-slider">
+          <div class="slider-viewport">
+            <div class="slider-track" [style.transform]="trackTransform()">
+              @for (page of pages(); track $index) {
+                <div class="slider-page" aria-label="Página de registros">
+                  @for (record of page; track record.id) {
+                    <article class="record-card">
+                      <div class="record-card__icon">
+                        <img
+                          src="/img/wp-migrated/registros-defuncion/registro-icon.svg"
+                          alt=""
+                          loading="lazy"
+                        />
+                      </div>
+                      <div class="record-card__body">
+                        <div class="record-card__heading">
+                          <span class="record-card__brand">Ser querido</span>
+                          <h3>{{ record.serQuerido }}</h3>
+                        </div>
+                        <ul class="record-card__fields">
+                          <li>
+                            <strong>N° de Registro</strong>
+                            <span>{{ record.numeroRegistro }}</span>
+                          </li>
+                          <li>
+                            <strong>Notaría</strong>
+                            <span>{{ record.notaria }}</span>
+                          </li>
+                        </ul>
+                      </div>
+                    </article>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+        </div>
+
+        @if (showSliderControls()) {
+          <nav class="results-pagination" aria-label="Paginación de resultados">
+            <button
+              type="button"
+              class="page-btn"
+              (click)="prevPage()"
+              [disabled]="currentPage() <= 1"
+              aria-label="Página anterior"
+            >
+              <i class="fa-solid fa-chevron-left" aria-hidden="true"></i>
+            </button>
+
+            @for (page of pages(); track $index; let i = $index) {
+              <button
+                type="button"
+                class="page-num"
+                [class.is-active]="currentPage() === i + 1"
+                (click)="goToPage(i)"
+                [attr.aria-label]="'Ir a la página ' + (i + 1)"
+                [attr.aria-current]="currentPage() === i + 1 ? 'page' : null"
+              >
+                {{ i + 1 }}
+              </button>
+            }
+
+            <button
+              type="button"
+              class="page-btn"
+              (click)="nextPage()"
+              [disabled]="currentPage() >= totalPages()"
+              aria-label="Página siguiente"
+            >
+              <i class="fa-solid fa-chevron-right" aria-hidden="true"></i>
+            </button>
+          </nav>
+        }
+      }
+    </div>
+  </section>
+
+  <!-- ─────────── CTA · Tribute Section ───────────────────────────────────── -->
+  <app-tribute-section (phoneClick)="onContactPhoneClick()"></app-tribute-section>
+</main>
+
+<app-content-footer [template]="activeTemplate()"></app-content-footer>
+
+<app-palette-fab
+  [template]="activeTemplate()"
+  [menuType]="menuType()"
+  [shape]="shape()"
+  [tributeShape]="tributeShape()"
+  (templateChange)="onTemplateChange($event)"
+  (menuTypeChange)="onMenuTypeChange($event)"
+  (shapeChange)="onShapeChange($event)"
+  (tributeShapeChange)="onTributeShapeChange($event)"
+></app-palette-fab>

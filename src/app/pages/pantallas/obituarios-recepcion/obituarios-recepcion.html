@@ -1,0 +1,74 @@
+@switch (view()) {
+  @case ('selector') {
+    <section class="selector">
+      <header class="selector__header">
+        <h1>Recepción</h1>
+        <p>Seleccione una sede</p>
+      </header>
+
+      @if (sedes().length === 0) {
+        <p class="selector__empty">Sin información disponible</p>
+      } @else {
+        <ul class="selector__grid">
+          @for (s of sedes(); track s.id) {
+            <li class="sede-card">
+              <h2>{{ s.nombre }}</h2>
+              <p>{{ s.count }} {{ s.count === 1 ? 'velatorio' : 'velatorios' }}</p>
+              <a [href]="'/obituarios-recepcion?sede=' + s.id">
+                /obituarios-recepcion?sede={{ s.id }}
+              </a>
+            </li>
+          }
+        </ul>
+      }
+    </section>
+  }
+
+  @case ('lobby') {
+    <section class="lobby">
+      @if (obituariosDeSede().length === 0) {
+        <p class="lobby__empty">Sin información disponible para esta sede</p>
+      } @else {
+        <ul class="lobby__list">
+          @for (o of obituariosDeSede(); track o.id) {
+            <li class="row">
+              <div class="row__left">
+                <h2 class="row__nombre">{{ o.nombre }}</h2>
+                @if (o.salaNombre) {
+                  <p class="row__sala">{{ o.salaNombre }}</p>
+                }
+                @if (o.sedeNombre) {
+                  <p class="row__sede">{{ o.sedeNombre }}</p>
+                }
+              </div>
+              <div class="row__right">
+                @if (o.exequias) {
+                  <p>
+                    <strong>EXEQUIAS:</strong> {{ o.exequias }}
+                    @if (o.fechaHoraExequias) {
+                      <br><strong>HORA:</strong> {{ o.fechaHoraExequias }}
+                    }
+                  </p>
+                }
+                @if (o.horaDestinoFinal) {
+                  <p><strong>HORA SALIDA:</strong> {{ o.horaDestinoFinal }}</p>
+                }
+                @if (o.destinoFinal) {
+                  <p><strong>DESTINO FINAL:</strong> {{ o.destinoFinal }}</p>
+                }
+              </div>
+            </li>
+          }
+        </ul>
+      }
+
+      <footer class="lobby__footer">
+        <div class="lobby__brand">
+          <strong>Los Olivos</strong>
+          <span>Un homenaje al amor</span>
+        </div>
+        <p class="lobby__sede-name">{{ sedeNombre() }}</p>
+      </footer>
+    </section>
+  }
+}

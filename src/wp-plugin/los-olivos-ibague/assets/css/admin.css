@@ -1,0 +1,313 @@
+.olvibg .olvibg-cards {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 16px;
+	margin-top: 24px;
+}
+
+.olvibg .olvibg-card {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	padding: 24px;
+	text-align: center;
+}
+
+.olvibg .olvibg-card h2 {
+	font-size: 2.4em;
+	margin: 0 0 8px;
+	color: #2271b1;
+}
+
+.olvibg .olvibg-card p {
+	margin: 0 0 12px;
+	color: #50575e;
+}
+
+.olvibg .olvibg-grid-2 {
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 24px;
+	margin-top: 16px;
+}
+
+@media (max-width: 1100px) {
+	.olvibg .olvibg-grid-2 { grid-template-columns: 1fr; }
+}
+
+.olvibg .olvibg-panel {
+	background: #fff;
+	border: 1px solid #dcdcde;
+	border-radius: 8px;
+	padding: 16px 20px;
+}
+
+.olvibg .olvibg-panel h2 {
+	margin-top: 0;
+}
+
+/* ------------------------------------------------------------------
+ * Layout estilo `edit-tags.php` (que WC reutiliza en Productos → Atributos).
+ * WP define `.form-wrap` / `.form-field` globalmente en wp-admin/forms.css.
+ * El split en columnas (35% / 65%) lo hacemos con flexbox para evitar
+ * floats que WP a veces sobrescribe en pantallas no nativas.
+ * ------------------------------------------------------------------ */
+.olvibg.wrap .olvibg-col-container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: flex-start;
+	gap: 32px;
+	margin-top: 20px;
+}
+
+.olvibg.wrap .olvibg-col-left {
+	flex: 0 0 33%;
+	max-width: 33%;
+	box-sizing: border-box;
+}
+
+.olvibg.wrap .olvibg-col-right {
+	flex: 1 1 0;
+	min-width: 0;
+	box-sizing: border-box;
+}
+
+@media screen and (max-width: 900px) {
+	.olvibg.wrap .olvibg-col-left,
+	.olvibg.wrap .olvibg-col-right {
+		flex: 1 1 100%;
+		max-width: 100%;
+	}
+}
+
+/* Form-wrap: tipografía y espacio igual al de edit-tags */
+.olvibg .form-wrap > h2 {
+	margin: 0 0 6px;
+	font-size: 14px;
+	font-weight: 700;
+	line-height: 1.4;
+}
+
+.olvibg .form-wrap > p {
+	color: #50575e;
+	font-size: 13px;
+	margin: 0 0 16px;
+	line-height: 1.5;
+}
+
+.olvibg .form-wrap .form-field {
+	margin: 0 0 16px;
+	padding: 0;
+	border: 0;
+}
+
+.olvibg .form-wrap .form-field label {
+	display: block;
+	font-weight: 600;
+	font-size: 13px;
+	padding: 0 0 4px;
+	color: #1d2327;
+}
+
+.olvibg .form-wrap .form-field input[type="text"],
+.olvibg .form-wrap .form-field select,
+.olvibg .form-wrap .form-field textarea {
+	width: 100%;
+	box-sizing: border-box;
+}
+
+.olvibg .form-wrap .form-field input[type="checkbox"] {
+	width: auto;
+	margin-right: 6px;
+}
+
+.olvibg .form-wrap .form-field input[type="checkbox"] + * {
+	display: inline;
+}
+
+.olvibg .form-wrap .form-field > p {
+	margin: 6px 0 0;
+	color: #646970;
+	font-size: 13px;
+	line-height: 1.4;
+}
+
+.olvibg .form-wrap .form-required label::after {
+	content: ' *';
+	color: #d63638;
+}
+
+.olvibg .form-wrap p.submit {
+	margin-top: 18px;
+	padding: 0;
+}
+
+/* Row actions estilo lista nativa */
+.olvibg .row-actions {
+	color: #8c8f94;
+	font-size: 13px;
+	visibility: hidden;
+	padding: 2px 0 0;
+}
+
+.olvibg tr:hover .row-actions,
+.olvibg tr:focus-within .row-actions {
+	visibility: visible;
+}
+
+.olvibg .row-actions .delete a,
+.olvibg .row-actions a.submitdelete {
+	color: #b32d2e;
+}
+
+/* Tablenav (filtro) sobre la tabla derecha */
+.olvibg .olvibg-tablenav {
+	margin: 0 0 10px;
+	padding: 6px 0;
+}
+
+/* Panel de importación CSV */
+.olvibg .olvibg-import-panel {
+	background: #fff;
+	border: 1px solid #c3c4c7;
+	border-left: 4px solid #2271b1;
+	padding: 12px 20px;
+	margin: 16px 0 24px;
+	border-radius: 2px;
+}
+
+.olvibg .olvibg-import-panel h2 {
+	margin: 0 0 8px;
+	font-size: 14px;
+	font-weight: 700;
+}
+
+.olvibg .olvibg-import-panel p {
+	margin: 6px 0;
+	font-size: 13px;
+	color: #50575e;
+}
+
+.olvibg .olvibg-import-panel code {
+	background: #f0f0f1;
+	padding: 2px 6px;
+	border-radius: 2px;
+	font-size: 12px;
+}
+
+.olvibg .olvibg-import-panel input[type="file"] {
+	margin-right: 6px;
+}
+
+/* Subtítulo en el H1 (modo filtrado) */
+.olvibg .wp-heading-inline + .subtitle,
+.olvibg h1.wp-heading-inline .subtitle {
+	font-size: 14px;
+	font-weight: 400;
+	color: #646970;
+	margin-left: 6px;
+}
+
+.olvibg .olvibg-badge {
+	display: inline-block;
+	padding: 2px 10px;
+	border-radius: 12px;
+	font-size: 11px;
+	font-weight: 600;
+	text-transform: uppercase;
+}
+
+.olvibg .olvibg-badge-vigente,
+.olvibg .olvibg-badge-approved,
+.olvibg .olvibg-badge-A    { background: #d1f4dd; color: #1a7a3a; }
+.olvibg .olvibg-badge-vencido,
+.olvibg .olvibg-badge-rejected,
+.olvibg .olvibg-badge-cerrado { background: #f4d1d1; color: #7a1a1a; }
+.olvibg .olvibg-badge-inactivo,
+.olvibg .olvibg-badge-I,
+.olvibg .olvibg-badge-leido  { background: #e0e0e0; color: #50575e; }
+.olvibg .olvibg-badge-pending,
+.olvibg .olvibg-badge-nuevo   { background: #fff4cc; color: #7a5a00; }
+
+.olvibg .olvibg-fotos-list {
+	list-style: none;
+	margin: 12px 0 0;
+	padding: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+}
+
+.olvibg .olvibg-fotos-list li {
+	position: relative;
+	width: 100px;
+	height: 100px;
+	border: 1px solid #dcdcde;
+	border-radius: 6px;
+	overflow: hidden;
+	cursor: move;
+	background: #f6f7f7;
+}
+
+.olvibg .olvibg-fotos-list img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+	display: block;
+}
+
+.olvibg .olvibg-foto-remove {
+	position: absolute;
+	top: 4px;
+	right: 4px;
+	width: 22px;
+	height: 22px;
+	border-radius: 50%;
+	border: 0;
+	background: rgba(0, 0, 0, 0.6);
+	color: #fff;
+	font-size: 16px;
+	line-height: 1;
+	cursor: pointer;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.olvibg .olvibg-foto-remove:hover {
+	background: #dc3232;
+}
+
+.olvibg .ui-sortable-helper {
+	opacity: 0.7;
+	transform: rotate(-2deg);
+}
+
+/* Mensaje de condolencia · colapsable */
+.olvibg-mensaje { max-width: 420px; }
+.olvibg-mensaje summary {
+	cursor: pointer;
+	list-style: none;
+	color: #1d2327;
+}
+.olvibg-mensaje summary::-webkit-details-marker { display: none; }
+.olvibg-mensaje summary::after {
+	content: ' · Ver completo ▾';
+	color: #2271b1;
+	font-size: 12px;
+	font-weight: 600;
+}
+.olvibg-mensaje[open] summary { color: #757575; }
+.olvibg-mensaje[open] summary::after { content: ' · Ocultar ▴'; }
+.olvibg-mensaje__full {
+	margin-top: 8px;
+	padding: 10px 12px;
+	background: #f6f7f7;
+	border-left: 3px solid #2271b1;
+	border-radius: 2px;
+	max-height: 320px;
+	overflow-y: auto;
+	line-height: 1.5;
+	white-space: pre-wrap;
+	word-break: break-word;
+}

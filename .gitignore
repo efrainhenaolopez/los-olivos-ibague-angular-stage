@@ -42,3 +42,11 @@ __screenshots__/
 # System files
 .DS_Store
 Thumbs.db
+
+# Snapshot local del WordPress (incluye credenciales y wp-content de
+# producción · no debe versionarse). El código del plugin propio sí va
+# bajo `src/wp-plugin/`.
+/src/es/
+
+# Bundles binarios grandes / temporales (extraer al build dir manualmente).
+/public/img.zip

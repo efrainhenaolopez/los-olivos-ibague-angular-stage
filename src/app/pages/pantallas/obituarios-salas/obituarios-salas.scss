@@ -1,0 +1,10 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--color-bg-light, #f5efe6);
+  color: var(--color-primary, #234b50);
+  font-family: 'Raleway', sans-serif;
+  // Hint para pantallas 1080x1920 sin forzar (DevTools landscape sigue usable).
+  aspect-ratio: 9 / 16;
+  max-width: 100%;
+}

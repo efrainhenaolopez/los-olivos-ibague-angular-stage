@@ -1,0 +1,27 @@
+<section class="vista">
+  <header class="vista__header">
+    <h1>{{ sedeNombre() }}</h1>
+    <p>Salas de velación</p>
+  </header>
+
+  @if (salas().length === 0) {
+    <p class="vista__empty">Sin información disponible para esta sede</p>
+  } @else {
+    <ul class="vista__grid">
+      @for (s of salas(); track s.id) {
+        <li class="card" [class.card--ocupada]="s.ocupada">
+          <h2 class="card__nombre">{{ s.nombre }}</h2>
+          @if (s.ocupada) {
+            <p class="card__status">Ocupada</p>
+            <p class="card__fallecido">{{ s.nombreFallecido }}</p>
+          } @else {
+            <p class="card__status card__status--libre">Disponible</p>
+          }
+          <a class="card__url" [href]="'/obituarios-salas?sede=' + sedeId() + '&sala=' + s.id">
+            ver obituario
+          </a>
+        </li>
+      }
+    </ul>
+  }
+</section>

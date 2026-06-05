@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Placeholder · rama de cerezo en flor (esquina superior izquierda). Reemplazar por PNG. -->
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width="400" height="400">
+  <!-- Rama -->
+  <path d="M0 100 Q 80 110 140 160 T 280 240 T 380 320" stroke="#6b3a1f" stroke-width="6" fill="none" stroke-linecap="round" opacity="0.6"/>
+  <path d="M50 80 Q 120 130 180 130" stroke="#6b3a1f" stroke-width="4" fill="none" stroke-linecap="round" opacity="0.5"/>
+  <!-- Flores · grupo 1 -->
+  <g transform="translate(80 90)">
+    <circle r="22" fill="#fce8eb" opacity="0.95"/>
+    <circle r="14" cx="-12" cy="-8" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="12" cy="-8" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="-12" cy="10" fill="#fff" opacity="0.9"/>
+    <circle r="14" cx="12" cy="10" fill="#fff" opacity="0.9"/>
+    <circle r="6" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(170 140)">
+    <circle r="26" fill="#fce8eb" opacity="0.95"/>
+    <circle r="16" cx="-15" cy="-10" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="15" cy="-10" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="-15" cy="12" fill="#fff" opacity="0.9"/>
+    <circle r="16" cx="15" cy="12" fill="#fff" opacity="0.9"/>
+    <circle r="7" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(260 210)">
+    <circle r="20" fill="#fce8eb" opacity="0.95"/>
+    <circle r="13" cx="-11" cy="-7" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="11" cy="-7" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="-11" cy="9" fill="#fff" opacity="0.9"/>
+    <circle r="13" cx="11" cy="9" fill="#fff" opacity="0.9"/>
+    <circle r="5" fill="#f4c2c8"/>
+  </g>
+  <g transform="translate(330 280)">
+    <circle r="18" fill="#fce8eb" opacity="0.95"/>
+    <circle r="12" cx="-10" cy="-6" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="10" cy="-6" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="-10" cy="8" fill="#fff" opacity="0.9"/>
+    <circle r="12" cx="10" cy="8" fill="#fff" opacity="0.9"/>
+    <circle r="5" fill="#f4c2c8"/>
+  </g>
+</svg>

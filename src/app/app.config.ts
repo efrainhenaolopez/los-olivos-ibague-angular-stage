@@ -15,6 +15,11 @@ export const appConfig: ApplicationConfig = {
         scrollPositionRestoration: 'enabled',
       })
     ),
+    // NOTA: no usamos `provideHttpClient` porque dispara el guardia
+    // SSRF de Angular SSR al servir las rutas (rechaza URLs con
+    // hostname `localhost`, hace fallback a CSR para TODAS las páginas
+    // y rompe el routing). Para llamadas HTTP usamos `fetch()` nativo
+    // dentro de los servicios — funciona en navegador y SSR.
     provideClientHydration(withEventReplay())
   ]
 };

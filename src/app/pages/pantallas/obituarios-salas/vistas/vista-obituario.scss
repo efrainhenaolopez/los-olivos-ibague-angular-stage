@@ -1,0 +1,359 @@
+// ============================================================
+//  Vista del obituario individual · réplica plantilla Canva
+//  Tipografía:
+//    - Cursive (títulos "En memoria de", "Sala:", "Exequias", "Destino Final",
+//      "Honramos tu amor"): familia 'Great Vibes' o 'Allura' (Google Fonts).
+//      Fallback a 'Brush Script MT', cursive.
+//    - Resto: Raleway (ya cargada por la app).
+//  Paleta:
+//    - Verde duelo profundo:  #1f4e3d  (títulos cursive)
+//    - Morado/burgundy:        #6b1f4d  (nombre del fallecido)
+//    - Texto secundario:       #5a5550
+// ============================================================
+
+:host {
+  display: block;
+}
+
+.obituario {
+  position: relative;
+  min-height: 100vh;
+  background: #fdfaf5;
+  overflow: hidden;
+  font-family: 'Raleway', sans-serif;
+  color: #3a3530;
+}
+
+// ============== Decoración persistente ==============
+
+.deco {
+  position: absolute;
+  pointer-events: none;
+  user-select: none;
+  z-index: 1;
+
+  &--top-left {
+    top: 0;
+    left: 0;
+    width: 32%;
+    max-width: 320px;
+    transform: translate(-8%, -8%);
+  }
+
+  &--bottom-right {
+    bottom: 0;
+    right: 0;
+    width: 38%;
+    max-width: 380px;
+    transform: translate(8%, 8%);
+  }
+}
+
+// ============== Footer persistente ==============
+
+.footer {
+  position: absolute;
+  bottom: 3vh;
+  left: 5%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  z-index: 3;
+
+  &__logo {
+    height: clamp(48px, 6vh, 72px);
+    width: auto;
+  }
+
+  &__tagline {
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: clamp(1rem, 1.6vw, 1.4rem);
+    color: #1f4e3d;
+    margin-top: 2px;
+  }
+}
+
+// ============== Sistema de escenas ==============
+
+.escena {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 6vh 8%;
+  z-index: 2;
+  opacity: 0;
+  transition: opacity 1s ease-in-out;
+  pointer-events: none;
+}
+
+// Activación por data-attribute en el padre.
+.obituario[data-scene='datos']    .escena--datos,
+.obituario[data-scene='fotos']    .escena--fotos,
+.obituario[data-scene='mensaje']  .escena--mensaje {
+  opacity: 1;
+}
+
+// ============== ESCENA 1 · DATOS ==============
+
+.escena--datos {
+  justify-content: flex-start;
+  gap: 1.5vh;
+}
+
+.en-memoria {
+  font-family: 'Great Vibes', 'Brush Script MT', cursive;
+  font-size: clamp(2rem, 4.5vw, 3.5rem);
+  color: #1f4e3d;
+  margin: 0;
+  font-weight: 400;
+  letter-spacing: 0.02em;
+
+  // Animación de entrada staggered (se re-dispara al cambiar de escena).
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+}
+.obituario[data-scene='datos'] .en-memoria {
+  opacity: 1;
+  transform: none;
+}
+
+.cinta {
+  width: clamp(120px, 22vw, 240px);
+  height: auto;
+  margin: 1vh 0 2vh;
+  filter: drop-shadow(0 4px 12px rgba(107, 31, 77, 0.2));
+
+  opacity: 0;
+  transform: scale(0.85);
+  transition: opacity 1s ease 0.6s, transform 1s ease 0.6s;
+}
+.obituario[data-scene='datos'] .cinta {
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nombre {
+  font-family: 'Raleway', sans-serif;
+  font-size: clamp(1.5rem, 3.2vw, 2.5rem);
+  font-weight: 700;
+  color: #6b1f4d;
+  margin: 0 0 3vh;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+
+  opacity: 0;
+  transform: translateY(15px);
+  transition: opacity 0.8s ease 1.2s, transform 0.8s ease 1.2s;
+}
+.obituario[data-scene='datos'] .nombre {
+  opacity: 1;
+  transform: none;
+}
+
+.bloque {
+  margin: 0 0 2.5vh;
+  max-width: 85%;
+
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+
+  &--sala     { transition-delay: 1.8s; }
+  &--exequias { transition-delay: 2.3s; }
+  &--destino  { transition-delay: 2.8s; }
+
+  &__titulo {
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: clamp(1.75rem, 3.5vw, 2.75rem);
+    color: #1f4e3d;
+    margin: 0 0 0.5rem;
+    font-weight: 400;
+  }
+
+  &__contenido {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    color: #6b1f4d;
+    margin: 0;
+    font-weight: 500;
+  }
+}
+
+.obituario[data-scene='datos'] .bloque {
+  opacity: 1;
+  transform: none;
+}
+
+.dato {
+  font-size: clamp(1rem, 1.8vw, 1.4rem);
+  color: #3a3530;
+  margin: 0.25rem 0;
+  font-weight: 400;
+
+  strong {
+    color: #6b1f4d;
+    font-weight: 700;
+  }
+}
+
+// ============== ESCENA 2 · FOTOS POLAROID ==============
+
+.escena--fotos {
+  justify-content: center;
+}
+
+.polaroids {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 3vh;
+  width: 100%;
+  max-width: 75%;
+}
+
+.polaroid {
+  background: linear-gradient(to bottom, #cfe7f5 0%, #cfe7f5 65%, #8fc26e 65%, #6fa84e 100%);
+  border: 8px solid #fff;
+  border-radius: 4px;
+  aspect-ratio: 4 / 3;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(31, 78, 61, 0.18);
+  position: relative;
+
+  // Animación: aparece desde abajo con un leve tilt.
+  opacity: 0;
+  transform: translateY(40px) rotate(-1deg);
+  transition: opacity 0.9s ease, transform 0.9s ease;
+
+  &:nth-child(1) { transition-delay: 0.3s; transform: translateY(40px) rotate(-1.5deg); }
+  &:nth-child(2) { transition-delay: 0.8s; transform: translateY(40px) rotate(1deg); }
+  &:nth-child(3) { transition-delay: 1.3s; transform: translateY(40px) rotate(-0.5deg); }
+
+  img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+  }
+
+  // Cuando no hay foto, el placeholder de paisaje se ve por debajo.
+  // Nube blanca simulada con pseudo-elemento.
+  &:empty::after,
+  &:not(:has(img))::after {
+    content: '';
+    position: absolute;
+    top: 20%;
+    left: 35%;
+    width: 30%;
+    height: 12%;
+    background: rgba(255, 255, 255, 0.7);
+    border-radius: 50%;
+    box-shadow: 0 8px 20px rgba(255, 255, 255, 0.5);
+  }
+}
+
+.obituario[data-scene='fotos'] .polaroid {
+  opacity: 1;
+  transform: rotate(var(--tilt, 0deg));
+  &:nth-child(1) { --tilt: -1.5deg; }
+  &:nth-child(2) { --tilt: 1deg; }
+  &:nth-child(3) { --tilt: -0.5deg; }
+}
+
+// ============== ESCENA 3 · MENSAJE ==============
+
+.escena--mensaje {
+  justify-content: space-between;
+  gap: 3vh;
+  padding: 6vh 10%;
+}
+
+.escena--mensaje .polaroid {
+  width: 85%;
+  aspect-ratio: 4 / 3;
+
+  &--top {
+    transform: translateY(-20px) rotate(-1.5deg);
+    transition-delay: 0.2s;
+  }
+  &--bottom {
+    transform: translateY(20px) rotate(1deg);
+    transition-delay: 0.4s;
+  }
+}
+
+.obituario[data-scene='mensaje'] .polaroid--top {
+  opacity: 1;
+  transform: rotate(-1.5deg);
+}
+.obituario[data-scene='mensaje'] .polaroid--bottom {
+  opacity: 1;
+  transform: rotate(1deg);
+}
+
+.mensaje {
+  width: 100%;
+  text-align: center;
+  padding: 0 5%;
+
+  &__titulo {
+    font-family: 'Great Vibes', 'Brush Script MT', cursive;
+    font-size: clamp(2.5rem, 5.5vw, 4rem);
+    color: #6b1f4d;
+    margin: 0 0 1.5rem;
+    font-weight: 400;
+
+    opacity: 0;
+    transform: translateY(-15px);
+    transition: opacity 0.9s ease 0.8s, transform 0.9s ease 0.8s;
+  }
+
+  &__texto {
+    font-size: clamp(1.1rem, 2vw, 1.6rem);
+    color: #1f4e3d;
+    line-height: 1.5;
+    margin: 0;
+    font-weight: 400;
+
+    opacity: 0;
+    transform: translateY(15px);
+    transition: opacity 0.9s ease 1.2s, transform 0.9s ease 1.2s;
+  }
+}
+
+.obituario[data-scene='mensaje'] .mensaje__titulo,
+.obituario[data-scene='mensaje'] .mensaje__texto {
+  opacity: 1;
+  transform: none;
+}
+
+// ============== Vacío ==============
+
+.vacio {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  text-align: center;
+  padding: 5vw;
+  background: #fdfaf5;
+
+  h1 {
+    font-size: clamp(2.5rem, 6vw, 4.5rem);
+    font-weight: 300;
+    color: var(--color-primary, #1f4e3d);
+    margin: 0 0 1rem;
+  }
+  p {
+    font-size: clamp(1.25rem, 2.5vw, 2rem);
+    color: var(--color-secondary, #8a9a96);
+    margin: 0;
+  }
+}

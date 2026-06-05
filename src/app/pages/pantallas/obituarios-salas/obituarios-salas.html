@@ -1,0 +1,15 @@
+@switch (view()) {
+  @case ('sedes') {
+    <app-vista-sedes [obituarios]="obituarios()" />
+  }
+  @case ('salas') {
+    <app-vista-salas [obituarios]="obituarios()" [sedeId]="sedeId()!" />
+  }
+  @case ('obituario') {
+    <app-vista-obituario
+      [obituarios]="obituarios()"
+      [sedeId]="sedeId()!"
+      [salaId]="salaId()!"
+    />
+  }
+}

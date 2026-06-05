@@ -1,0 +1,222 @@
+:host {
+  display: block;
+  min-height: 100vh;
+  background: var(--color-bg-light, #f5efe6);
+  color: var(--color-primary, #1f2c4a);
+  font-family: 'Raleway', sans-serif;
+  // Landscape: pantalla 1920x1080 sobre mesa de recepción.
+  aspect-ratio: 16 / 9;
+  max-width: 100%;
+}
+
+// ===================== SELECTOR (sin queryparam) =====================
+.selector {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 6vh 6vw;
+  gap: 5vh;
+  min-height: 100vh;
+
+  &__header {
+    text-align: center;
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4.5rem);
+      font-weight: 300;
+      margin: 0 0 0.5rem;
+      letter-spacing: -0.02em;
+    }
+    p {
+      font-size: clamp(1.25rem, 2vw, 1.75rem);
+      margin: 0;
+      color: var(--color-secondary);
+    }
+  }
+
+  &__empty {
+    font-size: 1.75rem;
+    color: var(--color-secondary);
+    margin: auto;
+  }
+
+  &__grid {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(380px, 100%), 1fr));
+    gap: 3rem;
+    width: 100%;
+    max-width: 1400px;
+  }
+}
+
+.sede-card {
+  background: #fff;
+  border: 1px solid rgba(15, 23, 42, 0.06);
+  border-top: 6px solid var(--color-primary);
+  border-radius: 12px;
+  padding: 3rem 2.5rem;
+  text-align: center;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.04);
+
+  h2 {
+    font-size: clamp(1.75rem, 3vw, 2.5rem);
+    font-weight: 700;
+    margin: 0 0 1rem;
+    color: var(--color-primary);
+  }
+  p {
+    font-size: clamp(1.1rem, 1.8vw, 1.5rem);
+    margin: 0 0 1.5rem;
+    color: var(--color-accent);
+    font-weight: 600;
+  }
+  a {
+    display: inline-block;
+    font-size: 0.9rem;
+    color: var(--color-secondary);
+    text-decoration: none;
+    padding: 0.5rem 1rem;
+    background: var(--color-bg-light);
+    border-radius: 6px;
+    font-family: 'Menlo', 'Monaco', monospace;
+  }
+}
+
+// ===================== LOBBY (con ?sede=N) =====================
+.lobby {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+  padding: 4vh 6vw 2vh;
+  position: relative;
+
+  // Flores decorativas (placeholder · esquina inferior derecha).
+  &::after {
+    content: '';
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    width: 280px;
+    height: 280px;
+    background: radial-gradient(circle at 70% 70%, rgba(169, 77, 105, 0.12), transparent 60%);
+    pointer-events: none;
+  }
+
+  &__empty {
+    font-size: 2rem;
+    color: var(--color-secondary);
+    margin: auto;
+    text-align: center;
+  }
+
+  &__list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    flex: 1;
+  }
+
+  &__footer {
+    margin-top: auto;
+    padding-top: 3vh;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    z-index: 1;
+  }
+
+  &__brand {
+    display: flex;
+    flex-direction: column;
+    strong {
+      font-size: clamp(1.5rem, 2.2vw, 2rem);
+      color: var(--color-primary);
+      font-weight: 700;
+    }
+    span {
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      color: var(--color-accent);
+      font-style: italic;
+      letter-spacing: 0.04em;
+    }
+  }
+
+  &__sede-name {
+    margin: 0;
+    font-size: clamp(1.25rem, 1.8vw, 1.5rem);
+    color: var(--color-secondary);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+  }
+}
+
+.row {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  background: var(--color-bg-row, #ece4d4);
+  border-radius: 8px;
+  overflow: hidden;
+  min-height: 140px;
+
+  &__left {
+    background: var(--color-bg-row);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+  }
+
+  &__right {
+    background: var(--color-bg-light);
+    padding: 1.5rem 2rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 0.25rem;
+
+    p {
+      margin: 0;
+      font-size: clamp(1rem, 1.4vw, 1.25rem);
+      color: var(--color-primary);
+      font-weight: 500;
+      letter-spacing: 0.02em;
+      line-height: 1.4;
+    }
+    strong {
+      font-weight: 700;
+      color: var(--color-primary);
+    }
+  }
+
+  &__nombre {
+    font-size: clamp(1.25rem, 1.8vw, 1.6rem);
+    font-weight: 700;
+    margin: 0 0 0.5rem;
+    color: var(--color-primary);
+    letter-spacing: 0.02em;
+    line-height: 1.15;
+  }
+
+  &__sala {
+    font-size: clamp(0.95rem, 1.3vw, 1.15rem);
+    color: var(--color-primary);
+    margin: 0;
+    font-weight: 600;
+  }
+
+  &__sede {
+    font-size: clamp(0.85rem, 1.2vw, 1rem);
+    color: var(--color-secondary);
+    margin: 0.25rem 0 0;
+    font-weight: 500;
+    letter-spacing: 0.04em;
+  }
+}

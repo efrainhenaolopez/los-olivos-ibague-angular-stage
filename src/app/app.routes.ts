@@ -101,6 +101,11 @@ export const routes: Routes = [
       import('./pages/contenido/obituarios/obituarios').then((m) => m.Obituarios),
   },
   {
+    path: 'obituario',
+    loadComponent: () =>
+      import('./pages/contenido/obituario/obituario').then((m) => m.Obituario),
+  },
+  {
     path: 'condolencias',
     loadComponent: () =>
       import('./pages/contenido/condolencias/condolencias').then((m) => m.Condolencias),
@@ -114,6 +119,18 @@ export const routes: Routes = [
     path: 'palabras-de-amor',
     loadComponent: () =>
       import('./pages/contenido/palabras-de-amor/palabras-de-amor').then((m) => m.PalabrasDeAmor),
+  },
+
+  // Pantallas internas de sedes (portrait/landscape · sin GTM · noindex)
+  {
+    path: 'obituarios-salas',
+    loadComponent: () =>
+      import('./pages/pantallas/obituarios-salas/obituarios-salas').then((m) => m.ObituariosSalas),
+  },
+  {
+    path: 'obituarios-recepcion',
+    loadComponent: () =>
+      import('./pages/pantallas/obituarios-recepcion/obituarios-recepcion').then((m) => m.ObituariosRecepcion),
   },
 
   // Contacto
@@ -153,17 +170,28 @@ export const routes: Routes = [
     loadComponent: () =>
       import('./pages/utilidades/registros-defuncion/registros-defuncion').then((m) => m.RegistrosDefuncion),
   },
-  // Slug del WP original `/otros-medios-de-recaudo`: redirige a la página
-  // canónica de medios de pago para preservar enlaces externos legacy.
+  // Slug del WP original `/registros-de-defuncion`. Apunta al MISMO
+  // componente (no `redirectTo`) porque las rutas con redirect no se
+  // prerenderan: al hit directo el servidor estático no halla archivo
+  // y cae al index.html raíz (página principal). Mantener ambas rutas
+  // garantiza HTML estático para ambos URLs legacy.
+  {
+    path: 'registros-de-defuncion',
+    loadComponent: () =>
+      import('./pages/utilidades/registros-defuncion/registros-defuncion').then((m) => m.RegistrosDefuncion),
+  },
+  // Slug del WP original `/otros-medios-de-recaudo`. Mismo razonamiento
+  // que `registros-de-defuncion`: apunta al componente Pagos en vez de
+  // redirect para no romper el prerender.
   {
     path: 'otros-medios-recaudo',
-    redirectTo: '/pagos',
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/utilidades/pagos/pagos').then((m) => m.Pagos),
   },
   {
     path: 'otros-medios-de-recaudo',
-    redirectTo: '/pagos',
-    pathMatch: 'full',
+    loadComponent: () =>
+      import('./pages/utilidades/pagos/pagos').then((m) => m.Pagos),
   },
 
   // Funnels — Thank You Pages
