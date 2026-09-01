@@ -26,6 +26,26 @@
             <strong>SERFUNCOOP</strong> (Servicios Funerarios Cooperativos del
             Tolima).
           </p>
+
+          <div class="pay-now">
+            <button
+              type="button"
+              class="pay-now__btn"
+              (click)="onPagarAhora()"
+              [disabled]="paying()"
+            >
+              <i class="fa-solid fa-lock" aria-hidden="true"></i>
+              {{ paying() ? 'Conectando…' : 'Pagar ahora' }}
+            </button>
+            @if (payError()) {
+              <p class="pay-now__error" role="alert">{{ payError() }}</p>
+            }
+            <p class="pay-now__hint">
+              Te llevará al portal seguro de pagos de SERFUNCOOP en una pestaña
+              nueva.
+            </p>
+          </div>
+
           <div class="notice">
             <i class="fa-solid fa-envelope-open-text" aria-hidden="true"></i>
             <div>

@@ -81,6 +81,60 @@ main {
   }
 }
 
+// ═══ Bloque "Pagar ahora" (portal público de pagos) ════════════════════
+.pay-now {
+  margin-top: 22px;
+}
+
+.pay-now__btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 14px 30px;
+  background: var(--color-cta, #F0A33D);
+  color: #ffffff;
+  font-family: 'Raleway', sans-serif;
+  font-weight: 700;
+  font-size: 15px;
+  letter-spacing: 0.02em;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 8px 20px rgba(240, 163, 61, 0.22);
+
+  i { font-size: 13px; }
+
+  &:hover:not(:disabled) {
+    background: var(--color-cta-strong, #E65C36);
+    transform: translateY(-2px);
+    box-shadow: 0 12px 26px rgba(230, 92, 54, 0.24);
+  }
+
+  &:disabled {
+    opacity: 0.6;
+    cursor: progress;
+    box-shadow: none;
+  }
+}
+
+.pay-now__error {
+  margin: 12px 0 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 1.5;
+  color: #C0392B;
+}
+
+.pay-now__hint {
+  margin: 10px 0 0;
+  font-family: 'Raleway', sans-serif;
+  font-size: 13px;
+  font-weight: 300;
+  color: #6b6e76;
+}
+
 // ═══ Notice block (instrucciones de envío de soporte) ═══════════════════
 .notice {
   display: flex;

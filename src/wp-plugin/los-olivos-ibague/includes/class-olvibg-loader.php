@@ -23,6 +23,7 @@ class OlvIbg_Loader {
 		( new OlvIbg_Rest_Registros() )->register_routes();
 		( new OlvIbg_Rest_Contacto() )->register_routes();
 		( new OlvIbg_Rest_Condolencias() )->register_routes();
+		( new OlvIbg_Rest_Pagos() )->register_routes();
 	}
 
 	/**

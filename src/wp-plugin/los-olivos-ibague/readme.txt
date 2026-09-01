@@ -27,6 +27,7 @@ Los endpoints REST viven bajo el namespace `serfuncoop/v1`:
 * `GET /wp-json/serfuncoop/v1/registros-defuncion`
 * `POST /wp-json/serfuncoop/v1/contacto`
 * `POST /wp-json/serfuncoop/v1/condolencias`
+* `POST /wp-json/serfuncoop/v1/payment-login` — proxy de login a la pasarela pública de pagos (Olivos Web Gateway). Guarda las credenciales server-side y devuelve el enlace firmado con JWT que el frontend abre en una pestaña nueva.
 
 == Installation ==
 
@@ -34,7 +35,7 @@ Los endpoints REST viven bajo el namespace `serfuncoop/v1`:
 2. En WP Admin → Plugins → Añadir nuevo → Subir, sube el `.zip` y actívalo.
 3. Al activar se crean 7 tablas con prefijo `{wp_prefix}olvibg_`.
 4. En el menú "Los Olivos" → "Sedes y Salas" registra primero las sedes y luego sus salas.
-5. En "Ajustes" configura el email de notificaciones y los orígenes CORS permitidos.
+5. En "Ajustes" configura el email de notificaciones, los orígenes CORS permitidos y las credenciales de la pasarela de pagos (URL, usuario y contraseña). Al activar se siembran los valores sandbox de Ibagué; también pueden forzarse con las constantes `OLVIBG_PAYMENT_USERNAME` y `OLVIBG_PAYMENT_PASSWORD` en `wp-config.php`.
 
 == Changelog ==
 

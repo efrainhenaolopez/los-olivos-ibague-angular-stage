@@ -14,6 +14,7 @@ import {
 import { ProgressBar } from '../../../secciones/progress-bar/progress-bar';
 import { TributeSection } from '../../../secciones/tribute-section/tribute-section';
 import { GtmService } from '../../../servicios/gtm';
+import { PagoFacturaService } from '../../../servicios/pago-factura';
 
 const STORAGE_KEY = 'pagos-fab-prefs';
 
@@ -110,6 +111,13 @@ export class Pagos implements OnInit {
   private readonly title = inject(Title);
   private readonly meta = inject(Meta);
   private readonly gtm = inject(GtmService);
+  private readonly pago = inject(PagoFacturaService);
+
+  /** El botón "Pagar ahora" está esperando respuesta de la pasarela. */
+  readonly paying = signal(false);
+
+  /** Mensaje de error del flujo de pago (null = sin error). */
+  readonly payError = signal<string | null>(null);
 
   readonly activeTemplate = signal<FooterTemplate>(DEFAULT_TEMPLATE);
   readonly activePalette = signal<Palette | null>(DEFAULT_PALETTE);
@@ -322,6 +330,96 @@ export class Pagos implements OnInit {
 
   onChannelClick(channelId: string): void {
     this.gtm.push({ event: 'payment_channel_click', channel: channelId, page: '/pagos' });
+  }
+
+  /**
+   * Abre el portal público de pagos (Olivos Web Gateway).
+   *
+   * Abrir `about:blank` SÍNCRONAMENTE dentro del click es la única forma
+   * fiable de que el navegador no bloquee el popup tras el `await`. Se pinta
+   * un loader de inmediato porque la pasarela puede tardar 5-15 s en su
+   * cold-start. Si la respuesta trae la URL firmada, se redirige esa pestaña;
+   * si falla, se cierra y se muestra el error inline.
+   */
+  onPagarAhora(): void {
+    if (typeof window === 'undefined' || this.paying()) return;
+
+    this.paying.set(true);
+    this.payError.set(null);
+    this.gtm.push({ event: 'payment_gateway_click', page: '/pagos' });
+
+    const popup = window.open('about:blank', '_blank');
+    this.pintarLoader(popup);
+
+    this.pago.iniciarLogin().subscribe({
+      next: (res) => {
+        this.paying.set(false);
+        const url = res?.response?.url;
+        if (res?.success !== false && url) {
+          if (popup) popup.location.href = url;
+          else window.location.href = url;
+        } else {
+          popup?.close();
+          this.mostrarError(
+            this.traducirError(res?.code)
+              ?? res?.errors?.[0]
+              ?? res?.title
+              ?? 'No fue posible iniciar el pago. Intenta nuevamente.',
+          );
+        }
+      },
+      error: () => {
+        this.paying.set(false);
+        popup?.close();
+        this.mostrarError('Error al conectar con la pasarela de pagos. Intenta nuevamente.');
+      },
+    });
+  }
+
+  private mostrarError(message: string): void {
+    this.payError.set(message);
+  }
+
+  private traducirError(code?: string): string | null {
+    switch (code) {
+      case 'olvibg_origin_forbidden':
+        return 'Origen no autorizado. El administrador debe agregar este sitio en Ajustes del plugin → Orígenes CORS permitidos.';
+      case 'olvibg_rate_limited':
+        return 'Demasiados intentos en poco tiempo. Espera unos minutos e inténtalo de nuevo.';
+      case 'network_error':
+        return 'No se pudo contactar con el servidor de pagos. Revisa tu conexión e intenta nuevamente.';
+      default:
+        return null;
+    }
+  }
+
+  private pintarLoader(popup: Window | null): void {
+    if (!popup || !popup.document) return;
+    popup.document.open();
+    popup.document.write(`<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <title>Conectando con la pasarela de pagos…</title>
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <style>
+    html,body{height:100%;margin:0;font-family:'Raleway',system-ui,-apple-system,Segoe UI,Roboto,sans-serif;background:#FFF2F4;color:#2c2e35}
+    .wrap{min-height:100%;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:24px;text-align:center}
+    .spinner{width:56px;height:56px;border:5px solid #f2d7dc;border-top-color:#F0A33D;border-radius:50%;animation:spin .9s linear infinite;margin-bottom:24px}
+    @keyframes spin{to{transform:rotate(360deg)}}
+    h1{font-size:20px;margin:0 0 8px;color:#DC4C5A}
+    p{margin:0;font-size:15px;line-height:1.5;max-width:420px}
+  </style>
+</head>
+<body>
+  <div class="wrap">
+    <div class="spinner" aria-hidden="true"></div>
+    <h1>Conectando con la pasarela de pagos</h1>
+    <p>Esto puede tardar unos segundos. Por favor, no cierres esta pestaña.</p>
+  </div>
+</body>
+</html>`);
+    popup.document.close();
   }
 
   selectCategory(categoryId: 'todos' | ChannelCategory): void {

@@ -18,6 +18,24 @@ class OlvIbg_Admin_Ajustes {
 		register_setting( 'olvibg_ajustes', 'olvibg_allowed_origins', array( 'sanitize_callback' => 'sanitize_textarea_field' ) );
 		register_setting( 'olvibg_ajustes', 'olvibg_rate_limit_max', array( 'sanitize_callback' => 'absint', 'default' => 20 ) );
 		register_setting( 'olvibg_ajustes', 'olvibg_rate_limit_window_min', array( 'sanitize_callback' => 'absint', 'default' => 10 ) );
+
+		// Pasarela de pagos (portal público Olivos Web Gateway). Las credenciales
+		// se usan solo en el servidor; nunca llegan al frontend Angular.
+		register_setting( 'olvibg_ajustes', 'olvibg_payment_gateway_url', array( 'sanitize_callback' => 'esc_url_raw' ) );
+		register_setting( 'olvibg_ajustes', 'olvibg_payment_username', array( 'sanitize_callback' => 'sanitize_text_field' ) );
+		register_setting( 'olvibg_ajustes', 'olvibg_payment_password', array( 'sanitize_callback' => array( __CLASS__, 'sanitize_payment_password' ) ) );
+	}
+
+	/**
+	 * Si el campo de contraseña llega vacío, conserva la ya guardada. Así el
+	 * valor real nunca se re-renderiza en el formulario ni se borra sin querer.
+	 */
+	public static function sanitize_payment_password( $nuevo ) {
+		$nuevo = is_string( $nuevo ) ? trim( $nuevo ) : '';
+		if ( '' === $nuevo ) {
+			return (string) get_option( 'olvibg_payment_password', '' );
+		}
+		return $nuevo;
 	}
 
 	public static function render() {
@@ -60,6 +78,33 @@ class OlvIbg_Admin_Ajustes {
 							<input type="number" min="1" step="1" id="olvibg_rate_limit_window_min" name="olvibg_rate_limit_window_min" class="small-text"
 								value="<?php echo esc_attr( get_option( 'olvibg_rate_limit_window_min', 10 ) ); ?>">
 							<p class="description"><?php esc_html_e( 'Aplica a POST /condolencias y /contacto. Poner 0 en máximo desactiva el rate-limit (útil en dev/QA).', 'los-olivos-ibague' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th colspan="2"><h2 style="margin:1.5rem 0 0;"><?php esc_html_e( 'Pasarela de pagos · portal público', 'los-olivos-ibague' ); ?></h2></th>
+					</tr>
+					<tr>
+						<th><label for="olvibg_payment_gateway_url"><?php esc_html_e( 'URL de la pasarela', 'los-olivos-ibague' ); ?></label></th>
+						<td>
+							<input type="text" id="olvibg_payment_gateway_url" name="olvibg_payment_gateway_url" class="large-text code"
+								value="<?php echo esc_attr( get_option( 'olvibg_payment_gateway_url', OlvIbg_Rest_Pagos::DEFAULT_GATEWAY_URL ) ); ?>">
+							<p class="description"><?php esc_html_e( 'Endpoint PublicPaymentsLogin de Olivos Web Gateway (incluye ?sede=…&test=…).', 'los-olivos-ibague' ); ?></p>
+						</td>
+					</tr>
+					<tr>
+						<th><label for="olvibg_payment_username"><?php esc_html_e( 'Usuario de la pasarela', 'los-olivos-ibague' ); ?></label></th>
+						<td>
+							<input type="text" id="olvibg_payment_username" name="olvibg_payment_username" class="regular-text" autocomplete="off"
+								value="<?php echo esc_attr( get_option( 'olvibg_payment_username', '' ) ); ?>">
+						</td>
+					</tr>
+					<tr>
+						<th><label for="olvibg_payment_password"><?php esc_html_e( 'Contraseña de la pasarela', 'los-olivos-ibague' ); ?></label></th>
+						<td>
+							<?php $tiene_pass = '' !== (string) get_option( 'olvibg_payment_password', '' ); ?>
+							<input type="password" id="olvibg_payment_password" name="olvibg_payment_password" class="regular-text" autocomplete="new-password"
+								value="" placeholder="<?php echo esc_attr( $tiene_pass ? '•••••••• (guardada — escribe para reemplazar)' : '' ); ?>">
+							<p class="description"><?php esc_html_e( 'Solo se usa en el servidor; nunca se envía al navegador. Para forzarla desde wp-config.php define OLVIBG_PAYMENT_USERNAME y OLVIBG_PAYMENT_PASSWORD.', 'los-olivos-ibague' ); ?></p>
 						</td>
 					</tr>
 					<tr>

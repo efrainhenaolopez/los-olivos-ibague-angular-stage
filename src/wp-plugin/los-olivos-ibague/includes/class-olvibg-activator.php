@@ -132,6 +132,18 @@ class OlvIbg_Activator {
 			add_option( 'olvibg_allowed_origins', home_url() );
 		}
 
+		// Pasarela de pagos: se siembra con la sandbox de Ibagué. Editable
+		// luego en Ajustes · Los Olivos (o forzable vía constantes en wp-config).
+		if ( false === get_option( 'olvibg_payment_gateway_url' ) ) {
+			add_option( 'olvibg_payment_gateway_url', 'https://olivoswebgatewaysandbox.azurewebsites.net/PublicPaymentsLogin?sede=ibague&test=true' );
+		}
+		if ( false === get_option( 'olvibg_payment_username' ) ) {
+			add_option( 'olvibg_payment_username', 'SerfuncoopPublicLink' );
+		}
+		if ( false === get_option( 'olvibg_payment_password' ) ) {
+			add_option( 'olvibg_payment_password', '$$3r3042O0pt=5st!BL1nK2o2!' );
+		}
+
 		update_option( 'olvibg_db_version', OLVIBG_VERSION );
 	}
 }
