@@ -1,13 +1,13 @@
 <?php
 /**
  * Plugin Name:       Los Olivos Ibague
- * Plugin URI:        https://www.brivalabs.com
+ * Plugin URI:        https://www.metamark.com.co
  * Description:       Backend para Los Olivos · obituarios, registros de defunción, condolencias y formularios de contacto. Expone endpoints REST bajo el namespace serfuncoop/v1 para el frontend Angular.
  * Version:           1.0.0
  * Requires at least: 6.0
  * Requires PHP:      7.4
- * Author:            Efrain Henao Lopez
- * Author URI:        https://www.brivalabs.com
+ * Author:            MetaMark
+ * Author URI:        https://www.metamark.com.co
  * License:           GPL-2.0+
  * License URI:       https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain:       los-olivos-ibague

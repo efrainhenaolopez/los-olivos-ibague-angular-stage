@@ -1,6 +1,7 @@
 === Los Olivos Ibague ===
-Contributors: brivalabs
-Author URI: https://www.brivalabs.com
+Contributors: metamark
+Author: MetaMark
+Author URI: https://www.metamark.com.co
 Tags: obituarios, condolencias, contacto, funeraria, rest-api
 Requires at least: 6.0
 Tested up to: 6.5
